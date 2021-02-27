@@ -1,11 +1,23 @@
 @page "/signup"
-
-<h1>Crowd Control</h1>
-<h2>Sign Up:</h2>
+@inject NavigationManager NavigationManager
+<div>
+    <h1>Crowd Control</h1>
+    <h2>Sign Up:</h2>
 
     <br>
     Username:
     <RadzenTextBox Placeholder="Username"/>
     <br>
     Password:
-    <RadzenPassword Placeholder="Enter password..." />
+    <RadzenPassword Placeholder="Enter password..."/>
+    <RadzenButton Text="SignUp" Click="HomeNavigate"/>
+</div>
+
+@code{
+
+    private void HomeNavigate()
+    {
+        NavigationManager.NavigateTo("/home");
+    }
+
+}
