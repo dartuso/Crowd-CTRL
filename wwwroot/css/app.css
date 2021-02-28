@@ -6,6 +6,16 @@ html, body {
     color: white;
 }
 
+.containerLevel1{
+    background-color: #4D4D4D;
+    color: white;
+}
+
+.containerLevel2{
+    background-color: #7A7A7A;
+    color: white;
+}
+
 a, .btn-link {
     color: #0366d6;
 }
