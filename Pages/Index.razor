@@ -1,25 +1,31 @@
 ﻿@page "/"
 @inject NavigationManager NavigationManager
 
-<h1>Crowd Control</h1>
-
-Welcome to your new app.
-<br>
-<RadzenButton 
-Text="Login" 
-Style="margin-bottom: 20px; width: 150px" 
-Click="LoginNavigate"/>
-<br>
-<RadzenButton 
-Text="Sign Up" 
-Style="margin-bottom: 20px; width: 150px" 
-Click="SignupNavigate"/>
+<div>
+    <h1>Crowd Control</h1>
+    Welcome to Crowd Control, a platform for gamers to connect, play and share!
+    <br>
+    <RadzenButton
+        Text="Login"
+        Style="margin-bottom: 20px; width: 150px"
+        Click="LoginNavigate"/>
+    <br>
+    <RadzenButton
+        Text="Sign Up"
+        Style="margin-bottom: 20px; width: 150px"
+        Click="SignupNavigate"/>
+</div>
 
 @code{
-    private void LoginNavigate() {
-         NavigationManager.NavigateTo("login"); 
+
+    private void LoginNavigate()
+    {
+        NavigationManager.NavigateTo("login");
     }
-        private void SignupNavigate() {
-         NavigationManager.NavigateTo("signup"); 
+
+    private void SignupNavigate()
+    {
+        NavigationManager.NavigateTo("signup");
     }
+
 }

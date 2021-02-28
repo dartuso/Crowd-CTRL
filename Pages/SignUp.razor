@@ -1,8 +1,9 @@
-@page "/login"
+@page "/signup"
 @inject NavigationManager NavigationManager
+
 <div>
     <h1>Crowd Control</h1>
-    <h2>Login:</h2>
+    <h2>Sign Up:</h2>
 
     <br>
     Username:
@@ -10,11 +11,14 @@
     <br>
     Password:
     <RadzenPassword Placeholder="Enter password..."/>
-    <RadzenButton Text="Login" Style="margin-bottom: 20px; width: 150px" Click="HomeNavigate"/>
+    <RadzenButton Text="SignUp" Click="HomeNavigate"/>
 </div>
+
 @code{
+
     private void HomeNavigate()
     {
         NavigationManager.NavigateTo("/home");
     }
+
 }
