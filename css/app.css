@@ -2,6 +2,18 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: black;
+    color: white;
+}
+
+.containerLevel1{
+    background-color: #4D4D4D;
+    color: white;
+}
+
+.containerLevel2{
+    background-color: #7A7A7A;
+    color: white;
 }
 
 a, .btn-link {
@@ -42,9 +54,9 @@ a, .btn-link {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
