@@ -1,0 +1,41 @@
+﻿@page "/oldhome"
+@using Components
+<style>
+    .flex{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .flex-header{
+        flex: 0 1 100%;
+    }
+    .main-content{
+        flex: 80 1 70%;
+        background-color: rgba(255,255,255,0.23);
+    }
+    .main-sidebar{
+        flex: 0 0 auto;
+        background-color: rgba(255,255,255,0.50);
+    }
+    .break {
+      flex-basis: 100%;
+      height: 0;
+    }
+</style>
+<div class="flex">
+    <div class="flex-header">
+        <CrowdHeader/>
+    </div>
+    <div class="main-content">
+        Card Content
+        <RadzenCard Style="width:600px; margin-bottom: 20px; height:500px;">
+
+        </RadzenCard>
+    </div>
+    <div class="main-sidebar">
+        Sidebar content
+    </div>
+</div>
+
+@code {
+    
+}

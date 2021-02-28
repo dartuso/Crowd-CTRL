@@ -1,11 +1,46 @@
 ﻿@namespace Components
+@inject NavigationManager NavigationManager
 <div>
     <RadzenButton Text="Setting"></RadzenButton>
-    <RadzenButton Text="Tournament"></RadzenButton>
-    <RadzenButton Text="Clans"></RadzenButton>
+    <RadzenButton Text="Tournament" Click="TournamentNavigate"/>
+    <RadzenButton Text="Clans" Click="ClansNavigate"/>
     LOGO
-    <RadzenButton Text="Friends"></RadzenButton>
-    <RadzenButton Text="Notification"></RadzenButton>
-    <RadzenButton Text="Profile"></RadzenButton>
-    <RadzenButton Text="LogOut"></RadzenButton>
+    <RadzenButton Text="Friends" Click="FriendsNavigate"/>
+    <RadzenButton Text="Notification" Click="NotificationNavigate"/>
+    <RadzenButton Text="Profile" Click="ProfileNavigate"/>
+    <RadzenButton Text="LogOut" Click="LogoutNavigate"/>
 </div>
+
+@code{
+
+    private void TournamentNavigate()
+    {
+        NavigationManager.NavigateTo("tournament");
+    }
+
+    private void ClansNavigate()
+    {
+        NavigationManager.NavigateTo("clans");
+    }
+
+    private void FriendsNavigate()
+    {
+        NavigationManager.NavigateTo("friends");
+    }
+
+    private void NotificationNavigate()
+    {
+        NavigationManager.NavigateTo("notifications");
+    }
+
+    private void ProfileNavigate()
+    {
+        NavigationManager.NavigateTo("friends");
+    }
+
+    private void LogoutNavigate()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+}
