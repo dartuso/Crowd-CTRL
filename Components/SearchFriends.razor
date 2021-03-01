@@ -1,0 +1,43 @@
+@namespace Components
+
+<style>
+    .main-friend-search-container{
+        @* position: relative; *@
+        margin: auto;
+        width: 70%;
+        height: 80%;
+    }
+    .search-container{
+        height: 10%;
+        padding-bottom: 5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .search-results-container{
+        height: 90%;
+        background-color: #4d4d4d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    form{
+        width: 100%;
+    }
+    
+</style>
+<div class="main-friend-search-container">
+    <div class="search-container">
+        <form style="display: flex; justify-content: center;">
+            <input type="text" id="searchBox" name="searchBox" style="width: 70%;"> 
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <div class="search-results-container">
+        <div class="res-list">
+            <h3>Friend 1</h3><br><br>
+            <h3>Friend 2</h3><br><br>
+            <h3>Friend 3</h3><br><br>
+        </div>
+    </div>
+</div>
