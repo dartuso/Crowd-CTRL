@@ -1,8 +1,59 @@
 ﻿@page "/profile"
 @layout Shared.SocialLayout
+<style>
+    .flex{
+        display: flex;
+        flex-wrap: wrap;
+    }
+        
+    .picContainer{
+        flex: 0 0 20%;
+        background-color: #0f6674;
+    }
+    
+    .pic{
+        height: 180px;
+        width: 180px;
+    }
+    
+    .username{
+        background-color: #0b2e13;
+        font-size: 3em;
+    }
+    
+    .platform{
+        flex: 0 0 80%;
+        background-color: #4D4D4D;
+    }
+    
+    .bio{
+        flex: 0 0 100%;
+    }
+    
+    .break-column {
+      flex-basis: 100%;
+      width: 0;
+    }
+</style>
 
-<h3>profile</h3>
+<div class="flex">
+    <div class="picContainer">
+        Profile pic
+        <img src="" class="pic"/>
+    </div>
+    <div class="platform">
+        <div class="username">
+            Username
+        </div>
+        <div>
+            Platforms:
+        </div>
+    </div>
+    <div class="bio">
+        Bio
+    </div>
+</div>
 
 @code {
-    
+
 }
