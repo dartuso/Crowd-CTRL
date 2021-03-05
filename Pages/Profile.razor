@@ -1,33 +1,43 @@
 ﻿@page "/profile"
 @layout Shared.SocialLayout
 <style>
-    .flex{
-        display: flex;
-        flex-wrap: wrap;
-    }
-        
     .picContainer{
-        flex: 0 0 20%;
-        background-color: #0f6674;
+        flex: 1 0 50%;
     }
     
     .pic{
         height: 180px;
         width: 180px;
+        display: block;
+        align-content: end;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
     }
     
     .username{
-        background-color: #0b2e13;
         font-size: 3em;
+        background-color: black;
     }
     
     .platform{
-        flex: 0 0 80%;
+        flex: 0 0 50%;
+    }
+    
+    .platforms{
+        display: inline-block;
+        padding: 10px;
         background-color: #4D4D4D;
     }
     
     .bio{
-        flex: 0 0 100%;
+        margin-top: 10px;
+        padding: 10px;
+        white-space: pre-line;
+        background-color: #4D4D4D;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .break-column {
@@ -36,24 +46,46 @@
     }
 </style>
 
-<div class="flex">
+<div class="flex" >
     <div class="picContainer">
-        Profile pic
-        <img src="" class="pic"/>
+        <img src="@ProfilePicture" class="pic" alt="Profile Picture"/>
     </div>
     <div class="platform">
         <div class="username">
-            Username
+            @Username
         </div>
-        <div>
-            Platforms:
+        <div class="platforms">
+            @foreach (var platform in _listPlatforms){
+                <div>@platform</div>
+            }
         </div>
     </div>
     <div class="bio">
-        Bio
+        @Bio
     </div>
 </div>
 
 @code {
+    private string Username { get; set; } = "GhostCluster1990";
+    private string ProfilePicture { get; set; } = "Icons\account.svg";
 
+    private readonly List<string> _listPlatforms = new List<string>()
+    {
+        "Steam: Ghost_cluster19",
+        "Battle.net: Ghosty#1870",
+        "GOG: Ghost_cluster19",
+        "PSN: Ghost_cluster19"
+    };
+
+    private string Bio { get; set; } =
+        "Most played Games \n" +
+        "Minecraft: 17 days, 18 hours Largest world size: 5.2gb \n" +
+        "Overwatch: 12 Days, 1 hour Highest ranked: 4400sr \n" +
+        "League of Legends: 11 days 16 hours \n" +
+        "Game Library \n" +
+        "Battle.net \n" +
+        "- Overwatch \n" +
+        "- Diablo III \n" +
+        "PSN \n" +
+        "- FIFA 21 \n";
 }
