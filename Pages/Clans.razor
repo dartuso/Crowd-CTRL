@@ -25,8 +25,9 @@
     .new {
         font-size: 1.5em;
         margin: 10px;
-        background: #C7EAE1;
+        background: rgba(255,255,255,0.05);
         grid-area: new;
+        color: white;
     }
 
     .search-button {
@@ -39,11 +40,12 @@
 
     .clan-entries {
         margin: 10px;
-        background: #C4C4C4;
+        background: rgba(253,255,255,0.05);
         grid-area: content;
     }
 
     .clan-card {
+        background-color: rgba(255,255,255,0.05); 
         margin: 5px;
         border: 1px solid black;
         display: grid;
@@ -55,7 +57,6 @@
     }
 
     .name {
-        color: black;
         margin: 10px;
         grid-area: name;
         font-size: 1.1em;
@@ -66,25 +67,26 @@
         grid-area: pict;
         justify-self: center;
         align-self: center;
+        background-color: rgba(255,255,255,0.05);  
     }
 
-    @* color of this request button isn't changing :/ *@
     .req {
         margin: 10px;
         grid-area: req;
         justify-self: end;
         align-self: end;
-        background-color: rgba(255,255,255,0.1); !important
-        
+        background-color: rgba(255,255,255,0.05); 
+        color: white;
     }
 
     .desc {
-        color: black;
         margin: 10px;
         grid-area: desc;
         font-size: 0.9em;
+        background-color: rgba(255,255,255,0.05); 
     }
 
+    
     input {
         margin: 5px;
         display: block;
@@ -96,7 +98,6 @@
 
 
 <div class="clans-container">
-
     <div class="search">
         <input type="text" placeholder="Enter a Clan Name or Clan Game">
     </div>
