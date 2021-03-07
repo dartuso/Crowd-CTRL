@@ -1,7 +1,149 @@
 ﻿@page "/clans"
 @layout Shared.SocialLayout
 
-<h3>Clans</h3>
+
+<style>
+
+    .clans-container {
+        min-height: 400px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 0.3fr;
+        grid-template-rows: auto auto 4fr;
+        grid-template-areas: 
+            "search search button1"
+            ". . new"
+            "content content .";
+    }
+
+    .search {
+        margin: 10px;
+        background: #C4C4C4;
+        grid-area: search;
+    }
+
+    .new {
+        font-size: 1.5em;
+        margin: 10px;
+        background: rgba(255,255,255,0.05);
+        grid-area: new;
+        color: white;
+    }
+
+    .search-button {
+        font-size: 1.5em;
+        margin: 10px;
+        background: rgba(255,255,255,0.1);
+        color: white;
+        grid-area: button1;
+    }
+
+    .clan-entries {
+        margin: 10px;
+        background: rgba(253,255,255,0.05);
+        grid-area: content;
+    }
+
+    .clan-card {
+        background-color: rgba(255,255,255,0.05); 
+        margin: 5px;
+        border: 1px solid black;
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-rows: 1fr 3fr;
+        grid-template-areas:
+            "pict name ."
+            "pict desc req";
+    }
+
+    .name {
+        margin: 10px;
+        grid-area: name;
+        font-size: 1.1em;
+    }
+
+    .pict {
+        margin: 10px;
+        grid-area: pict;
+        justify-self: center;
+        align-self: center;
+        background-color: rgba(255,255,255,0.05);  
+    }
+
+    .req {
+        margin: 10px;
+        grid-area: req;
+        justify-self: end;
+        align-self: end;
+        background-color: rgba(255,255,255,0.05); 
+        color: white;
+    }
+
+    .desc {
+        margin: 10px;
+        grid-area: desc;
+        font-size: 0.9em;
+        background-color: rgba(255,255,255,0.05); 
+    }
+
+    
+    input {
+        margin: 5px;
+        display: block;
+        line-height: 30px;
+        width: 98%;
+    }
+</style>
+
+
+
+<div class="clans-container">
+    <div class="search">
+        <input type="text" placeholder="Enter a Clan Name or Clan Game">
+    </div>
+    <button class="new">New Clan</button>
+    <div style="text-align: center">
+        <button class="search-button">Search</button>
+    </div>
+    <div class="clan-entries">
+        <div class="clan-card">
+            <div class="name">
+                <span style="float: left; width: 60%; text-align: left;">Team name: FridaysLeagueGamers</span>
+                <span style="float: left; width: 40%; text-align: right;">League of Legends</span>
+            </div>
+            <div class="pict">pic1</div>
+            <button class="req">Request to join</button>
+            <div class="desc">
+                <p>This is a quick description about this group/team</p>
+            </div>
+        </div>
+        <div class="clan-card">
+            <div class="name">
+                <span style="float: left; width: 60%; text-align: left;">Team name: ApexGamingTeam</span>
+                <span style="float: left; width: 40%; text-align: right;">Apex Legends</span>
+            </div>
+            <div class="pict">pic2</div>
+            <button class="req">Request to join</button>
+            <div class="desc">
+                <p>This is a quick description about this group/team</p>
+            </div>
+        </div>
+        <div class="clan-card">
+            <div class="name">
+                <span style="float: left; width: 60%; text-align: left;">Team name: NeverOverOverwatch</span>
+                <span style="float: left; width: 40%; text-align: right;">Overwatch</span>
+            </div>
+            <div class="pict">pic3</div>
+            <button class="req">Request to join</button>
+            <div class="desc">
+                <p>This is a quick description about this group/team</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 @code {
     

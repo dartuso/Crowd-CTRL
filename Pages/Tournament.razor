@@ -1,8 +1,152 @@
 ﻿@page "/tournament"
 @layout Shared.SocialLayout
 
+<style>
 
-<h3>Tournament</h3>
+
+    .button{
+        border: 1px solid black;
+        color: #C7EAE1;
+        text-align: center;
+    }
+
+    .content{
+        color: white;
+        background-color: rgba(255,255,255,0.05);
+        margin: 0px 20px 20px 20px;
+        grid-area: cont;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+            "header header header header header"
+            "name game teams date action"
+            "name game teams date action"
+            "name game teams date action"
+            "name game teams date action";
+    }
+
+    .header{
+        background-color: rgba(255,255,255,0);
+        color: white;
+        text-align: center;
+        grid-area: content > header;
+    }
+
+    .name{
+        font-size: 0.75em;
+        margin: 5px 0px 0px 10px;
+        grid-area: content > name;
+        text-align: center;
+        background-color: rgba(255,255,255,0.05);
+    }
+
+    .game {
+        font-size: 0.75em;
+        margin: 5px 0px 0px 0px;
+        background-color: rgba(255,255,255,0.05);
+        grid-area: content > game;
+        text-align: center;
+    }
+
+    .teams {
+        font-size: 0.75em;
+        margin: 5px 0px 0px 0px;
+        grid-area: content > teams;
+        text-align: center;
+        background-color: rgba(255,255,255,0.05);
+    }
+
+    .date {
+        font-size: 0.75em;
+        margin: 5px 0px 0px 0px;
+        background-color: rgba(255,255,255,0.05);
+        grid-area: content > date;
+        text-align: center;
+    }
+
+    .action {
+        font-size: 0.75em;
+        background: #667EFD;
+        margin: 15px 30px 10px 30px;
+        grid-area: content > action;
+        text-align: center;
+    }
+
+    .TournamentContainer{
+        border-top: 1px solid white;
+        border-right: 1px solid white;
+        font-size: 1.5em;
+        min-height: 300px;
+        width: 100%;
+        display:grid;
+        grid-template-columns: 1fr 1fr ;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-gap: 10px;
+        grid-template-areas: 
+            "join create"
+            "cont cont"
+            "cont cont"
+            "cont cont";
+    }
+    
+    .TournamentButton{
+        color: white;
+        max-width: 160px;
+        background: #667EFD;
+        margin: 30px auto;
+    }
+    
+    #join{
+        grid-area: join;
+    }
+    
+    #create{
+        grid-area: create;
+    }
+
+    .empty-vertical{
+        height: 20px;
+    }
+
+</style>
+
+<div class="TournamentContainer">
+    <button id="join" class="TournamentButton" >JOIN</button>
+    <button id="create" class="TournamentButton" >CREATE</button>
+    <div class="content">
+        <div class="header">Tournament Name</div>
+        <div class="header">Game</div>
+        <div class="header">Number of Teams</div>
+        <div class="header">Date</div>
+        <div class="header">Action</div>
+
+        <div class="name">Tournmament Name</div>
+        <div class="game">Game</div>
+        <div class="teams">Number of Teams</div>
+        <div class="date">Date</div>
+        <button class="action button">ACTION</button>
+
+        <div class="name">Tournmament Name</div>
+        <div class="game">Game</div>
+        <div class="teams">Number of Teams</div>
+        <div class="date">Date</div>
+        <button class="action button">ACTION</button>
+
+        <div class="name">Tournmament Name</div>
+        <div class="game">Game</div>
+        <div class="teams">Number of Teams</div>
+        <div class="date">Date</div>
+        <button class="action button">ACTION</button>
+
+        <div class="name">Tournmament Name</div>
+        <div class="game">Game</div>
+        <div class="teams">Number of Teams</div> 
+        <div class="date">Date</div>
+        <button class="action button">ACTION</button>
+    </div>
+
+</div>
 
 @code {
     

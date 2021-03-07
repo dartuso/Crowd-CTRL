@@ -1,18 +1,87 @@
 ﻿@namespace Components
 @inject NavigationManager NavigationManager
-<div>
-    <RadzenButton Text="Setting"></RadzenButton>
-    <RadzenButton Text="Tournament" Click="TournamentNavigate"/>
-    <RadzenButton Text="Clans" Click="ClansNavigate"/>
-    LOGO
-    <RadzenButton Text="Friends" Click="FriendsNavigate"/>
-    <RadzenButton Text="Notification" Click="NotificationNavigate"/>
-    <RadzenButton Text="Profile" Click="ProfileNavigate"/>
-    <RadzenButton Text="LogOut" Click="LogoutNavigate"/>
+
+
+<style>
+    .header-grid{
+        margin: 10px 5px 5px 5px;
+        min-height: 100px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas: 
+            "button button button button button button button button";
+    }
+
+    .abutton {
+        display: inline-block;
+        height: 100px;
+        padding: 0;
+        margin: 0;
+        vertical-align: top;
+        width: 104px;
+        color: white;
+    }
+
+    .imaj {
+        max-height: 80px;
+    }
+
+
+</style>
+
+<div class="header-grid">
+    <RadzenButton class="abutton"  Style="background-color:#ffffff00">
+        <RadzenImage Path="Icons/settings.png" Style="width:30px;"/>
+        <br/>
+        Settings
+    </RadzenButton>
+    
+    <RadzenButton Click="TournamentNavigate" class="abutton" Style="background-color:#ffffff00">
+        <RadzenImage Path="Icons\tournament.png" Style="width:30px;"/>
+        <br/>
+        Tournament
+    </RadzenButton>
+
+    <RadzenButton Click="ClansNavigate" class="abutton" Style="background-color:#ffffff00">
+        <RadzenImage Path="Icons\team.png" Style="width:30px;"/>
+        <br/>
+        Clans
+    </RadzenButton>
+
+    <RadzenButton Click="HomeNavigate" class="abutton" Style="background-color:#ffffff00">
+        <RadzenImage Path="Icons\logo.png" Style="width:110px;"/>
+    </RadzenButton>
+
+    <RadzenButton Click="FriendsNavigate" class="abutton" Style="background-color:#ffffff00">
+        <RadzenImage Path="Icons\addUser.png" Style="width:30px;"/>
+        <br/>
+        Friends
+    </RadzenButton>
+
+    <RadzenButton Text="Notifications" Click="NotificationNavigate" class="abutton" Style="background-color:#ffffff00"> 
+        <RadzenImage Path="Icons\notification.png" Style="width:30px;" />
+        <br/>
+        Notifications
+    </RadzenButton>
+
+    <RadzenButton Text="Profile" Click="ProfileNavigate" class="abutton" Style="background-color:#ffffff00">
+        <RadzenImage Path="Icons\account.svg" Style="width:30px;" />
+        <br/>
+        Profile
+    </RadzenButton>
+
+    <RadzenButton Text="LogOut"  Click="LogoutNavigate" class="abutton" Style="background-color:#ffffff00">
+
+    </RadzenButton>
 </div>
 
 @code{
 
+    private void HomeNavigate() 
+    {
+        NavigationManager.NavigateTo("home");
+    }
+    
     private void TournamentNavigate()
     {
         NavigationManager.NavigateTo("tournament");

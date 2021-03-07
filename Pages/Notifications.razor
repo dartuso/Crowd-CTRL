@@ -1,7 +1,119 @@
 ﻿@page "/Notifications"
 @layout Shared.SocialLayout
 
-<h3>Notifications</h3>
+<style>
+    .Notifications-container {
+        font-size: 1.5em;
+        min-height: 300px;
+        width: 100%;
+        height: 100%;
+        display:grid;
+        grid-template-columns: 1fr 1fr ;
+        grid-template-rows: auto 1fr 1fr 1fr;
+        grid-gap: 10px;
+        grid-template-areas: 
+            "header header"
+            "notification-card notification-card"
+            "notification-card notification-card"
+            "notification-card notification-card";
+    }
+
+    .NotificationHeader {
+        background-color: rgba(255,255,255,0);
+        justify-self: stretch;
+        text-align: center;
+        grid-area: header;
+        color: white;
+    }
+    
+    .not-card-container {
+        justify-self: center;
+        min-width: 90%;
+        grid-area: notification-card;
+    }
+
+    .a-card {
+        background-color: rgba(255,255,255,0.05);
+        font-size: 0.6em;
+        margin: 10px;
+        padding: 5px;
+        display: grid;
+        grid-template-columns: 15% 65% 20%;
+        grid-template-areas: 
+            "not-type not-desc not-act";
+    }
+
+    .friend-req {
+        border: 1px solid lightcoral;
+    }
+
+    .clan-not {
+        border: 1px solid cyan;
+    }
+
+    .content-not {
+        border: 1px solid springgreen;
+    }
+
+    .misc-not {
+        border: 1px solid grey;
+    }
+
+    .not-type {
+        font-size: 1em;
+        grid-area: not-type;
+    }
+
+    .not-desc {
+        grid-area: not-desc;
+    }
+
+    .not-act {
+        grid-area: not-act;
+    }
+
+    button{
+        margin: 1px;
+        background-color: rgba(255,255,255,0.5);
+        color: white;
+    }
+</style>
+
+<div class="Notifications-container">
+    <div class="NotificationHeader" >Your most recent notifications</div>
+    <div class="not-card-container">
+        <div class="a-card friend-req">
+            <div class="not-type">FRIEND NOTIFICATION</div>
+            <div class="not-desc">You have received a new friend request from X.</div>
+            <div class="not-act">
+                <button>Accept</button>
+                <button>Decline</button>
+            </div>
+        </div>
+        <div class="a-card clan-not">
+            <div class="not-type">TEAM NOTIFICATION</div>
+            <div class="not-desc">There is a new member in your clan/team (team name). Say hello to Y!</div>
+            <div class="not-act">
+                <button>Go to Clan page</button>
+            </div>
+        </div>
+        <div class="a-card content-not">
+            <div class="not-type">CONTENT NOTIFICATION</div>
+            <div class="not-desc">Your video was liked by Z.</div>
+            <div class="not-act">
+                <button>View post</button>
+            </div>
+        </div>
+        <div class="a-card misc-not">
+            <div class="not-type">TOURNAMENT NOTIFICATION</div>
+            <div class="not-desc">Tournament A is about to start! Get ready to join!</div>
+            <div class="not-act">
+                <button>Join tournament</button>
+                <button>View tournament</button>
+            </div>
+        </div>
+    </div> 
+</div>
 
 @code {
     
