@@ -1,4 +1,5 @@
 @namespace Components
+@inject NavigationManager NavigationManager
 
 <style>
     .main-friend-search-container{
@@ -41,9 +42,16 @@
     </div>
     <div class="search-results-container">
         <div class="res-list">
-            <h3>Friend 1</h3><br><br>
+            <RadzenLink Path="user_profile" Text="Friend 1" /><br><br>
             <h3>Friend 2</h3><br><br>
             <h3>Friend 3</h3><br><br>
         </div>
     </div>
 </div>
+
+@code{
+    private void UserProfileNavigate()
+    {
+        NavigationManager.NavigateTo("user_profile");
+    }
+}
