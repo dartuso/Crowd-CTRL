@@ -2294,30 +2294,30 @@ ul.rz-profile-menu {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center; }
-  .rz-cell-filter .rzi, .rz-cell-filter .rz-datatable-loading-content .rzi-circle-o-notch, .rz-datatable-loading-content .rz-cell-filter .rzi-circle-o-notch, .rz-cell-filter .rz-menuitem .rz-menuitem-icon, .rz-menuitem .rz-cell-filter .rz-menuitem-icon, .rz-cell-filter .rz-fileupload-row .rz-button .rzi-close, .rz-cell-filter .rz-fileupload-row .rz-paginator-element .rzi-close, .rz-fileupload-row .rz-button .rz-cell-filter .rzi-close, .rz-fileupload-row .rz-paginator-element .rz-cell-filter .rzi-close,
-  .rz-cell-filter .rz-fileupload-row .rz-button .rzi-times,
-  .rz-cell-filter .rz-fileupload-row .rz-paginator-element .rzi-times,
-  .rz-fileupload-row .rz-button .rz-cell-filter .rzi-times,
-  .rz-fileupload-row .rz-paginator-element .rz-cell-filter .rzi-times,
-  .rz-cell-filter .rz-fileupload-row .rz-button .rz-icon-trash,
-  .rz-cell-filter .rz-fileupload-row .rz-paginator-element .rz-icon-trash,
-  .rz-fileupload-row .rz-button .rz-cell-filter .rz-icon-trash,
-  .rz-fileupload-row .rz-paginator-element .rz-cell-filter .rz-icon-trash, .rz-cell-filter .rz-datatable .rzi-chevron-circle-right, .rz-datatable .rz-cell-filter .rzi-chevron-circle-right, .rz-cell-filter .rz-datatable .rzi-chevron-circle-down, .rz-datatable .rz-cell-filter .rzi-chevron-circle-down, .rz-cell-filter .rz-sortable-column .rzi-grid-sort, .rz-sortable-column .rz-cell-filter .rzi-grid-sort, .rz-cell-filter .rz-datatable-header .rzi-plus, .rz-datatable-header .rz-cell-filter .rzi-plus {
-    width: 0.875rem;
-    height: 0.875rem;
-    font-size: 0.8125rem;
-    margin: 0 0.3125rem 0 0;
-    color: #88989b; }
-    .rz-cell-filter .rzi.rz-cell-filter-clear, .rz-cell-filter .rz-datatable-loading-content .rz-cell-filter-clear.rzi-circle-o-notch, .rz-datatable-loading-content .rz-cell-filter .rz-cell-filter-clear.rzi-circle-o-notch, .rz-cell-filter .rz-menuitem .rz-cell-filter-clear.rz-menuitem-icon, .rz-menuitem .rz-cell-filter .rz-cell-filter-clear.rz-menuitem-icon, .rz-cell-filter .rz-fileupload-row .rz-button .rz-cell-filter-clear.rzi-close, .rz-cell-filter .rz-fileupload-row .rz-paginator-element .rz-cell-filter-clear.rzi-close, .rz-fileupload-row .rz-button .rz-cell-filter .rz-cell-filter-clear.rzi-close, .rz-fileupload-row .rz-paginator-element .rz-cell-filter .rz-cell-filter-clear.rzi-close,
-    .rz-cell-filter .rz-fileupload-row .rz-button .rz-cell-filter-clear.rzi-times,
-    .rz-cell-filter .rz-fileupload-row .rz-paginator-element .rz-cell-filter-clear.rzi-times,
-    .rz-fileupload-row .rz-button .rz-cell-filter .rz-cell-filter-clear.rzi-times,
-    .rz-fileupload-row .rz-paginator-element .rz-cell-filter .rz-cell-filter-clear.rzi-times,
-    .rz-cell-filter .rz-fileupload-row .rz-button .rz-cell-filter-clear.rz-icon-trash,
-    .rz-cell-filter .rz-fileupload-row .rz-paginator-element .rz-cell-filter-clear.rz-icon-trash,
-    .rz-fileupload-row .rz-button .rz-cell-filter .rz-cell-filter-clear.rz-icon-trash,
-    .rz-fileupload-row .rz-paginator-element .rz-cell-filter .rz-cell-filter-clear.rz-icon-trash, .rz-cell-filter .rz-datatable .rz-cell-filter-clear.rzi-chevron-circle-right, .rz-datatable .rz-cell-filter .rz-cell-filter-clear.rzi-chevron-circle-right, .rz-cell-filter .rz-datatable .rz-cell-filter-clear.rzi-chevron-circle-down, .rz-datatable .rz-cell-filter .rz-cell-filter-clear.rzi-chevron-circle-down, .rz-cell-filter .rz-sortable-column .rz-cell-filter-clear.rzi-grid-sort, .rz-sortable-column .rz-cell-filter .rz-cell-filter-clear.rzi-grid-sort, .rz-cell-filter .rz-datatable-header .rz-cell-filter-clear.rzi-plus, .rz-datatable-header .rz-cell-filter .rz-cell-filter-clear.rzi-plus {
-      margin-left: auto; }
+    .rz-cell-filter label > .rzi, .rz-cell-filter .rz-datatable-loading-content label > .rzi-circle-o-notch, .rz-datatable-loading-content .rz-cell-filter label > .rzi-circle-o-notch, .rz-cell-filter .rz-menuitem label > .rz-menuitem-icon, .rz-menuitem .rz-cell-filter label > .rz-menuitem-icon, .rz-cell-filter .rz-fileupload-row .rz-button label > .rzi-close, .rz-cell-filter .rz-fileupload-row .rz-paginator-element label > .rzi-close, .rz-fileupload-row .rz-button .rz-cell-filter label > .rzi-close, .rz-fileupload-row .rz-paginator-element .rz-cell-filter label > .rzi-close,
+    .rz-cell-filter .rz-fileupload-row .rz-button label > .rzi-times,
+    .rz-cell-filter .rz-fileupload-row .rz-paginator-element label > .rzi-times,
+    .rz-fileupload-row .rz-button .rz-cell-filter label > .rzi-times,
+    .rz-fileupload-row .rz-paginator-element .rz-cell-filter label > .rzi-times,
+    .rz-cell-filter .rz-fileupload-row .rz-button label > .rz-icon-trash,
+    .rz-cell-filter .rz-fileupload-row .rz-paginator-element label > .rz-icon-trash,
+    .rz-fileupload-row .rz-button .rz-cell-filter label > .rz-icon-trash,
+    .rz-fileupload-row .rz-paginator-element .rz-cell-filter label > .rz-icon-trash, .rz-cell-filter .rz-datatable label > .rzi-chevron-circle-right, .rz-datatable .rz-cell-filter label > .rzi-chevron-circle-right, .rz-cell-filter .rz-datatable label > .rzi-chevron-circle-down, .rz-datatable .rz-cell-filter label > .rzi-chevron-circle-down, .rz-cell-filter .rz-sortable-column label > .rzi-grid-sort, .rz-sortable-column .rz-cell-filter label > .rzi-grid-sort, .rz-cell-filter .rz-datatable-header label > .rzi-plus, .rz-datatable-header .rz-cell-filter label > .rzi-plus {
+      width: 0.875rem;
+      height: 0.875rem;
+      font-size: 0.8125rem;
+      margin: 0 0.3125rem 0 0;
+      color: #88989b; }
+      .rz-cell-filter label > .rzi.rz-cell-filter-clear, .rz-cell-filter .rz-datatable-loading-content label > .rz-cell-filter-clear.rzi-circle-o-notch, .rz-datatable-loading-content .rz-cell-filter label > .rz-cell-filter-clear.rzi-circle-o-notch, .rz-cell-filter .rz-menuitem label > .rz-cell-filter-clear.rz-menuitem-icon, .rz-menuitem .rz-cell-filter label > .rz-cell-filter-clear.rz-menuitem-icon, .rz-cell-filter .rz-fileupload-row .rz-button label > .rz-cell-filter-clear.rzi-close, .rz-cell-filter .rz-fileupload-row .rz-paginator-element label > .rz-cell-filter-clear.rzi-close, .rz-fileupload-row .rz-button .rz-cell-filter label > .rz-cell-filter-clear.rzi-close, .rz-fileupload-row .rz-paginator-element .rz-cell-filter label > .rz-cell-filter-clear.rzi-close,
+      .rz-cell-filter .rz-fileupload-row .rz-button label > .rz-cell-filter-clear.rzi-times,
+      .rz-cell-filter .rz-fileupload-row .rz-paginator-element label > .rz-cell-filter-clear.rzi-times,
+      .rz-fileupload-row .rz-button .rz-cell-filter label > .rz-cell-filter-clear.rzi-times,
+      .rz-fileupload-row .rz-paginator-element .rz-cell-filter label > .rz-cell-filter-clear.rzi-times,
+      .rz-cell-filter .rz-fileupload-row .rz-button label > .rz-cell-filter-clear.rz-icon-trash,
+      .rz-cell-filter .rz-fileupload-row .rz-paginator-element label > .rz-cell-filter-clear.rz-icon-trash,
+      .rz-fileupload-row .rz-button .rz-cell-filter label > .rz-cell-filter-clear.rz-icon-trash,
+      .rz-fileupload-row .rz-paginator-element .rz-cell-filter label > .rz-cell-filter-clear.rz-icon-trash, .rz-cell-filter .rz-datatable label > .rz-cell-filter-clear.rzi-chevron-circle-right, .rz-datatable .rz-cell-filter label > .rz-cell-filter-clear.rzi-chevron-circle-right, .rz-cell-filter .rz-datatable label > .rz-cell-filter-clear.rzi-chevron-circle-down, .rz-datatable .rz-cell-filter label > .rz-cell-filter-clear.rzi-chevron-circle-down, .rz-cell-filter .rz-sortable-column label > .rz-cell-filter-clear.rzi-grid-sort, .rz-sortable-column .rz-cell-filter label > .rz-cell-filter-clear.rzi-grid-sort, .rz-cell-filter .rz-datatable-header label > .rz-cell-filter-clear.rzi-plus, .rz-datatable-header .rz-cell-filter label > .rz-cell-filter-clear.rzi-plus {
+        margin-left: auto; }
   .rz-cell-filter .rz-spinner {
     border: none;
     padding: 0;
