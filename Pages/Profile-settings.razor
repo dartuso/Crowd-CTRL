@@ -85,7 +85,7 @@
     </div>
     <div class="pr-sett">
         <div>
-            <button>Change profile picture</button>
+            <button class="btn btn-primary">Change profile picture</button>
         </div>
         <div style="margin-top: 5px; font-size: 1.2em;">
             AiviaIsBr0ken16
@@ -100,18 +100,18 @@
         </div>
     </div>
     <div class="conf">
-        <button>Update password</button>
+        <button class="btn btn-primary">Update password</button>
     </div>
     <div class="accounts">
         <h4>Connect your accounts</h4>
         <div class="all-accounts">
             @foreach (var platform in _listPlatforms){
-                <button style="margin:2px;">@platform</button>
+                <button class="btn btn-primary" style="margin:2px;">@platform</button>
             }
         </div>
     </div>
     <div class="bot-button">
-        <button @onclick="HomeNavigate">Continue to feed</button>
+        <button @onclick="HomeNavigate" class="btn btn-primary">Continue to feed</button>
     </div>
 </div>
 
