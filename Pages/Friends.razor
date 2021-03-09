@@ -1,8 +1,166 @@
 ﻿@page "/friends"
 @layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
+@* @using Components *@
 
-<h3>FriendManagement</h3>
+<style>
+    .main-friend-search-container{
+        padding-top: 10px;
+        min-height: 500px;
+        margin: auto;
+        width: 80%;
+        height: 100%;
+    }
+    .search-container{
+        padding-bottom: 4%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .search-results-container{
+        height: 90%;
+        background-color: #4d4d4d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    form{
+        width: 100%;
+    }
+    .res-list{
+        height: 90%;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    hr{
+        color: white;
+        background-color: white;
+        width: 100%;
+    }
+    .friend-item{
+        width: 100%;
+        display: flex;
 
-@code {
+    }
+    .friend-actions{
+        margin-left: auto;
+    }
+    .friend-action-button{
+        width: 30px;
+        height: 30px;
+    }
     
+</style>
+<div class="main-friend-search-container">
+    <div class="search-container">
+        <form style="display: flex; justify-content: center;">
+            <input type="text" placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 89%; color: white; background-color: #4d4d4d;"> 
+            <div style="text-align: center">
+                <button class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+    <div class="list-header">
+        <h2>My Friends</h2>
+    </div>
+    <div class="search-results-container">
+        <div class="res-list">
+            <div class="friend-item">
+                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
+                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 1" />
+                
+                <div class="friend-actions">
+                    @* <RadzenButton style ="friend-action-button">
+                        
+                    </RadzenButton> *@
+                    <RadzenIcon style="background-color = red;" Icon="clear" />
+                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
+                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
+                </div>
+                
+            </div>
+            <hr>
+            <div class="friend-item">
+                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
+                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 2" />
+                
+                <div class="friend-actions">
+                    <RadzenIcon style="background-color = red;" Icon="clear" />
+                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
+                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
+                </div>
+                
+            </div>
+            <hr>
+            <div class="friend-item">
+                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
+                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 3" />
+                
+                <div class="friend-actions">
+                    <RadzenIcon style="background-color = red;" Icon="clear" />
+                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
+                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
+                </div>
+                
+            </div>
+            <hr>
+            <div class="friend-item">
+                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
+                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 4" />
+                
+                <div class="friend-actions">
+                    <RadzenIcon style="background-color = red;" Icon="clear" />
+                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
+                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
+                </div>
+                
+            </div>
+            <hr>
+            <div class="friend-item">
+                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
+                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 5" />
+                
+                <div class="friend-actions">
+                    <RadzenIcon style="background-color = red;" Icon="clear" />
+                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
+                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
+                </div>
+                
+            </div>
+            <hr>
+            <div class="friend-item">
+                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
+                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 6" />
+                
+                <div class="friend-actions">
+                    <RadzenIcon style="background-color = red;" Icon="clear" />
+                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
+                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
+                </div>
+                
+            </div>
+            <hr>
+            <div class="friend-item">
+                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
+                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 7" />
+                
+                <div class="friend-actions">
+                    <RadzenIcon style="background-color = red;" Icon="clear" />
+                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
+                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@code{
+    private void UserProfileNavigate()
+    {
+        NavigationManager.NavigateTo("user_profile");
+    }
 }
