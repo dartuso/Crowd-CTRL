@@ -2,8 +2,50 @@
 @layout Shared.SocialLayout
 
 <div class="main-content">
-    Share Content
-    <RadzenCard Style="width:600px; margin-bottom: 20px; height:500px;">
+    <div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin-left: auto; margin-right: auto; margin-bottom: 5%">
+        <div class="card-body">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Share what's new here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white" ></textarea>
+            <div class="row">
+                <div class="col">
+                    <input class="form-control" type="file" id="formFile" style="background-color: rgba(255,255,255,0.05); color: white; width: 60%">
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" style="margin-left: 50%">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin-left: auto; margin-right: auto; margin-bottom: 5%">
+        <div class="row">
+            <div class="col-2">
+                <img src="Icons\\account.svg" class="card-img-top" alt="Profile Picture" height="150px" width="150px"/>
+                <h3 style="text-align: center">Username</h3>
+            </div>
 
-    </RadzenCard>
+            <div class="col">
+                <div class="card-body">
+                    <h5 class="card-title">Posted @DateTime.Now</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin-left: auto; margin-right: auto; margin-bottom: 5%">
+            <div class="row">
+                <div class="col-2">
+                    <img src="Icons\\account.svg" class="card-img-top" alt="Profile Picture" height="150px" width="150px"/>
+                    <h3 style="text-align: center">Username</h3>
+                </div>
+    
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title">Posted @DateTime.Now</h5>
+                        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/O161-WNZBP4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
+
+
