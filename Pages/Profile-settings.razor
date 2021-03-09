@@ -1,0 +1,144 @@
+@page "/profile-settings"
+@layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
+
+<style>
+    .page-container {
+        max-width: 800px;
+        padding: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: 
+            "header1 header1 header1"
+            "pr-pic prof-sett conf"
+            ". accounts button";
+    }
+
+    .header1 {
+        margin: 15px;
+        grid-area: header1;
+        font-size: 2em;
+        color: white;
+        text-align: center;
+    }
+
+    .conf {
+        grid-area: conf;
+        align-self: end;
+        justify-self: end;
+    }
+
+    .pr-pic { 
+
+        grid-area: pr-pic;
+    }
+
+    .pic {
+        display: block;
+        align-content: end;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        height: 180px;
+        width: 180px;
+    }
+
+    .pr-sett {
+        
+        padding: 15px 0px 15px 0px;
+        grid-area: prof-sett;
+        border-bottom: 2px solid white;
+    }
+
+    .accounts {
+        margin: 15px 0px 0px 0px;
+        grid-area: accounts;
+    }
+
+    .bot-button {
+        align-self: end;
+        justify-self: end;
+        grid-area: button;
+    }
+
+    .all-accounts {
+       
+        display: grid;
+        padding: 10px;
+    }
+
+    button{
+        background-color: rgba(255,255,255,0.05);
+        color:  #667EFD;
+    }
+
+</style>
+
+
+<div class="page-container">
+    <div class="header1">Your profile settings</div>
+    <div class="pr-pic">
+        <img src="@ProfilePicture" class="pic" alt="Profile Picture"/>
+    </div>
+    <div class="pr-sett">
+        <div>
+            <button class="btn btn-primary">Change profile picture</button>
+        </div>
+        <div style="margin-top: 5px; font-size: 1.2em;">
+            AiviaIsBr0ken16
+        </div>
+        <div style="margin-top: 5px">
+            <i>Update password</i>
+        </div>
+        <div>
+            @foreach (var pas in _password) {
+                <input type="password" placeholder="@pas" style="margin: 2px;">
+            }
+        </div>
+    </div>
+    <div class="conf">
+        <button class="btn btn-primary">Update password</button>
+    </div>
+    <div class="accounts">
+        <h4>Connect your accounts</h4>
+        <div class="all-accounts">
+            @foreach (var platform in _listPlatforms){
+                <button class="btn btn-primary" style="margin:2px;">@platform</button>
+            }
+        </div>
+    </div>
+    <div class="bot-button">
+        <button @onclick="HomeNavigate" class="btn btn-primary">Continue to feed</button>
+    </div>
+</div>
+
+@code {
+
+    private readonly List<string> _password = new List<string>()
+    {
+        "Current password",
+        "New password",
+        "Confirm new password"
+    };
+
+    private string ProfilePicture { get; set; } = "Icons\\account.svg";
+    private readonly List<string> _listPlatforms = new List<string>()
+    {
+        "Steam",
+        "Battle.net",
+        "GOG",
+        "PSN",
+        "Epic Games",
+        "Riot Games",
+        "Xbox Live"
+    };
+
+    private void HomeNavigate() 
+    {
+        NavigationManager.NavigateTo("home");
+    }
+    
+}

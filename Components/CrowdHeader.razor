@@ -30,7 +30,7 @@
 </style>
 
 <div class="header-grid">
-    <RadzenButton class="abutton"  Style="background-color:#ffffff00">
+    <RadzenButton class="abutton" Click="SettingsNavigate" Style="background-color:#ffffff00">
         <RadzenImage Path="Icons/settings.png" Style="width:30px;"/>
         <br/>
         Settings
@@ -78,6 +78,10 @@
 </div>
 
 @code{
+
+    private void SettingsNavigate() {
+        NavigationManager.NavigateTo("profile-settings");
+    }
 
     private void HomeNavigate() 
     {
