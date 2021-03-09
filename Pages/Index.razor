@@ -1,22 +1,40 @@
 ﻿@page "/"
 @inject NavigationManager NavigationManager
+<style>
+        .jumbotron {
+            text-align: center;
+            background-color: #121212;
+            margin-top: 10%;
+        }
+</style>
+<div class="container" style="text-align: center;">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="jumbotron">
+                <h1 style="font-size: 50px">Welcome to <span class="spantitle" style="color: #7289da; font-size: 50px">Crowd CTRL</span></h1>
+                <h2>Connect, Play, Share!</h2>
 
-<div style="margin: 5%; text-align: center">
-    <h1>Crowd Control</h1>
-    Welcome to Crowd Control, a platform for gamers to connect, play and share!
-    <br>
-    <RadzenButton
+            </div>
+        </div>
+    </div>
+    <button
+        class="btn btn-primary"
         Text="Login"
         Style="margin-bottom: 20px; width: 150px"
-        Click="LoginNavigate"/>
+        @onclick="LoginNavigate">
+        Login
+    </button>
     <br>
-    <RadzenButton
-        Text="Sign Up"
+    <button
+        class="btn btn-primary"
         Style="margin-bottom: 20px; width: 150px"
-        Click="SignupNavigate"/>
+        @onclick="SignupNavigate">
+        Sign Up
+    </button>
 </div>
 
 @code{
+
     private void LoginNavigate()
     {
         NavigationManager.NavigateTo("login");
@@ -26,4 +44,5 @@
     {
         NavigationManager.NavigateTo("signup");
     }
+
 }
