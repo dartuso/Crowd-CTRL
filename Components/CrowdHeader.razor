@@ -70,8 +70,10 @@
         Profile
     </RadzenButton>
 
-    <RadzenButton Text="LogOut"  Click="LogoutNavigate" class="abutton" Style="background-color:#ffffff00">
-
+    <RadzenButton Text="LogOut" Click="LogoutNavigate" class="abutton" Style="background-color:#ffffff00">
+        <RadzenIcon Icon="exit_to_app" Style="width:30px;" />
+        <br />
+        Logout
     </RadzenButton>
 </div>
 
@@ -113,7 +115,7 @@
 
     private void LogoutNavigate()
     {
-        NavigationManager.NavigateTo("");
+        NavigationManager.NavigateTo("login");
     }
 
 }
