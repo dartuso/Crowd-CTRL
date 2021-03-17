@@ -2,6 +2,44 @@
 @layout Shared.SocialLayout
 
 <div class="main-content">
+    <div class="container" style="width: 90%; margin-left: auto; margin-right: auto; background-color: rgba(255,255,255,0.05);padding: 1%;margin-bottom: 3%">
+        <div class="row" style="text-align: center">
+            <div class="col">
+                <a href="/profile" class="link-primary">
+                    <h3>Live Game Info</h3>
+                </a>
+                <div style="background-color: rgba(255,255,255,0.05)">
+                    LIVE - Overwatch<br>
+                    KDA - 2.5
+                </div>
+            </div>
+            <div class="col">
+                <a href="/tournament" class="link-primary">
+                    <h3>Tournament</h3>
+                </a>
+                <div style="background-color: rgba(255,255,255,0.05)">
+                    Weekly5x5 - Ongoing<br>
+                    Weekly5x5 - In 7 days
+                </div>
+            </div>
+            <div class="col">
+                <a href="/clans" class="link-primary">
+                    <h3>Clan Events</h3>
+                </a>
+                <div style="background-color: rgba(255,255,255,0.05)">
+                    Superclan - Raid in 5 hours<br>
+                </div>
+            </div>
+            <div class="col">
+                <a href="/tournament" class="link-primary">
+                    <h3>Notifications</h3>
+                </a>
+                <div style="background-color: rgba(255,255,255,0.05)">
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin-left: auto; margin-right: auto; margin-bottom: 5%">
         <div class="card-body">
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Share what's new here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white" ></textarea>
@@ -25,17 +63,22 @@
             <div class="col">
                 <div class="card-body">
                     <h5 class="card-title">Posted @DateTime.Now</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">Here is a post! This could be anything!</p>
                     <div style="position: absolute; bottom: 0; right: 13px;">
                         <button class="btn" onclick="" style="font-size: 24px; background-color: rgba(255,255,255,0.05);">
                             🔥
                         </button>
-                        <button class="btn" onclick="" style="background-color: rgba(255,255,255,0.05);">
+                        <button class="btn" type="button" @onclick="() => this.Collapsed = !this.Collapsed" style="background-color: rgba(255,255,255,0.05);" >
                             <RadzenIcon Icon="comment" Style="color: white; height: 36px;"/>
                         </button>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="collapse" Collapse="@Collapsed" id="collapseExample">
+        <div class="card card-body">
+            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
         </div>
     </div>
     <div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin-left: auto; margin-right: auto; margin-bottom: 5%">
@@ -63,3 +106,10 @@
         </div>
     </div>
 </div>
+@code{
+    [Parameter]
+    public bool Collapsed{get;set;}= true; // hide by default
+    
+    
+    
+}
