@@ -1,0 +1,80 @@
+@page "/tournament-create"
+@layout Shared.SocialLayout
+
+<style>
+    .page-layout {
+        text-align:center;
+        justify-self: center;
+        display: grid;
+        margin: 20px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .bot-button {
+        justify-self: end;
+        align-self: end;
+        width: fit-content;
+        height: fit-content; 
+    }
+
+    form{
+        text-align: left;
+    }
+
+    input[type=checkbox] { 
+        vertical-align: middle; 
+        position: relative; 
+        bottom: 1px; 
+    } 
+
+
+</style>
+
+<div class="page-layout">
+    <h1>Start hosting a new tournament!</h1>
+    <form>
+        <label for="tname">Tournament name</label><br>
+        <input class="form-control" type="text" id="tname" name="tname"><br>
+
+        <label for="game">Game</label>
+        <select class="form-control" id="game">
+            <option disabled selected value> -- select a game -- </option>
+            <option>League of Legends</option>
+            <option>Rocket League</option>
+            <option>Overwatch</option>
+            <option>4</option>
+            <option>5</option>
+        </select><br>
+
+        <label for="noOfTeams">Number of teams</label>
+        <select class="form-control" id="noOfTeams">
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+        </select><br>
+
+        <label for="rules">Rules</label><br>
+        <textarea class="form-control" id="rules" rows="5" name="rules"></textarea> <br>
+    
+    </form><br>
+    <div style="align-self: center; justify-self: stretch;">
+        <input type="checkbox" class="form-check-input" style="width:16px; height:16px; " id="checkbox-1" value="">
+        <label class="form-check-label" for="checkbox-1">Share tournament to feed</label> 
+    </div>
+
+    <button class="bot-button btn btn-primary">Continue</button>
+</div>
+
+@code {
+
+}

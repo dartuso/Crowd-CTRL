@@ -1,5 +1,6 @@
 ﻿@page "/tournament"
 @layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
 
 <style>
 
@@ -106,7 +107,7 @@
 <h1 style="text-align: center;">TOURNAMENTS</h1>
 <div class="TournamentContainer">
     <button id="join" class="TournamentButton btn btn-primary" >JOIN</button>
-    <button id="create" class="TournamentButton btn btn-primary" >CREATE</button>
+    <button id="create" class="TournamentButton btn btn-primary" @onclick="TournamentCreateNavigate">CREATE</button>
     <div class="content">
         <div class="header">Tournament Name</div>
         <div class="header">Game</div>
@@ -142,5 +143,8 @@
 </div>
 
 @code {
-    
+        private void TournamentCreateNavigate() 
+    {
+        NavigationManager.NavigateTo("tournament-create");
+    }
 }
