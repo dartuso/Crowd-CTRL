@@ -6,14 +6,20 @@ namespace Crowd_CTRL.Pages
 
     public class Post
     {
+        private const int ReactionMax = 20;
+        Func<uint> GenRandomReaction()
+        {
+            Random _gen = new Random();
 
+            return () => (uint) _gen.Next(ReactionMax);
+        }
         public Post()
         {
             ProfileUrl = "";
             Username = "";
             Embed = "";
             Text = "";
-            Reaction = 0;
+            Reaction = 0;;
             PostedDate = DateTime.UnixEpoch;
         }
 
@@ -23,7 +29,7 @@ namespace Crowd_CTRL.Pages
             Username = username;
             Embed = embed;
             Text = text;
-            Reaction = 0;
+            Reaction = GenRandomReaction()();
             PostedDate = time;
         }
 
