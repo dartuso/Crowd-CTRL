@@ -11,9 +11,9 @@ namespace Crowd_CTRL.Pages
         private const int ReactionMax = 20;
         Func<uint> GenRandomReaction()
         {
-            Random _gen = new Random();
+            Random gen = new Random();
 
-            return () => (uint) _gen.Next(ReactionMax);
+            return () => (uint) gen.Next(ReactionMax);
         }
         public Post()
         {
