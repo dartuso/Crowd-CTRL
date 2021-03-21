@@ -1,5 +1,6 @@
 @page "/home"
 @using Crowd_CTRL.Pages
+@using Components
 @layout Shared.SocialLayout
 
 <div class="main-content">
@@ -46,7 +47,7 @@
             <EditForm Model="@_formPost" OnValidSubmit="@HandleValidSubmit">
                 <DataAnnotationsValidator/>
                 <ValidationSummary/>
-                <InputText @bind-Value="_formPost.Text" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Share what's new here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white"/>
+                <InputText @bind-Value="_formPost.Text" CssClass="form-control" class="form-control" rows="3" placeholder="Share what's new here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white"/>
                 <div class="row">
                     <div class="col">
                         <InputFile @bind-Value="_formPost.Embed" class="form-control" type="file" id="formFile" style="background-color: rgba(255,255,255,0.05); color: white; width: 60%"/>
@@ -77,10 +78,10 @@
                             }
                             <p class="card-text">@post.Text</p>
                             <div style="position: absolute; bottom: 0; right: 13px;">
-                                <button @onclick="() => { post.Reaction += 1;}" class="btn" style="font-size: 24px; background-color: rgba(255,255,255,0.05); color: white">
+                                <button @onclick="() => { post.Reaction += 1; }" class="btn" style="font-size: 24px; background-color: rgba(255,255,255,0.05); color: white">
                                     @post.Reaction 🔥
                                 </button>
-                                <button class="btn"  style="background-color: rgba(255,255,255,0.05);">
+                                <button @onclick="() => {post.DisplayComments = !post.DisplayComments; StateHasChanged();}" class="btn" style="background-color: rgba(255,255,255,0.05);">
                                     <RadzenIcon Icon="comment" Style="color: white; height: 36px;"/>
                                 </button>
                             </div>
@@ -88,6 +89,10 @@
                     </div>
                 </div>
             </div>
+            @if (post.DisplayComments)
+            {
+                <CommentSection Comments="@post.Comments"/>
+            }
         }
     }
 </div>
@@ -98,7 +103,7 @@
 
     private void HandleValidSubmit()
     {
-        _formPost.Username =  Program.Username;
+        _formPost.Username = Program.Username;
         _formPost.PostedDate = DateTime.Now;
         _formPost.ProfileUrl = "Icons\\account.svg";
         Program.Posts.Insert(0, _formPost);

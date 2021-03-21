@@ -15,6 +15,9 @@
     <Compile Update="Pages\Post.cs">
       <DependentUpon>Home.razor</DependentUpon>
     </Compile>
+    <Compile Update="Components\Comment.cs">
+      <DependentUpon>CommentSection.razor</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

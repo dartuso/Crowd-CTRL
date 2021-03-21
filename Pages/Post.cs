@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Crowd_CTRL.Comments;
 
 namespace Crowd_CTRL.Pages
 {
@@ -19,8 +21,10 @@ namespace Crowd_CTRL.Pages
             Username = "";
             Embed = "";
             Text = "";
-            Reaction = 0;;
+            Reaction = 0;
             PostedDate = DateTime.UnixEpoch;
+            Comments = new List<Comment>();
+            DisplayComments = false;
         }
 
         public Post(string profileUrl, string username, string embed, string text, DateTime time)
@@ -31,6 +35,8 @@ namespace Crowd_CTRL.Pages
             Text = text;
             Reaction = GenRandomReaction()();
             PostedDate = time;
+            Comments = new List<Comment>();
+            DisplayComments = false;
         }
 
         public Post(string username, string text)
@@ -41,6 +47,8 @@ namespace Crowd_CTRL.Pages
             Embed = "";
             Reaction = 0;
             PostedDate = DateTime.Now;
+            Comments = new List<Comment>();
+            DisplayComments = false;
         }
 
         public Post(string text)
@@ -51,6 +59,8 @@ namespace Crowd_CTRL.Pages
             Embed = "";
             Reaction = 0;
             PostedDate = DateTime.Now;
+            Comments = new List<Comment>();
+            DisplayComments = false;
         }
         public Post(string username, string text, string embed)
         {
@@ -60,6 +70,8 @@ namespace Crowd_CTRL.Pages
             Embed = embed;
             Reaction = 0;
             PostedDate = DateTime.Now;
+            Comments = new List<Comment>();
+            DisplayComments = false;
         }
 
         public DateTime PostedDate { get; set; }
@@ -70,5 +82,8 @@ namespace Crowd_CTRL.Pages
         public string Text { get; set; }
         public uint Reaction { get; set; }
         
+        public List<Comment> Comments { get; set; }
+
+        public bool DisplayComments { get; set; }
     }
 }
