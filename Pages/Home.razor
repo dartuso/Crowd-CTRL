@@ -43,15 +43,19 @@
     </div>
     <div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin-left: auto; margin-right: auto; margin-bottom: 5%">
         <div class="card-body">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Share what's new here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white" ></textarea>
-            <div class="row">
+            <EditForm Model="@formPost" OnValidSubmit="@HandleValidSubmit">
+                <DataAnnotationsValidator/>
+                <ValidationSummary/>
+                <InputText @bind-Value="formPost.Text" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Share what's new here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white"/>
+                <div class="row">
                     <div class="col">
-                        <input @bind="inputText" class="form-control" type="file" id="formFile" style="background-color: rgba(255,255,255,0.05); color: white; width: 60%">
+                        <InputFile @bind-Value="formPost.Embed" class="form-control" type="file" id="formFile" style="background-color: rgba(255,255,255,0.05); color: white; width: 60%"/>
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary" style="margin-left: 50%">Submit</button>
+                        <button type="submit" class="btn btn-primary" style="margin-left: 50%">Submit</button>
                     </div>
-            </div>
+                </div>
+            </EditForm>
         </div>
     </div>
     @if (_posts.Count > 0)
@@ -89,8 +93,7 @@
 </div>
 
 @code{
-    string inputText;
-
+    private Post formPost = new Post();
     static Func<DateTime> getRandomDate = RandomDayFunc();
 
     private readonly List<Post> _posts = new List<Post>
@@ -103,12 +106,21 @@
 
     static Func<DateTime> RandomDayFunc()
     {
-        DateTime start = new DateTime(1995, 1, 1);
+        DateTime start = new DateTime(2021, 1, 1);
         Random gen = new Random();
         int range = (DateTime.Today - start).Days;
-        return () => start.AddDays(gen.Next(range));
+        return () => start.AddDays(gen.Next(range)).AddHours(gen.Next(24)).AddMinutes(gen.Next(60)).AddSeconds(gen.Next(60));
     }
 
-
+    private void HandleValidSubmit()
+    {
+        formPost.Username = "TestUser";
+        formPost.PostedDate = DateTime.Now;
+        formPost.ProfileUrl = "Icons\\account.svg";
+        _posts.Insert(0,formPost);
+        
+        formPost = new Post();
+        StateHasChanged();
+    }
 
 }

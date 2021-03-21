@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crowd_CTRL.Pages
 {
@@ -6,14 +7,14 @@ namespace Crowd_CTRL.Pages
     public class Post
     {
 
-        private Post()
+        public Post()
         {
-            
             ProfileUrl = "";
             Username = "";
             Embed = "";
             Text = "";
             Reaction = 0;
+            PostedDate = DateTime.UnixEpoch;
         }
 
         public Post(string profileUrl, string username, string embed, string text, DateTime time)
@@ -59,6 +60,7 @@ namespace Crowd_CTRL.Pages
         public string ProfileUrl { get; set; }
         public string Username { get; set; }
         public string Embed { get; set; }
+        [Required]
         public string Text { get; set; }
         public uint Reaction { get; set; }
         
