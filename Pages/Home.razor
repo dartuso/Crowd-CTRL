@@ -1,4 +1,5 @@
 @page "/home"
+@using Crowd_CTRL.Pages
 @layout Shared.SocialLayout
 
 <div class="main-content">
@@ -44,72 +45,70 @@
         <div class="card-body">
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Share what's new here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white" ></textarea>
             <div class="row">
-                <div class="col">
-                    <input class="form-control" type="file" id="formFile" style="background-color: rgba(255,255,255,0.05); color: white; width: 60%">
-                </div>
-                <div class="col">
-                    <button class="btn btn-primary" style="margin-left: 50%">Submit</button>
-                </div>
+                    <div class="col">
+                        <input @bind="inputText" class="form-control" type="file" id="formFile" style="background-color: rgba(255,255,255,0.05); color: white; width: 60%">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" style="margin-left: 50%">Submit</button>
+                    </div>
             </div>
         </div>
     </div>
-    <div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin-left: auto; margin-right: auto; margin-bottom: 5%">
-        <div class="row">
-            <div class="col-2">
-                <img src="Icons\\account.svg" class="card-img-top" alt="Profile Picture" height="150px" width="150px"/>
-                <h3 style="text-align: center">Username</h3>
-            </div>
-
-            <div class="col">
-                <div class="card-body">
-                    <h5 class="card-title">Posted @DateTime.Now</h5>
-                    <p class="card-text">Here is a post! This could be anything!</p>
-                    <div style="position: absolute; bottom: 0; right: 13px;">
-                        <button class="btn" onclick="" style="font-size: 24px; background-color: rgba(255,255,255,0.05);">
-                            🔥
-                        </button>
-                        <button class="btn" type="button" @onclick="() => this.Collapsed = !this.Collapsed" style="background-color: rgba(255,255,255,0.05);" >
-                            <RadzenIcon Icon="comment" Style="color: white; height: 36px;"/>
-                        </button>
+    @if (_posts.Count > 0)
+    {
+        @foreach (var post in _posts)
+        {
+            <div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin-left: auto; margin-right: auto; margin-bottom: 5%">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="@post.ProfileUrl" class="card-img-top" alt="Profile Picture" height="150px" width="150px"/>
+                        <h3 style="text-align: center">@post.Username</h3>
+                    </div>
+                    <div class="col">
+                        <div class="card-body">
+                            <h5 class="card-title">Posted @post.PostedDate </h5>
+                            @if (@post.Embed.Length > 0)
+                            {
+                                <iframe width="560" height="315" src="@post.Embed" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            }
+                            <p class="card-text">@post.Text</p>
+                            <div style="position: absolute; bottom: 0; right: 13px;">
+                                <button class="btn" onclick="" style="font-size: 24px; background-color: rgba(255,255,255,0.05);">
+                                    🔥
+                                </button>
+                                <button class="btn" onclick="" style="background-color: rgba(255,255,255,0.05);">
+                                    <RadzenIcon Icon="comment" Style="color: white; height: 36px;"/>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="collapse" Collapse="@Collapsed" id="collapseExample">
-        <div class="card card-body">
-            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-        </div>
-    </div>
-    <div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin-left: auto; margin-right: auto; margin-bottom: 5%">
-        <div class="row">
-            <div class="col-2">
-                <img src="Icons\\account.svg" class="card-img-top" alt="Profile Picture" height="150px" width="150px"/>
-                <h3 style="text-align: center">Username</h3>
-            </div>
-
-            <div class="col">
-                <div class="card-body">
-                    <h5 class="card-title">Posted @DateTime.Now</h5>
-                    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/O161-WNZBP4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <div style="position: absolute; bottom: 0; right: 13px;">
-                        <button class="btn" onclick="" style="font-size: 24px; background-color: rgba(255,255,255,0.05);">
-                            🔥
-                        </button>
-                        <button class="btn" onclick="" style="background-color: rgba(255,255,255,0.05);">
-                            <RadzenIcon Icon="comment" Style="color: white; height: 36px;"/>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        }
+    }
 </div>
+
 @code{
-    [Parameter]
-    public bool Collapsed{get;set;}= true; // hide by default
-    
-    
-    
+    string inputText;
+
+    static Func<DateTime> getRandomDate = RandomDayFunc();
+
+    private readonly List<Post> _posts = new List<Post>
+    {
+        new Post("Icons\\account.svg", "Daniel", "", "Hey! Hope everyone is doing well!", getRandomDate()),
+        new Post("Icons\\account.svg", "Overwatch Gamer", "https://www.youtube-nocookie.com/embed/O161-WNZBP4", "Check out my overwatch game play.", getRandomDate())
+    };
+
+    /*Credit: https://stackoverflow.com/questions/194863/random-date-in-c-sharp*/
+
+    static Func<DateTime> RandomDayFunc()
+    {
+        DateTime start = new DateTime(1995, 1, 1);
+        Random gen = new Random();
+        int range = (DateTime.Today - start).Days;
+        return () => start.AddDays(gen.Next(range));
+    }
+
+
+
 }
