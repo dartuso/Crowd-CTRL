@@ -1,0 +1,74 @@
+@page "/tournament-teams"
+@layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
+
+<style>
+    .page-layout {
+        text-align:center;
+        justify-self: center;
+        display: grid;
+        grid-template-areas: 
+            "header1 header1"
+            "uheader uheader"
+            "col1 col1"
+            "col1 col1"
+            "col1 col1"
+            "but1 but2";
+        margin: 20px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .header1 {
+        grid-area: header1;
+    }
+    .uheader {
+        grid-area: uheader;
+    }
+    .col1 {
+        grid-area: col1;
+    }
+    .but1 {
+        margin: 5px;
+        grid-area: but1;
+    }
+    .but2 {
+        margin: 5px;
+        grid-area: but2;
+    }
+    form {
+        text-align: left;
+    }
+
+</style>
+
+<div class="page-layout">
+    <h1 class="header1">Enter team details</h1>
+    <h3 class="uheader">(type team name or click invite)</h3>
+
+    <form class="col1">
+    @foreach (int value in Enumerable.Range(1,6))
+    {
+        <div>
+        <label for="tname">Team #@value</label><br>
+        <input class="form-control" type="text" id="tname" name="tname" style="margin: 5px;"><br>
+        </div>
+    }
+    </form>
+
+    <button class="btn btn-primary but1 " @onclick="TournamentCreateNavigate">Go back</button>
+    <button class="btn btn-primary but2 " @onclick="TournamentBracketNavigate">Continue</button>
+</div>
+
+@code {
+    private void TournamentCreateNavigate() 
+    {
+        NavigationManager.NavigateTo("tournament-create");
+    }
+
+    private void TournamentBracketNavigate() 
+    {
+        NavigationManager.NavigateTo("tournament-teams");           //must change 
+    }
+}
