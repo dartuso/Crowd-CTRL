@@ -1,0 +1,59 @@
+@* https://stackoverflow.com/questions/59256798/how-to-use-bootstrap-modal-in-blazor-client-app <-- Used for development of Modal *@
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: #7A7A7A; align-items:center; justify-content:center;">
+            <div style="width:96%; background-color: #4D4D4D;">
+              <div class="modal-header" style="border-width:0px;">
+                  
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="() => Close()">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+
+              <div class="modal-body" style="text-align:center;">
+                  <h2>Are you sure you want to remove</h2>
+                  <h2>"@friendName" ?</h2>
+              </div>
+              <div class="modal-footer" style="border-width:0px; justify-content:center;">
+                  <button style="font-size: 20px; width:100px;" type="button" class="btn btn-success">Yes</button>
+                  <button style="font-size: 20px; width:100px;" type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">No</button>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+
+
+  public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+    public string friendName;
+
+    public void Open(String fName)
+    {
+        friendName = fName;
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+}
