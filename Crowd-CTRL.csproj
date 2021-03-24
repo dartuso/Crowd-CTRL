@@ -11,4 +11,13 @@
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Pages\Post.cs">
+      <DependentUpon>Home.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Components\Comment.cs">
+      <DependentUpon>CommentSection.razor</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
