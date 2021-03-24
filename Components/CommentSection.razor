@@ -6,18 +6,18 @@
     <div>
         @foreach (var comment in Comments)
         {
-            <div style="background-color: rgba(255,255,255,0.05)">
+            <div class="container-fluid" style="background-color: rgba(255,255,255,0.05)">
                 @comment.PostedDate <b>@comment.Username</b> @comment.Text
             </div>
         }
     </div>
-    <div>
+    <div >
         <EditForm Model="_newComment" OnValidSubmit="@HandleCommentAdd">
             <div class="row">
                 <div class="col-10">
                     <InputText @bind-Value="_newComment.Text" CssClass="form-control" class="form-control" rows="3" placeholder="Add a comment here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white"/>
                 </div>
-                <div class="col">
+                <div class="col-2">
                     <button type="submit" class="btn btn-primary" style="margin-left: 50%">Add comment</button>
                 </div>
             </div>
@@ -34,6 +34,7 @@
 
     private void HandleCommentAdd()
     {
+        if (_newComment.Text.Length <= 0) return;
         _newComment.Username = Program.Username;
         _newComment.PostedDate = DateTime.Now;
         Comments.Add(_newComment);
