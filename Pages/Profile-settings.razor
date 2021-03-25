@@ -1,4 +1,5 @@
 @page "/profile-settings"
+@using Crowd_CTRL.Pages
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
 
@@ -81,64 +82,64 @@
 <div class="page-container">
     <div class="header1">Your profile settings</div>
     <div class="pr-pic">
-        <img src="@ProfilePicture" class="pic" alt="Profile Picture"/>
+        <img src="@Program.User.ProfilePicture" class="pic" alt="Profile Picture"/>
     </div>
     <div class="pr-sett">
-        <div>
-            <button class="btn btn-primary">Change profile picture</button>
-        </div>
-        <div style="margin-top: 5px; font-size: 1.2em;">
-            AiviaIsBr0ken16
-        </div>
-        <div style="margin-top: 5px">
-            <i>Update password</i>
-        </div>
-        <div>
-            @foreach (var pas in _password) {
-                <input  type="password" placeholder="@pas" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white">
-            }
-        </div>
+        @*<div>
+                <button class="btn btn-primary">Change profile picture</button>
+            </div>*@
+        <EditForm Model="updateUser" OnValidSubmit="@HandleUpdatePassword">
+            <div style="margin-top: 5px">
+                <i>Update password</i>
+            </div>
+            <div>
+                <InputText @bind-Value="@CurrentPass" type="password" placeholder="Current password" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+                <InputText @bind-Value="@NewPass" type="password" placeholder="Current password" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+                <InputText @bind-Value="@ConfirmPass" type="password" placeholder="Confirm password" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+            </div>
+            <div class="conf">
+                <button class="btn btn-primary">Update password</button>
+            </div>
+        </EditForm>
     </div>
-    <div class="conf">
-        <button class="btn btn-primary">Update password</button>
-    </div>
+
+    <EditForm Model="updateUser" OnValidSubmit="@HandleUpdateUser">
     <div class="accounts">
         <h4>Connect your accounts</h4>
         <div class="all-accounts">
-            @foreach (var platform in _listPlatforms){
-                <button class="btn btn-primary" style="margin:2px;">@platform</button>
-            }
-        </div>
+            <InputText @bind-Value="@Steam"     placeholder="Steam Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+            <InputText @bind-Value="@Battle"    placeholder="Battle.net Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+            <InputText @bind-Value="@GOG"       placeholder="GOG Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+            <InputText @bind-Value="@EpicGames" placeholder="Epic Games Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+            <InputText @bind-Value="@RiotGames" placeholder="Riot Games Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+            <InputText @bind-Value="@PSN"       placeholder="PSN Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+            <InputText @bind-Value="@Xbox"      placeholder="Xbox Live Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+        </div>      
     </div>
     <div class="bot-button">
-        <button @onclick="HomeNavigate" class="btn btn-primary">Continue to feed</button>
+        <button type="submit" class="btn btn-primary">Continue to feed</button>
     </div>
+    </EditForm>
 </div>
 
 @code {
+    User updateUser = new User();
+    string CurrentPass, NewPass, ConfirmPass, Steam, Battle, GOG, EpicGames, RiotGames, PSN, Xbox;
+    
 
-    private readonly List<string> _password = new List<string>()
-    {
-        "Current password",
-        "New password",
-        "Confirm new password"
-    };
-
-    private string ProfilePicture { get; set; } = "Icons\\account.svg";
-    private readonly List<string> _listPlatforms = new List<string>()
-    {
-        "Steam",
-        "Battle.net",
-        "GOG",
-        "PSN",
-        "Epic Games",
-        "Riot Games",
-        "Xbox Live"
-    };
-
-    private void HomeNavigate() 
+    private void HomeNavigate()
     {
         NavigationManager.NavigateTo("home");
     }
-    
+
+    private void HandleUpdateUser()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HandleUpdatePassword()
+    {
+        throw new NotImplementedException();
+    }
+
 }

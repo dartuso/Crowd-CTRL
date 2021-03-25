@@ -23,7 +23,7 @@ namespace Crowd_CTRL
             await builder.Build().RunAsync();
         }
 
-        public static string Username = "TestUser";
+        public static User User = new User();
         static Func<DateTime> RandomDayFunc()
         {
             /*Credit: https://stackoverflow.com/questions/194863/random-date-in-c-sharp*/
@@ -34,7 +34,7 @@ namespace Crowd_CTRL
         }
 
         private static readonly Func<DateTime> GetRandomDate = RandomDayFunc();
-
+        
         public static readonly List<Post> Posts = new List<Post>
         {
             new("Icons\\account.svg", "Daniel", "", "Hey! Hope everyone is doing well!", GetRandomDate()),

@@ -1,4 +1,5 @@
-﻿@page "/profile"
+﻿@page "/profile/{Username?}"
+@using Crowd_CTRL.Pages
 @layout Shared.SocialLayout
 <style>
     .picContainer{
@@ -42,28 +43,33 @@
 
 <div class="flex" >
     <div class="picContainer">
-        <img src="@ProfilePicture" class="pic" alt="Profile Picture"/>
+        <img src="@User.ProfilePicture" class="pic" alt="Profile Picture"/>
     </div>
     <div class="platform">
         <div class="username">
-            @Username
+            @User.Username
         </div>
         <div class="platforms">
-            @foreach (var platform in _listPlatforms){
+            @foreach (string platform in User.Platforms){
                 <div>@platform</div>
             }
         </div>
     </div>
     <div class="bio">
-        @Bio
+        @User.Bio
+        @foreach (string game in User.Games)
+        {
+            <div>@game</div>
+        }
     </div>
 </div>
 
 @code {
-    private string Username { get; set; } = "GhostCluster1990";
-    private string ProfilePicture { get; set; } = "Icons\\account.svg";
+    [Parameter]
+    public User User { get; set; }
+    
 
-    private readonly List<string> _listPlatforms = new List<string>()
+    /*private readonly List<string> _listPlatforms = new List<string>()
     {
         "Steam: Ghost_cluster19",
         "Battle.net: Ghosty#1870",
@@ -81,5 +87,5 @@
         "- Overwatch \n" +
         "- Diablo III \n" +
         "PSN \n" +
-        "- FIFA 21 \n";
+        "- FIFA 21 \n";*/
 }
