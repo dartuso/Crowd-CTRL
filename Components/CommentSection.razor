@@ -1,0 +1,45 @@
+﻿@namespace Components
+@using Crowd_CTRL.Comments
+
+<div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin: -5% auto 5%;">
+    <br>
+    <div>
+        @foreach (var comment in Comments)
+        {
+            <div class="container-fluid" style="background-color: rgba(255,255,255,0.05)">
+                @comment.PostedDate <b>@comment.Username</b> @comment.Text
+            </div>
+        }
+    </div>
+    <div >
+        <EditForm Model="_newComment" OnValidSubmit="@HandleCommentAdd">
+            <div class="row">
+                <div class="col-10">
+                    <InputText @bind-Value="_newComment.Text" CssClass="form-control" class="form-control" rows="3" placeholder="Add a comment here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white"/>
+                </div>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-primary" style="margin-left: 50%">Add comment</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public List<Comment> Comments { get; set; }
+
+    private Comment _newComment = new Comment();
+
+    private void HandleCommentAdd()
+    {
+        if (_newComment.Text.Length <= 0) return;
+        _newComment.Username = Program.Username;
+        _newComment.PostedDate = DateTime.Now;
+        Comments.Add(_newComment);
+        _newComment = new Comment();
+        StateHasChanged();
+    }
+
+}
