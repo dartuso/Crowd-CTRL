@@ -46,13 +46,13 @@
                 <h4>Update Bio</h4>
                 @Program.User.Bio
                 <InputText @bind-Value="@_updateUser.Bio" placeholder="Update bio" rows="3" class="form-control inputStyling" />
-                <button type="submit" class="btn btn-primary">Update password</button>
+                <button type="submit" class="btn btn-primary">Update Bio</button>
             </EditForm>
             <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdatePassword">
                 <h4>Update password</h4>
                 <div>
                     <InputText @bind-Value="@CurrentPass" type="password" placeholder="Current password" class="form-control inputStyling" CssClass="form-control"/>
-                    <InputText @bind-Value="@NewPass" type="password" placeholder="Current password" class="form-control inputStyling" CssClass="form-control"/>
+                    <InputText @bind-Value="@NewPass" type="password" placeholder="New password" class="form-control inputStyling" CssClass="form-control"/>
                     <InputText @bind-Value="@ConfirmPass" type="password" placeholder="Confirm password" class="form-control inputStyling" CssClass="form-control" />
                 </div>
                 <button type="submit" class="btn btn-primary">Update password</button>
@@ -67,6 +67,7 @@
                     <InputText @bind-Value="@GOG" placeholder="GOG Username" class="form-control inputStyling" CssClass="form-control"/>
                     <InputText @bind-Value="@Epic" placeholder="Epic Games Username" class="form-control inputStyling" CssClass="form-control"/>
                     <InputText @bind-Value="@Riot" placeholder="Riot Games Username" class="form-control inputStyling" CssClass="form-control" />
+                    <InputText @bind-Value="@PSN" placeholder="PSN Username" class="form-control inputStyling" CssClass="form-control" />
                     <InputText @bind-Value="@Xbox" placeholder="Xbox Live Username" class="form-control inputStyling" CssClass="form-control"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Update platforms</button>
@@ -76,8 +77,8 @@
 </div>
 
 @code {
-    private User _updateUser = new User();
-    string CurrentPass, NewPass, ConfirmPass, Steam, BattleNET, GOG, Epic, Riot, PSN, Xbox;
+    private User _updateUser = new();
+    string CurrentPass = "", NewPass = "", ConfirmPass = "", Steam = "", BattleNET = "", GOG = "", Epic = "", Riot = "", PSN = "", Xbox = "";
 
     private void HomeNavigate()
     {
@@ -98,7 +99,7 @@
         Xbox = "";
     }
 
-    private void UpdatePlatforms()
+    void UpdatePlatforms()
     {
         if (Steam.Length != 0)
         {
@@ -168,8 +169,6 @@
     private void AddPlatform(string platform, string username)
     {
         _updateUser.Platforms.Add(String.Concat(platform, ": ", username));
-        Program.User.Platforms = _updateUser.Platforms;
-        _updateUser = new User();
     }
 
     private void HandleUpdatePassword()
