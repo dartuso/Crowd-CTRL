@@ -4,39 +4,6 @@
 @inject NavigationManager NavigationManager
 
 <style>
-    .page-container {
-        max-width: 800px;
-        padding: 20px;
-        margin-left: auto;
-        margin-right: auto;
-        display: grid;
-        grid-template-rows: auto auto 1fr;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-areas: 
-            "header1 header1 header1"
-            "pr-pic prof-sett conf"
-            ". accounts button";
-    }
-
-    .header1 {
-        margin: 15px;
-        grid-area: header1;
-        font-size: 2em;
-        color: white;
-        text-align: center;
-    }
-
-    .conf {
-        grid-area: conf;
-        align-self: end;
-        justify-self: end;
-    }
-
-    .pr-pic { 
-
-        grid-area: pr-pic;
-    }
-
     .pic {
         display: block;
         align-content: end;
@@ -47,99 +14,184 @@
         width: 180px;
     }
 
-    .pr-sett {
-        
-        padding: 15px 0px 15px 0px;
-        grid-area: prof-sett;
-        border-bottom: 2px solid white;
-    }
-
-    .accounts {
-        margin: 15px 0px 0px 0px;
-        grid-area: accounts;
-    }
-
-    .bot-button {
-        align-self: end;
-        justify-self: end;
-        grid-area: button;
-    }
-
-    .all-accounts {
-       
-        display: grid;
-        padding: 10px;
-    }
-
     button{
         background-color: rgba(255,255,255,0.05);
         color:  #667EFD;
     }
 
+    .inputStyling{
+    margin: 3px; background-color: rgba(255,255,255,0.05); color: white
+    }
 </style>
 
 
-<div class="page-container">
-    <div class="header1">Your profile settings</div>
-    <div class="pr-pic">
-        <img src="@Program.User.ProfilePicture" class="pic" alt="Profile Picture"/>
+<div class="container">
+    <h1>Your profile settings</h1>
+    <div class="row">
+        <div class="col">
+            <img src="@Program.User.ProfilePicture" class="pic" alt="Profile Picture"/>
+            @*<div><button class="btn btn-primary">Change profile picture</button></div>*@
+        </div>
+        <div class="col">
+            <h1>@Program.User.Username</h1>
+            <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdateUsername">
+                <InputText @bind-Value="@_updateUser.Username" placeholder="Enter username to update" class="form-control inputStyling"/>
+                <button type="submit" class="btn btn-primary">Update username</button>
+            </EditForm>
+        </div>
     </div>
-    <div class="pr-sett">
-        @*<div>
-                <button class="btn btn-primary">Change profile picture</button>
-            </div>*@
-        <EditForm Model="updateUser" OnValidSubmit="@HandleUpdatePassword">
-            <div style="margin-top: 5px">
-                <i>Update password</i>
-            </div>
-            <div>
-                <InputText @bind-Value="@CurrentPass" type="password" placeholder="Current password" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-                <InputText @bind-Value="@NewPass" type="password" placeholder="Current password" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-                <InputText @bind-Value="@ConfirmPass" type="password" placeholder="Confirm password" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-            </div>
-            <div class="conf">
-                <button class="btn btn-primary">Update password</button>
-            </div>
-        </EditForm>
+    <div class="row">
+        <div class="col">
+            <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdateBio">
+                <h4>Update Bio</h4>
+                @Program.User.Bio
+                <InputText @bind-Value="@_updateUser.Bio" placeholder="Update bio" rows="3" class="form-control inputStyling" />
+                <button type="submit" class="btn btn-primary">Update password</button>
+            </EditForm>
+            <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdatePassword">
+                <h4>Update password</h4>
+                <div>
+                    <InputText @bind-Value="@CurrentPass" type="password" placeholder="Current password" class="form-control inputStyling" CssClass="form-control"/>
+                    <InputText @bind-Value="@NewPass" type="password" placeholder="Current password" class="form-control inputStyling" CssClass="form-control"/>
+                    <InputText @bind-Value="@ConfirmPass" type="password" placeholder="Confirm password" class="form-control inputStyling" CssClass="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Update password</button>
+            </EditForm>
+        </div>
+        <div class="col">
+            <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdatePlatforms">
+                <h4>Connect your accounts</h4>
+                <div>
+                    <InputText @bind-Value="@Steam" placeholder="Steam Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
+                    <InputText @bind-Value="@BattleNET" placeholder="Battle.net Username" class="form-control inputStyling" CssClass="form-control" />
+                    <InputText @bind-Value="@GOG" placeholder="GOG Username" class="form-control inputStyling" CssClass="form-control"/>
+                    <InputText @bind-Value="@Epic" placeholder="Epic Games Username" class="form-control inputStyling" CssClass="form-control"/>
+                    <InputText @bind-Value="@Riot" placeholder="Riot Games Username" class="form-control inputStyling" CssClass="form-control" />
+                    <InputText @bind-Value="@Xbox" placeholder="Xbox Live Username" class="form-control inputStyling" CssClass="form-control"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Update platforms</button>
+            </EditForm>
+        </div>
     </div>
-
-    <EditForm Model="updateUser" OnValidSubmit="@HandleUpdateUser">
-    <div class="accounts">
-        <h4>Connect your accounts</h4>
-        <div class="all-accounts">
-            <InputText @bind-Value="@Steam"     placeholder="Steam Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-            <InputText @bind-Value="@Battle"    placeholder="Battle.net Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-            <InputText @bind-Value="@GOG"       placeholder="GOG Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-            <InputText @bind-Value="@EpicGames" placeholder="Epic Games Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-            <InputText @bind-Value="@RiotGames" placeholder="Riot Games Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-            <InputText @bind-Value="@PSN"       placeholder="PSN Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-            <InputText @bind-Value="@Xbox"      placeholder="Xbox Live Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-        </div>      
-    </div>
-    <div class="bot-button">
-        <button type="submit" class="btn btn-primary">Continue to feed</button>
-    </div>
-    </EditForm>
 </div>
 
 @code {
-    User updateUser = new User();
-    string CurrentPass, NewPass, ConfirmPass, Steam, Battle, GOG, EpicGames, RiotGames, PSN, Xbox;
-    
+    private User _updateUser = new User();
+    string CurrentPass, NewPass, ConfirmPass, Steam, BattleNET, GOG, Epic, Riot, PSN, Xbox;
 
     private void HomeNavigate()
     {
         NavigationManager.NavigateTo("home");
     }
 
-    private void HandleUpdateUser()
+    private void HandleUpdatePlatforms()
     {
-        throw new NotImplementedException();
+        UpdatePlatforms();
+        Program.User.Platforms = _updateUser.Platforms;
+        _updateUser = new User();
+        Steam = "";
+        BattleNET = "";
+        GOG = "";
+        Epic = "";
+        Riot = "";
+        PSN = "";
+        Xbox = "";
+    }
+
+    private void UpdatePlatforms()
+    {
+        if (Steam.Length != 0)
+        {
+            if (!FindAndReplace(nameof(Steam), Steam))
+            {
+                AddPlatform(nameof(Steam), Steam);
+            }
+        }
+
+        if (BattleNET.Length != 0)
+        {
+            if (!FindAndReplace("Battle.net", BattleNET))
+            {
+                AddPlatform("Battle.net", BattleNET);
+            }
+        }
+
+        if (GOG.Length != 0)
+        {
+            if (!FindAndReplace(nameof(GOG), GOG))
+            {
+                AddPlatform(nameof(GOG), GOG);
+            }
+        }
+
+        if (Epic.Length != 0)
+        {
+            if (!FindAndReplace(nameof(Epic), Epic))
+            {
+                AddPlatform(nameof(Epic), Epic);
+            }
+        }
+
+        if (Riot.Length != 0)
+        {
+            if (!FindAndReplace(nameof(Riot), Riot))
+            {
+                AddPlatform(nameof(Riot), Riot);
+            }
+        }
+
+        if (PSN.Length != 0)
+        {
+            if (!FindAndReplace(nameof(PSN), PSN))
+            {
+                AddPlatform(nameof(PSN), PSN);
+            }
+        }
+
+        if (Xbox.Length != 0)
+        {
+            if (!FindAndReplace(nameof(Xbox), Xbox))
+            {
+                AddPlatform(nameof(Xbox), Xbox);
+            }
+        }
+    }
+
+    private bool FindAndReplace(string platform, string username)
+    {
+        var index = _updateUser.Platforms.FindIndex(ind => ind.Contains(platform));
+        if (index == -1) return false;
+        _updateUser.Platforms[index] = String.Concat(platform, ": ", username);
+        return true;
+    }
+
+    private void AddPlatform(string platform, string username)
+    {
+        _updateUser.Platforms.Add(String.Concat(platform, ": ", username));
+        Program.User.Platforms = _updateUser.Platforms;
+        _updateUser = new User();
     }
 
     private void HandleUpdatePassword()
     {
-        throw new NotImplementedException();
+        _updateUser.Password = NewPass;
+        Program.User.Password = _updateUser.Password;
+        _updateUser = new User();
+        CurrentPass = "";
+        NewPass = "";
+        ConfirmPass = "";
+    }
+
+    private void HandleUpdateUsername()
+    {
+        Program.User.Username = _updateUser.Username.Trim();
+        _updateUser = new User();
+    }
+
+    private void HandleUpdateBio()
+    {
+        Program.User.Bio = _updateUser.Bio.Trim();
+        _updateUser = new User();
     }
 
 }

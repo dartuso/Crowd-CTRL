@@ -27,6 +27,18 @@ namespace Crowd_CTRL.Pages
             DisplayComments = false;
         }
 
+        public Post(string username, string text, DateTime time)
+        {
+            ProfileUrl = "Icons\\account.svg";
+            Username = username;
+            Embed = "";
+            Text = text;
+            Reaction = GenRandomReaction()();
+            PostedDate = time;
+            Comments = new List<Comment>();
+            DisplayComments = false;
+        }
+        
         public Post(string profileUrl, string username, string embed, string text, DateTime time)
         {
             ProfileUrl = profileUrl;
