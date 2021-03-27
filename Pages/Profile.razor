@@ -1,4 +1,4 @@
-﻿@page "/profile/{Username?}"
+﻿@page "/profile"
 @using Crowd_CTRL.Pages
 @layout Shared.SocialLayout
 <style>
@@ -66,26 +66,6 @@
 
 @code {
     [Parameter]
-    public User User { get; set; }
-    
+    public User User { get; set; } = Program.User;
 
-    /*private readonly List<string> _listPlatforms = new List<string>()
-    {
-        "Steam: Ghost_cluster19",
-        "Battle.net: Ghosty#1870",
-        "GOG: Ghost_cluster19",
-        "PSN: Ghost_cluster19"
-    };
-
-    private string Bio { get; set; } =
-        "Most played Games \n" +
-        "Minecraft: 17 days, 18 hours Largest world size: 5.2gb \n" +
-        "Overwatch: 12 Days, 1 hour Highest ranked: 4400sr \n" +
-        "League of Legends: 11 days 16 hours \n" +
-        "Game Library \n" +
-        "Battle.net \n" +
-        "- Overwatch \n" +
-        "- Diablo III \n" +
-        "PSN \n" +
-        "- FIFA 21 \n";*/
 }
