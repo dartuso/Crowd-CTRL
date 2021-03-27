@@ -23,7 +23,7 @@ namespace Crowd_CTRL
             await builder.Build().RunAsync();
         }
 
-        public static User User = new User();
+        public static User User = new User("TestUser");
         static Func<DateTime> RandomDayFunc()
         {
             /*Credit: https://stackoverflow.com/questions/194863/random-date-in-c-sharp*/
@@ -39,8 +39,8 @@ namespace Crowd_CTRL
         {
             new("Icons\\account.svg", "Daniel", "", "Hey! Hope everyone is doing well!", GetRandomDate()),
             new("Icons\\account.svg", "Overwatch Gamer", "https://www.youtube-nocookie.com/embed/O161-WNZBP4", "Check out my overwatch game play.", GetRandomDate()),
-            new ("", "Your Clan “League Warriors” just joined the  “LCS Fall 2020” tournament!"),
-            new ("", "Vector91831 is playing Overwatch! - Playing “Competitive” - 20m"),
+            new ("", "Your Clan “League Warriors” just joined the  “LCS Fall 2020” tournament!",GetRandomDate()),
+            new ("", "Vector91831 is playing Overwatch! - Playing “Competitive” - 20m",GetRandomDate()),
         };
     }
 }
