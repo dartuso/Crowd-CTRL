@@ -18,6 +18,9 @@
     <Compile Update="Components\Comment.cs">
       <DependentUpon>CommentSection.razor</DependentUpon>
     </Compile>
+    <Compile Update="Pages\ATournament.cs">
+      <DependentUpon>TournamentCreate.razor</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

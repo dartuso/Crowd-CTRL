@@ -21,6 +21,22 @@
         height: fit-content; 
     }
 
+    .ot-button {
+        justify-self: start;
+        align-self: start;
+        width: fit-content;
+        height: fit-content; 
+    }
+    .form-button {
+        width: 500px;
+        display: flex;
+        overflow: auto;
+        white-space: nowrap;
+        margin: 0 auto;
+        justify-content: space-between;
+        
+    }   
+
     form{
         text-align: left;
     }
@@ -38,10 +54,10 @@
     <h1>Start hosting a new tournament!</h1>
     <form>
         <label for="tname">Tournament name</label><br>
-        <input class="form-control" type="text" id="tname" name="tname"><br>
+        <input @bind-value="_tournament.TournamentName" class="form-control" type="text" id="tname" name="tname"><br>
 
         <label for="game">Game</label>
-        <select class="form-control" id="game">
+        <select @bind="_tournament.GameName" class="form-control" id="game">         
             <option disabled selected> -- select a game -- </option>
             <option>League of Legends</option>
             <option>Rocket League</option>
@@ -51,7 +67,7 @@
         </select><br>
 
         <label for="noOfTeams">Number of teams</label>
-        <select class="form-control" id="noOfTeams">
+        <select @bind="_tournament.NumberOfTeams" class="form-control" id="noOfTeams">       
             <option>2</option>
             <option>3</option>
             <option>4</option>
@@ -66,20 +82,43 @@
         </select><br>
 
         <label for="rules">Rules</label><br>
-        <textarea class="form-control" id="rules" rows="5" name="rules"></textarea> <br>
+        <textarea @bind="_tournament.Rules" class="form-control" id="rules" rows="5" name="rules"></textarea> <br>
     
     </form><br>
+
+
     <div style="align-self: center; justify-self: stretch;">
-        <input type="checkbox" class="form-check-input" style="width:16px; height:16px; " id="checkbox-1" value="">
+        <input name="aShare" type="checkbox" class="form-check-input" style="width:16px; height:16px; " id="checkbox-1">
         <label class="form-check-label" for="checkbox-1">Share tournament to feed</label> 
     </div>
-
+    <div class="form-button">
+    <button class="ot-button btn btn-primary" @onclick="TournamentNavigate">Go back</button>
     <button class="bot-button btn btn-primary" @onclick="TournamentTeamsNavigate">Continue</button>
+    </div>
 </div>
 
 @code{
     private void TournamentTeamsNavigate() 
     {
         NavigationManager.NavigateTo("tournament-teams");
+
+        if (!_tournament.TeamNames.Any()) {
+            foreach (int val in Enumerable.Range(1, _tournament.NumberOfTeams)) {
+                _tournament.TeamNames.Add(new ATeam(val));
+            }
+        } else {
+            _tournament.TeamNames = new List<ATeam>();
+            foreach (int val in Enumerable.Range(1, _tournament.NumberOfTeams)) {
+                _tournament.TeamNames.Add(new ATeam(val));
+            }
+        }
     }
+
+    private void TournamentNavigate() 
+    {
+        NavigationManager.NavigateTo("tournament");
+    }
+
+    public static ATournament _tournament = new ATournament();
+
 }

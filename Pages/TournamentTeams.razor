@@ -47,18 +47,22 @@
     <h1 class="header1">Enter team details</h1>
     <h3 class="uheader">(type team name or click invite)</h3>
 
-    <form class="col1">
-    @foreach (int value in Enumerable.Range(1,6))
+    <EditForm Model="@TournamentCreate._tournament" class="col1">
+    @foreach (ATeam team in TournamentCreate._tournament.TeamNames)
     {
         <div>
-        <label for="tname">Team #@value</label><br>
-        <input class="form-control" type="text" id="tname" name="tname" style="margin: 5px;"><br>
+        <label for="tname">Team #@team.teamNo</label>
+        <a href="#" class="badge badge-secondary">
+            <h4>Invite</h4>
+        </a>
+        <br>
+        <input @bind="team.teamName" class="form-control" type="text" name="tname" style="margin: 5px;"><br>
         </div>
     }
-    </form>
-
     <button class="btn btn-primary but1 " @onclick="TournamentCreateNavigate">Go back</button>
-    <button class="btn btn-primary but2 " @onclick="TournamentBracketNavigate">Continue</button>
+    <button type="submit" class="btn btn-primary but2 " @onclick="TournamentBracketNavigate">Continue</button>
+    </EditForm>
+    
 </div>
 
 @code {
@@ -69,6 +73,10 @@
 
     private void TournamentBracketNavigate() 
     {
-        NavigationManager.NavigateTo("tournament-teams");           //must change 
+        NavigationManager.NavigateTo("tournament-bracket");          
+    }
+
+    private void submitTeamNames() {
+        
     }
 }
