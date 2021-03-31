@@ -43,6 +43,7 @@
     .friend-item{
         width: 100%;
         display: flex;
+        align-items: center;
 
     }
     .friend-actions{
@@ -58,6 +59,15 @@
         width: 30px;
         border-width: 0px;
         background-color:#ffffff00;
+        align-items: center;
+    }
+    .friend-search-other-prompt{
+        width: 95%;
+        align-self: center;
+        height: 35%;
+        justify-content: center;
+        align-items: flex-end;
+        display: flex;
     }
     
 </style>
@@ -80,141 +90,140 @@
         @if (@friend.Name == ""){
             <div class="res-list">
                 <div class="friend-item">
-                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                    <RadzenLink style="color: white;" Path="user_profile" Text="Friend 1" />
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 1" />
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend1")'>
-                            <RadzenIcon Style="font-size:26px; color: red;" Icon="clear" />
+                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 1")'>
+                            <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:25px; color: #0C9CED;" Icon="notifications_off" />
+                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
                         </button>
 
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:23px; color: white; justify-self: flex-end;"  Icon="chat" />
-                        </button>
-
-                    </div>
-                    
-                </div>
-                <hr>
-                <div class="friend-item">
-                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                    <RadzenLink style="color: white;" Path="user_profile" Text="Friend 2" />
-                    
-                    <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend2")'>
-                            <RadzenIcon Style="font-size:26px; color: red;" Icon="clear" />
-                        </button> 
-                        
-                        <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:25px; color: #0C9CED;" Icon="notifications_off" />
-                        </button>
-
-                        <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:23px; color: white; justify-self: flex-end;"  Icon="chat" />
+                            <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
                     
                 </div>
                 <hr>
                 <div class="friend-item">
-                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                    <RadzenLink style="color: white;" Path="user_profile" Text="Friend 3" />
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 2" />
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend3")'>
-                            <RadzenIcon Style="font-size:26px; color: red;" Icon="clear" />
+                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 2")'>
+                            <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:25px; color: #0C9CED;" Icon="notifications_off" />
+                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
                         </button>
 
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:23px; color: white; justify-self: flex-end;"  Icon="chat" />
+                            <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
                     
                 </div>
                 <hr>
                 <div class="friend-item">
-                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                    <RadzenLink style="color: white;" Path="user_profile" Text="Friend 4" />
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 3" />
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend4")'>
-                            <RadzenIcon Style="font-size:26px; color: red;" Icon="clear" />
+                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 3")'>
+                            <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:25px; color: #0C9CED;" Icon="notifications_off" />
+                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
                         </button>
 
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:23px; color: white; justify-self: flex-end;"  Icon="chat" />
+                            <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
                     
                 </div>
                 <hr>
                 <div class="friend-item">
-                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                    <RadzenLink style="color: white;" Path="user_profile" Text="Friend 5" />
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 4" />
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend5")'>
-                            <RadzenIcon Style="font-size:26px; color: red;" Icon="clear" />
+                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 4")'>
+                            <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:25px; color: #0C9CED;" Icon="notifications_off" />
+                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
                         </button>
 
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:23px; color: white; justify-self: flex-end;"  Icon="chat" />
+                            <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
                     
                 </div>
                 <hr>
                 <div class="friend-item">
-                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                    <RadzenLink style="color: white;" Path="user_profile" Text="Friend 6" />
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 5" />
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend6")'>
-                            <RadzenIcon Style="font-size:26px; color: red;" Icon="clear" />
+                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 5")'>
+                            <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:25px; color: #0C9CED;" Icon="notifications_off" />
+                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
                         </button>
 
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:23px; color: white; justify-self: flex-end;"  Icon="chat" />
+                            <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
                     
                 </div>
                 <hr>
                 <div class="friend-item">
-                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                    <RadzenLink style="color: white;" Path="user_profile" Text="Friend 7" />
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 6" />
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend7")'>
-                            <RadzenIcon Style="font-size:26px; color: red;" Icon="clear" />
+                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 6")'>
+                            <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:25px; color: #0C9CED;" Icon="notifications_off" />
+                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
                         </button>
 
                         <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:23px; color: white; justify-self: flex-end;"  Icon="chat" />
+                            <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
+                        </button>
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="friend-item">
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 7" />
+                    
+                    <div class="friend-actions">
+                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 7")'>
+                            <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
+                        </button> 
+                        
+                        <button class="friend-action-button">
+                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                        </button>
+
+                        <button class="friend-action-button">
+                            <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
                     
@@ -223,20 +232,80 @@
             </div>
         }
         @if(@friend.Name != ""){
-            <div class="friend-item">
-                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                <RadzenLink style="color: white;" Path="user_profile" Text="@friend.Name" />
-                
-                <div class="friend-actions">
-                    <button class="btn btn-primary">
-                        Add Friend
-                    </button>
-                    <button class="friend-action-button">
-                        <RadzenIcon Style="font-size:23px; color: white; justify-self: flex-end;"  Icon="chat" />
-                    </button>
+            <div class="res-list">
+                <div class="friend-item" style="width: 90%; align-self: center;">
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="@friend.Name" />
+                    
+                    <div class="friend-actions">
+                        <button class="btn btn-primary">
+                            Add Friend
+                        </button>
 
+                    </div>
+                    
                 </div>
-                
+                <hr>
+                <div class="friend-search-other-prompt">
+                    <div style="text-align: center;">
+                        <h2>Others you may know</h2>
+                        <h4>(based on past games played and common friends)</h4>
+                    </div>
+                    
+                </div>
+                <br>
+                <div class="friend-item" style="width: 90%; align-self: center;">
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 1" />
+                    
+                    <div class="friend-actions">
+                        <button class="btn btn-primary">
+                            Add Friend
+                        </button>
+
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="friend-item" style="width: 90%; align-self: center;">
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 2" />
+                    
+                    <div class="friend-actions">
+                        <button class="btn btn-primary">
+                            Add Friend
+                        </button>
+
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="friend-item" style="width: 90%; align-self: center;">
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 3" />
+                    
+                    <div class="friend-actions">
+                        <button class="btn btn-primary">
+                            Add Friend
+                        </button>
+
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="friend-item" style="width: 90%; align-self: center;">
+                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 4" />
+                    
+                    
+                    <div class="friend-actions">
+                        <button class="btn btn-primary">
+                            Add Friend
+                        </button>
+
+                    </div>
+                    
+                </div>
             </div>
         }
         
