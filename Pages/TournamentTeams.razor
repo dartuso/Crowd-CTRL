@@ -1,6 +1,8 @@
 @page "/tournament-teams"
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
+@inject PageHistoryState PageHistoryState
+
 
 <style>
     .page-layout {
@@ -33,7 +35,7 @@
         margin: 5px;
         grid-area: but1;
     }
-    .but2 {
+    .but2 { 
         margin: 5px;
         grid-area: but2;
     }
@@ -65,15 +67,18 @@
     
 </div>
 
+
+
 @code {
     private void TournamentCreateNavigate() 
     {
-        NavigationManager.NavigateTo("tournament-create");
+        NavigationManager.NavigateTo(PageHistoryState.GetGoBackPage());
     }
 
     private void TournamentBracketNavigate() 
     {
         NavigationManager.NavigateTo("tournament-bracket");          
+        PageHistoryState.AddPageToHistory("tournament-teams");
     }
 
     private void submitTeamNames() {

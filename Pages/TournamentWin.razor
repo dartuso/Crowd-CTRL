@@ -1,0 +1,72 @@
+@page "/tournament-win"
+@layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
+@inject PageHistoryState PageHistoryState
+
+<style>
+    .page-layout {
+        text-align:center;
+        justify-self: center;
+        display: grid;
+        margin: 20px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .bot-button {
+        justify-self: end;
+        align-self: end;
+        width: fit-content;
+        height: fit-content; 
+    }
+
+    .ot-button {
+        justify-self: start;
+        align-self: start;
+        width: fit-content;
+        height: fit-content; 
+    }
+
+    .form-button {
+        width: 500px;
+        display: flex;
+        overflow: auto;
+        white-space: nowrap;
+        margin: 0 auto;
+        justify-content: space-between;
+        
+    }   
+
+
+    h2 {
+        display: flex; /* flex behavior (displays children inline) */
+        justify-content: center; /* horizontal centering */
+        align-items: center; /* vertical centering */
+        height: 50vh;
+        margin: 0;
+        text-align: center; /* comes in handy when resizing the browser width, if the text is long/big enough */
+    }
+</style>
+
+
+<h1 style="margin: 30px; text-align: center; font-size: 3.5em">Tournament @(TournamentCreate._tournament.TournamentName) finished!</h1>
+<h2>Congratulations, @(TournamentBracket.FIN.teamName)! You are the tournament's winners! GG WP!</h2>
+<div class="form-button">
+    <button class="ot-button btn btn-primary" @onclick="TournamentBracketNavigate">View bracket</button>
+    <button class="bot-button btn btn-primary" @onclick="TournamentNavigate">Home</button>
+</div>
+
+
+@code {
+    private void TournamentBracketNavigate()
+    {
+        NavigationManager.NavigateTo("tournament-win-bracket");
+        PageHistoryState.AddPageToHistory("tournament-win");
+    }
+    
+    private void TournamentNavigate()
+    {
+        NavigationManager.NavigateTo("tournament");
+    }
+}

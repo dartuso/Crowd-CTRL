@@ -1,7 +1,7 @@
 @page "/tournament-create"
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
-
+@inject PageHistoryState PageHistoryState
 
 <style>
     .page-layout {
@@ -101,6 +101,7 @@
     private void TournamentTeamsNavigate() 
     {
         NavigationManager.NavigateTo("tournament-teams");
+        PageHistoryState.AddPageToHistory("tournament-create");
 
         if (!_tournament.TeamNames.Any()) {
             foreach (int val in Enumerable.Range(1, _tournament.NumberOfTeams)) {
@@ -116,7 +117,7 @@
 
     private void TournamentNavigate() 
     {
-        NavigationManager.NavigateTo("tournament");
+        NavigationManager.NavigateTo(PageHistoryState.GetGoBackPage());
     }
 
     public static ATournament _tournament = new ATournament();

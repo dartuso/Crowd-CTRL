@@ -1,0 +1,78 @@
+@page "/tournament-win-bracket"
+@layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
+@inject PageHistoryState PageHistoryState
+
+@* https://grid.layoutit.com/?id=gWtsyNv  *@
+<style>
+.grid-container {
+    margin: 40px;
+    text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". T5 . ."
+    "T1 O1 O3 ."
+    "T2 O1 O3 FIN"
+    "T3 O2 O4 FIN"
+    "T4 O2 O4 ."
+    ". T6 . BUTTONS";
+}
+.T5 { grid-area: T5;     margin: 50px;  align-self: center; }
+.T6 { grid-area: T6;     margin: 50px;  align-self: center; }
+.T1 { grid-area: T1;     margin: 50px;  align-self: center; }
+.T2 { grid-area: T2;     margin: 50px;  align-self: center; }
+.T3 { grid-area: T3;     margin: 50px;  align-self: center; }
+.T4 { grid-area: T4;     margin: 50px;  align-self: center; }
+.O1 { grid-area: O1;     margin: 50px;  align-self: center; }
+.O2 { grid-area: O2;     margin: 50px;  align-self: center; }
+.O3 { grid-area: O3;     margin: 50px;  align-self: center; }
+.O4 { grid-area: O4;     margin: 50px;  align-self: center; }
+.FIN { grid-area: FIN;     margin: 50px;  align-self: center; }
+.BUTTONS {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 10px 0px;
+  grid-template-areas:
+    "B1"
+    "B2"
+    "B3";
+  grid-area: BUTTONS;
+}
+.B1 { grid-area: B1; }
+.B2 { grid-area: B2; }
+.B3 { grid-area: B3; }
+</style>
+
+
+<h1 style="text-align:center; margin: 30px;">@(TournamentCreate._tournament.TournamentName)</h1>
+<div class="grid-container">
+    @foreach (ATeam team in TournamentCreate._tournament.TeamNames)
+        {
+            <button class="T@(team.teamNo) btn btn-secondary" id="t@(team.teamNo)"  >@(team.teamName)</button>
+        }
+
+  <button class="O1 btn btn-secondary"  >@(TournamentBracket.O1.teamName)</button>
+  <button class="O2 btn btn-secondary"  >@(TournamentBracket.O2.teamName)</button>
+  <button class="O3 btn btn-secondary"  >@(TournamentBracket.O3.teamName)</button>
+  <button class="O4 btn btn-secondary"  >@(TournamentBracket.O4.teamName)</button>
+  <button class="FIN btn btn-warning"  >@(TournamentBracket.FIN.teamName)</button>
+  <div class="BUTTONS">
+    <div class="B1">
+        <button class="btn btn-primary" @onclick="TournamentWinNavigate">Go back</button>
+    </div>
+    <div class="B2">
+        <button class="btn btn-danger" >Share bracket</button>
+    </div>
+  </div>
+</div>
+
+@code {
+    private void TournamentWinNavigate()
+    {
+        NavigationManager.NavigateTo(PageHistoryState.GetGoBackPage());
+    }
+}
