@@ -8,13 +8,7 @@ namespace Crowd_CTRL.Pages
 
     public class Post
     {
-        private const int ReactionMax = 20;
-        Func<uint> GenRandomReaction()
-        {
-            Random gen = new Random();
 
-            return () => (uint) gen.Next(ReactionMax);
-        }
         public Post()
         {
             ProfileUrl = "";
@@ -38,7 +32,17 @@ namespace Crowd_CTRL.Pages
             Comments = new List<Comment>();
             DisplayComments = false;
         }
-        
+        public Post(string profileUrl, string username, string embed, string text)
+        {
+            ProfileUrl = profileUrl;
+            Username = username;
+            Embed = embed;
+            Text = text;
+            Reaction = GenRandomReaction()();
+            PostedDate = RandomDayFunc()();
+            Comments = new List<Comment>();
+            DisplayComments = false;
+        }
         public Post(string profileUrl, string username, string embed, string text, DateTime time)
         {
             ProfileUrl = profileUrl;
@@ -58,7 +62,7 @@ namespace Crowd_CTRL.Pages
             ProfileUrl = "Icons\\account.svg";
             Embed = "";
             Reaction = 0;
-            PostedDate = DateTime.Now;
+            PostedDate = RandomDayFunc()();
             Comments = new List<Comment>();
             DisplayComments = false;
         }
@@ -70,7 +74,7 @@ namespace Crowd_CTRL.Pages
             ProfileUrl = "Icons\\account.svg";
             Embed = "";
             Reaction = 0;
-            PostedDate = DateTime.Now;
+            PostedDate = RandomDayFunc()();
             Comments = new List<Comment>();
             DisplayComments = false;
         }
@@ -81,7 +85,7 @@ namespace Crowd_CTRL.Pages
             ProfileUrl = "Icons\\account.svg";
             Embed = embed;
             Reaction = 0;
-            PostedDate = DateTime.Now;
+            PostedDate = RandomDayFunc()();
             Comments = new List<Comment>();
             DisplayComments = false;
         }
@@ -97,5 +101,22 @@ namespace Crowd_CTRL.Pages
         public List<Comment> Comments { get; set; }
 
         public bool DisplayComments { get; set; }
+        
+        
+        static Func<DateTime> RandomDayFunc()
+        {
+            /*Credit: https://stackoverflow.com/questions/194863/random-date-in-c-sharp*/
+            DateTime start = new DateTime(2021, 1, 1);
+            Random gen = new Random();
+            int range = (DateTime.Today - start).Days;
+            return () => start.AddDays(gen.Next(range)).AddHours(gen.Next(24)).AddMinutes(gen.Next(60)).AddSeconds(gen.Next(60));
+        }
+        private const int ReactionMax = 20;
+        Func<uint> GenRandomReaction()
+        {
+            Random gen = new Random();
+
+            return () => (uint) gen.Next(ReactionMax);
+        }
     }
 }
