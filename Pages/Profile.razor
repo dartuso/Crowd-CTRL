@@ -1,4 +1,4 @@
-﻿@page "/profile"
+﻿@page "/profile/{username}"
 @using Crowd_CTRL.Pages
 @layout Shared.SocialLayout
 <style>
@@ -41,7 +41,7 @@
     }
 </style>
 
-<div class="flex" >
+<div class="flex">
     <div class="picContainer">
         <img src="@User.ProfilePicture" class="pic" alt="Profile Picture"/>
     </div>
@@ -50,7 +50,8 @@
             @User.Username
         </div>
         <div class="platforms">
-            @foreach (string platform in User.Platforms){
+            @foreach (string platform in User.Platforms)
+            {
                 <div>@platform</div>
             }
         </div>
@@ -65,8 +66,26 @@
 </div>
 
 @code {
-    string Username;
-    
-    public User User { get; set; } = Program.User;
 
+    [Parameter]
+    public string Username { get; set; }
+
+    protected override void OnInitialized()
+    {
+        User = Username == "" ? Program.User : Program.Friends.Find(user => user.Username == Username);
+        Username ??= "YourProfile";
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await Task.Run(() =>
+        {
+            User = Username == "" ? Program.User : Program.Friends.Find(user => user.Username == Username);
+            Username ??= "YourProfile";
+        });
+        StateHasChanged();
+    }
+
+
+    private User User { get; set; }
 }
