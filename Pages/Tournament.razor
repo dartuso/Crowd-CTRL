@@ -3,9 +3,6 @@
 @inject NavigationManager NavigationManager
 
 <style>
-
-
-
     .content{
         color: white;
         background-color: rgba(255,255,255,0.05);
@@ -109,42 +106,43 @@
     <button id="join" class="TournamentButton btn btn-primary" >JOIN</button>
     <button id="create" class="TournamentButton btn btn-primary" @onclick="TournamentCreateNavigate">CREATE</button>
     <div class="content">
+
         <div class="header">Tournament Name</div>
         <div class="header">Game</div>
         <div class="header">Number of Teams</div>
         <div class="header">Date</div>
         <div class="header">Action</div>
 
-        <div class="name">Tournmament Name</div>
-        <div class="game">Game</div>
-        <div class="teams">Number of Teams</div>
-        <div class="date">Date</div>
-        <button class="action btn btn-primary">ACTION</button>
-
-        <div class="name">Tournmament Name</div>
-        <div class="game">Game</div>
-        <div class="teams">Number of Teams</div>
-        <div class="date">Date</div>
-        <button class="action btn btn-primary">ACTION</button>
-
-        <div class="name">Tournmament Name</div>
-        <div class="game">Game</div>
-        <div class="teams">Number of Teams</div>
-        <div class="date">Date</div>
-        <button class="action btn btn-primary">ACTION</button>
-
-        <div class="name">Tournmament Name</div>
-        <div class="game">Game</div>
-        <div class="teams">Number of Teams</div> 
-        <div class="date">Date</div>
-        <button class="action btn btn-primary">ACTION</button>
+        @foreach(ATournament tour in _oldTournaments) {
+                    <div class="name">@tour.TournamentName</div>
+                    <div class="game">@tour.GameName</div>
+                    <div class="teams">@tour.NumberOfTeams</div>
+                    <div class="date">@tour.TDate</div>
+                    <button class="action btn btn-primary">View bracket</button>
+        }
     </div>
-
 </div>
 
 @code {
+    
     private void TournamentCreateNavigate() 
     {
         NavigationManager.NavigateTo("tournament-create");
     }
+
+    static string date_string_1 = "02/04/2021 19:35";
+    static string date_string_2 = "31/03/2021 21:00";
+    static string date_string_3 = "29/03/2021 17:45";
+    static string date_string_4 = "29/03/2021 20:30";
+
+    
+    
+
+    static ATournament t1 = new ATournament("League Fridays #31", "League of Legends", 6, "", new List<ATeam>(){new ATeam(1, "Excelsior")}, date_string_1);
+    static ATournament t2 = new ATournament("Overwatch Daily", "Overwatch", 12, "", new List<ATeam>(){new ATeam(1, "Excelsior")}, date_string_2);
+    static ATournament t3 = new ATournament("Tournament Testing", "Rocket League", 6, "", new List<ATeam>(){new ATeam(1, "Excelsior")}, date_string_3);
+    static ATournament t4 = new ATournament("League Fridays #30", "League of Legends", 6, "", new List<ATeam>(){new ATeam(1, "Excelsior")}, date_string_4);
+
+    public static List<ATournament> _oldTournaments = new List<ATournament>() {t1, t2, t3, t4};
+    
 }
