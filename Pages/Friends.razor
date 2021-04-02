@@ -3,6 +3,7 @@
 @inject NavigationManager NavigationManager
 @* @using Components *@
 <Crowd_CTRL.Shared.ConfirmModal @ref="ConfirmModal"></Crowd_CTRL.Shared.ConfirmModal>
+@using System.Collections.Generic;
 
 <style>
     .main-friend-search-container{
@@ -92,17 +93,28 @@
                 <div class="friend-item">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
                     <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 1" />
+                    @* If there is the option to turn on notifications, then the user has been muted *@
+                    @if (@friendMutedStatus["Friend 1"].Equals("notifications_off")){
+                        <RadzenIcon Style="font-size:25px; color: red;" Icon="notifications_off" />
+                    }
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 1")'>
+                        <button class="friend-action-button" title="Remove friend" @onclick='() => ConfirmModal.Open("Friend 1")'>
                             <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
-                        <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                        <button class="friend-action-button" title="Mute notifications" @onclick='() => changeMutedStatus("Friend 1")'>
+                            @if (@friendMutedStatus["Friend 1"].Equals("notifications_active"))
+                            {
+                                <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                            }
+                            else{
+                                <RadzenIcon Style="font-size:31px; color: green;" Icon="notifications_active" />
+                            }
+                            
                         </button>
 
-                        <button class="friend-action-button">
+                        <button class="friend-action-button" title="Chat: In progress!">
                             <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
@@ -112,17 +124,28 @@
                 <div class="friend-item">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
                     <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 2" />
+                    @* If there is the option to turn on notifications, then the user has been muted *@
+                    @if (@friendMutedStatus["Friend 2"].Equals("notifications_off")){
+                        <RadzenIcon Style="font-size:25px; color: red;" Icon="notifications_off" />
+                    }
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 2")'>
+                        <button class="friend-action-button" title="Remove friend" @onclick='() => ConfirmModal.Open("Friend 2")'>
                             <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
-                        <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                        <button class="friend-action-button" title="Mute notifications" @onclick='() => changeMutedStatus("Friend 2")'>
+                            @if (@friendMutedStatus["Friend 2"].Equals("notifications_active"))
+                            {
+                                <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                            }
+                            else{
+                                <RadzenIcon Style="font-size:31px; color: green;" Icon="notifications_active" />
+                            }
+                            
                         </button>
 
-                        <button class="friend-action-button">
+                        <button class="friend-action-button" title="Chat: In progress!">
                             <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
@@ -132,17 +155,28 @@
                 <div class="friend-item">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
                     <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 3" />
+                    @* If there is the option to turn on notifications, then the user has been muted *@
+                    @if (@friendMutedStatus["Friend 3"].Equals("notifications_off")){
+                        <RadzenIcon Style="font-size:25px; color: red;" Icon="notifications_off" />
+                    }
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 3")'>
+                        <button class="friend-action-button" title="Remove friend" @onclick='() => ConfirmModal.Open("Friend 3")'>
                             <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
-                        <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                        <button class="friend-action-button" title="Mute notifications" @onclick='() => changeMutedStatus("Friend 3")'>
+                            @if (@friendMutedStatus["Friend 3"].Equals("notifications_active"))
+                            {
+                                <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                            }
+                            else{
+                                <RadzenIcon Style="font-size:31px; color: green;" Icon="notifications_active" />
+                            }
+                            
                         </button>
 
-                        <button class="friend-action-button">
+                        <button class="friend-action-button" title="Chat: In progress!">
                             <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
@@ -152,17 +186,28 @@
                 <div class="friend-item">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
                     <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 4" />
+                    @* If there is the option to turn on notifications, then the user has been muted *@
+                    @if (@friendMutedStatus["Friend 4"].Equals("notifications_off")){
+                        <RadzenIcon Style="font-size:25px; color: red;" Icon="notifications_off" />
+                    }
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 4")'>
+                        <button class="friend-action-button" title="Remove friend" @onclick='() => ConfirmModal.Open("Friend 4")'>
                             <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
-                        <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                        <button class="friend-action-button" title="Mute notifications" @onclick='() => changeMutedStatus("Friend 4")'>
+                            @if (@friendMutedStatus["Friend 4"].Equals("notifications_active"))
+                            {
+                                <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                            }
+                            else{
+                                <RadzenIcon Style="font-size:31px; color: green;" Icon="notifications_active" />
+                            }
+                            
                         </button>
 
-                        <button class="friend-action-button">
+                        <button class="friend-action-button" title="Chat: In progress!">
                             <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
@@ -172,17 +217,28 @@
                 <div class="friend-item">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
                     <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 5" />
+                    @* If there is the option to turn on notifications, then the user has been muted *@
+                    @if (@friendMutedStatus["Friend 5"].Equals("notifications_off")){
+                        <RadzenIcon Style="font-size:25px; color: red;" Icon="notifications_off" />
+                    }
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 5")'>
+                        <button class="friend-action-button" title="Remove friend" @onclick='() => ConfirmModal.Open("Friend 5")'>
                             <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
-                        <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                        <button class="friend-action-button" title="Mute notifications" @onclick='() => changeMutedStatus("Friend 5")'>
+                            @if (@friendMutedStatus["Friend 5"].Equals("notifications_active"))
+                            {
+                                <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                            }
+                            else{
+                                <RadzenIcon Style="font-size:31px; color: green;" Icon="notifications_active" />
+                            }
+                            
                         </button>
 
-                        <button class="friend-action-button">
+                        <button class="friend-action-button" title="Chat: In progress!">
                             <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
@@ -192,17 +248,28 @@
                 <div class="friend-item">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
                     <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 6" />
+                    @* If there is the option to turn on notifications, then the user has been muted *@
+                    @if (@friendMutedStatus["Friend 6"].Equals("notifications_off")){
+                        <RadzenIcon Style="font-size:25px; color: red;" Icon="notifications_off" />
+                    }
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 6")'>
+                        <button class="friend-action-button" title="Remove friend" @onclick='() => ConfirmModal.Open("Friend 6")'>
                             <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
-                        <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                        <button class="friend-action-button" title="Mute notifications" @onclick='() => changeMutedStatus("Friend 6")'>
+                            @if (@friendMutedStatus["Friend 6"].Equals("notifications_active"))
+                            {
+                                <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                            }
+                            else{
+                                <RadzenIcon Style="font-size:31px; color: green;" Icon="notifications_active" />
+                            }
+                            
                         </button>
 
-                        <button class="friend-action-button">
+                        <button class="friend-action-button" title="Chat: In progress!">
                             <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
@@ -212,17 +279,28 @@
                 <div class="friend-item">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
                     <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 7" />
+                    @* If there is the option to turn on notifications, then the user has been muted *@
+                    @if (@friendMutedStatus["Friend 7"].Equals("notifications_off")){
+                        <RadzenIcon Style="font-size:25px; color: red;" Icon="notifications_off" />
+                    }
                     
                     <div class="friend-actions">
-                        <button class="friend-action-button" @onclick='() => ConfirmModal.Open("Friend 7")'>
+                        <button class="friend-action-button" title="Remove friend" @onclick='() => ConfirmModal.Open("Friend 7")'>
                             <RadzenIcon Style="font-size:32px; color: red;" Icon="clear" />
                         </button> 
                         
-                        <button class="friend-action-button">
-                            <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                        <button class="friend-action-button" title="Mute notifications" @onclick='() => changeMutedStatus("Friend 7")'>
+                            @if (@friendMutedStatus["Friend 7"].Equals("notifications_active"))
+                            {
+                                <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                            }
+                            else{
+                                <RadzenIcon Style="font-size:31px; color: green;" Icon="notifications_active" />
+                            }
+                            
                         </button>
 
-                        <button class="friend-action-button">
+                        <button class="friend-action-button" title="Chat: In progress!">
                             <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
                         </button>
                     </div>
@@ -231,6 +309,7 @@
 
             </div>
         }
+        @* When the user tries to search something *@
         @if(@friend.Name != ""){
             <div class="res-list">
                 <div class="friend-item" style="width: 90%; align-self: center;">
@@ -238,10 +317,17 @@
                     <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="@friend.Name" />
                     
                     <div class="friend-actions">
-                        <button class="btn btn-primary">
-                            Add Friend
-                        </button>
-
+                        @if (friendRequested)
+                        {
+                            <button class="btn btn-light" @onclick="() => changedFriendRequestedStatus()">
+                                Request Sent!
+                            </button>
+                        }
+                        else{
+                            <button class="btn btn-primary" @onclick="() => changedFriendRequestedStatus()">
+                                Add Friend
+                            </button>
+                        }
                     </div>
                     
                 </div>
@@ -292,20 +378,6 @@
                     </div>
                     
                 </div>
-                <hr>
-                <div class="friend-item" style="width: 90%; align-self: center;">
-                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
-                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 4" />
-                    
-                    
-                    <div class="friend-actions">
-                        <button class="btn btn-primary">
-                            Add Friend
-                        </button>
-
-                    </div>
-                    
-                </div>
             </div>
         }
         
@@ -314,12 +386,35 @@
 </div>
 
 @code{
+    
 
     private Crowd_CTRL.Shared.ConfirmModal ConfirmModal { get; set; }
 
+    private Crowd_CTRL.Friend friend = new Crowd_CTRL.Friend("");
+
+
     string resTitle = "My Friends";
 
-    private Crowd_CTRL.Friend friend = new Crowd_CTRL.Friend("");
+    bool friendRequested = false;
+
+    private Dictionary<string, string> friendMutedStatus = new Dictionary<string, string>();
+
+    @* Things are likely going to change here with this friends array and how it is populated *@
+    @* and functions, so bear that in mine*@
+
+    Task initFriendsDict()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            friendMutedStatus.Add(("Friend " + (i+1)), "notifications_active");
+        }
+        return Task.CompletedTask;
+    }
+    protected override async Task OnInitializedAsync(){
+        await initFriendsDict();
+    }
+
+    
     private void FormSubmitted()
     {
         resTitle = "Friend Search";
@@ -328,6 +423,25 @@
     private void UserProfileNavigate()
     {
         NavigationManager.NavigateTo("user_profile");
+    }
+
+    private void changeMutedStatus(string FName){
+        if(friendMutedStatus[FName].Equals("notifications_active")){
+            friendMutedStatus[FName] = "notifications_off";
+        }
+        else{
+            friendMutedStatus[FName] = "notifications_active";
+        }
+    }
+
+    private void changedFriendRequestedStatus(){
+        if (friendRequested)
+        {
+            friendRequested = false;
+        }
+        else{
+            friendRequested = true;
+        }
     }
 
 }
