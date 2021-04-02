@@ -45,6 +45,27 @@
 .B1 { grid-area: B1; }
 .B2 { grid-area: B2; }
 .B3 { grid-area: B3; }
+
+.st:link {
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    color: black;
+    background-color: white; 
+}
+
+.st:visited {
+    color: black;
+    background-color: green;
+}
+
+.winner {
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    color: black;
+    background-color: yellow;
+}
 </style>
 
 
@@ -52,21 +73,18 @@
 <div class="grid-container">
     @foreach (ATeam team in TournamentCreate._tournament.TeamNames)
         {
-            <button class="T@(team.teamNo)" id="t@(team.teamNo)" @onclick="() => selectWinner(team)">@(team.teamName)</button>
+            <a class="T@(team.teamNo) st" id="t@(team.teamNo)" href="" @onclick:preventDefault @onclick="() => selectWinner(team)">@(team.teamName)</a>
         }
 
-  <button class="O1" @onclick="() => selectWinner(O1)">@(O1.teamName)</button>
-  <button class="O2" @onclick="() => selectWinner(O2)">@(O2.teamName)</button>
-  <button class="O3" @onclick="() => selectWinner(O3)">@(O3.teamName)</button>
-  <button class="O4" @onclick="() => selectWinner(O4)">@(O4.teamName)</button>
-  <button class="FIN">@(FIN.teamName)</button>
+  <a class="O1 st" href="" @onclick:preventDefault @onclick="() => selectWinner(O1)">@(O1.teamName)</a>
+  <a class="O2 st" href="" @onclick:preventDefault @onclick="() => selectWinner(O2)">@(O2.teamName)</a>
+  <a class="O3 st" href="" @onclick:preventDefault @onclick="() => selectWinner(O3)">@(O3.teamName)</a>
+  <a class="O4 st" href="" @onclick:preventDefault @onclick="() => selectWinner(O4)">@(O4.teamName)</a>
+  <a class="FIN winner" @onclick:preventDefault href="">@(FIN.teamName)</a>
   <div class="BUTTONS">
     <div class="B1">
         <button class="btn btn-primary" @onclick="TournamentCreateNavigate">Edit tournament</button>
     </div>
-    @* <div class="B2">
-        <button class="btn btn-primary" @onclick="TournamentTeamsNavigate">Edit teams</button>
-    </div> *@
     <div class="B2">
         <button class="btn btn-danger" @onclick="TournamentWinNavigate">End tournament</button>
     </div>
@@ -74,18 +92,12 @@
 </div>
 
 @code {
+    public static string but_col = "grey";
     public static ATeam O1 = new ATeam(7, "");
     public static ATeam O2 = new ATeam(8, "");
     public static ATeam O3 = new ATeam(9, "");
     public static ATeam O4 = new ATeam(10, "");
     public static ATeam FIN = new ATeam(11, "");
-
-    @* decided to remove this button, it can be done with edit tournament *@
-    @* private void TournamentTeamsNavigate() 
-    {
-        NavigationManager.NavigateTo("tournament-teams");
-        PageHistoryState.AddPageToHistory("tournament-bracket");
-    } *@
 
     private void TournamentCreateNavigate()
     {
