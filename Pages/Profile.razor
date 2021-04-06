@@ -51,23 +51,26 @@
         </div>
         @if (User.Platforms.Count > 0)
         {
-            
-        <div class="container platforms">
-            @foreach (string platform in User.Platforms)
-            {
-                <div>@platform</div>
-            }
-        </div>
+            <div class="container platforms">
+                @foreach (string platform in User.Platforms)
+                {
+                    <div>@platform</div>
+                }
+            </div>
         }
     </div>
-    @if(User.Bio != "" || User.Platforms.Count > 0){
-    <div class="container bio">
-        @User.Bio
-        @foreach (string game in User.Games)
-        {
-            <div>@game</div>
-        }
-    </div>}
+    @if (User.Bio != "" || User.Games.Count != 0)
+    {
+        <div class="container bio">
+            <h4>Bio:</h4>
+            @User.Bio
+            <h4>Games:</h4>
+            @foreach (string game in User.Games)
+            {
+                <div>@game</div>
+            }
+        </div>
+    }
 </div>
 
 @code {

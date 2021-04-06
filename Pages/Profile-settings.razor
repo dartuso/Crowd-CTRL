@@ -45,7 +45,7 @@
             <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdateBio">
                 <h4>Update Bio</h4>
                 @Program.User.Bio
-                <InputText @bind-Value="@_updateUser.Bio" placeholder="Update bio" rows="3" class="form-control inputStyling" />
+                <InputText @bind-Value="@_updateUser.Bio" placeholder="Update bio" rows="3" class="form-control inputStyling"/>
                 <button type="submit" class="btn btn-primary">Update Bio</button>
             </EditForm>
             <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdatePassword">
@@ -53,7 +53,7 @@
                 <div>
                     <InputText @bind-Value="@CurrentPass" type="password" placeholder="Current password" class="form-control inputStyling" CssClass="form-control"/>
                     <InputText @bind-Value="@NewPass" type="password" placeholder="New password" class="form-control inputStyling" CssClass="form-control"/>
-                    <InputText @bind-Value="@ConfirmPass" type="password" placeholder="Confirm password" class="form-control inputStyling" CssClass="form-control" />
+                    <InputText @bind-Value="@ConfirmPass" type="password" placeholder="Confirm password" class="form-control inputStyling" CssClass="form-control"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Update password</button>
             </EditForm>
@@ -63,22 +63,47 @@
                 <h4>Connect your accounts</h4>
                 <div>
                     <InputText @bind-Value="@Steam" placeholder="Steam Username" class="form-control" style="margin: 3px; background-color: rgba(255,255,255,0.05); color: white"/>
-                    <InputText @bind-Value="@BattleNET" placeholder="Battle.net Username" class="form-control inputStyling" CssClass="form-control" />
+                    <InputText @bind-Value="@BattleNET" placeholder="Battle.net Username" class="form-control inputStyling" CssClass="form-control"/>
                     <InputText @bind-Value="@GOG" placeholder="GOG Username" class="form-control inputStyling" CssClass="form-control"/>
                     <InputText @bind-Value="@Epic" placeholder="Epic Games Username" class="form-control inputStyling" CssClass="form-control"/>
-                    <InputText @bind-Value="@Riot" placeholder="Riot Games Username" class="form-control inputStyling" CssClass="form-control" />
-                    <InputText @bind-Value="@PSN" placeholder="PSN Username" class="form-control inputStyling" CssClass="form-control" />
+                    <InputText @bind-Value="@Riot" placeholder="Riot Games Username" class="form-control inputStyling" CssClass="form-control"/>
+                    <InputText @bind-Value="@PSN" placeholder="PSN Username" class="form-control inputStyling" CssClass="form-control"/>
                     <InputText @bind-Value="@Xbox" placeholder="Xbox Live Username" class="form-control inputStyling" CssClass="form-control"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Update platforms</button>
             </EditForm>
         </div>
+        <div class="col">
+            <h4>Manage your games</h4>
+            <EditForm Model="_updateUser" OnValidSubmit="@HandleAddGame">
+                <InputText @bind-Value="@_game" placeholder="Add a game you play..." class="form-control inputStyling" CssClass="form-control"/>
+                <button type="submit" class="btn btn-primary">Add Game</button>
+            </EditForm>
+            <h4>Current games</h4>
+            <div>
+                @foreach (var game in Program.User.Games)
+                {
+                    <div class="row">
+                        <div class="col">
+                            @game
+                        </div>
+                        <div class="col">
+                            <button>
+                                <span class="oi oi-trash" style="color: white" @onclick="() => DeleteGame(game)" ></span>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
+    <a href="/Home" class="btn btn-primary" style="margin-left: auto;">Return home</a>
 </div>
 
 @code {
     private User _updateUser = new();
     string CurrentPass = "", NewPass = "", ConfirmPass = "", Steam = "", BattleNET = "", GOG = "", Epic = "", Riot = "", PSN = "", Xbox = "";
+    string _game = "";
 
     private void HomeNavigate()
     {
@@ -191,6 +216,17 @@
     {
         Program.User.Bio = _updateUser.Bio.Trim();
         _updateUser = new User();
+    }
+
+    private void HandleAddGame()
+    {
+        Program.User.Games.Add(_game);
+        _game = "";
+    }
+
+    private void DeleteGame(string game)
+    {
+        Program.User.Games.Remove(game);
     }
 
 }
