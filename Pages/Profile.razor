@@ -1,4 +1,4 @@
-﻿@page "/profile/{username}"
+﻿@page "/profile/{username?}"
 @using Crowd_CTRL.Pages
 @layout Shared.SocialLayout
 <style>
@@ -12,7 +12,7 @@
         display: block;
         align-content: end;
         margin-left: auto;
-        margin-right: auto;
+        margin-right: 0;
         margin-top: 10px;
     }
     
@@ -41,28 +41,33 @@
     }
 </style>
 
-<div class="flex">
+<div class="container flex">
     <div class="picContainer">
         <img src="@User.ProfilePicture" class="pic" alt="Profile Picture"/>
     </div>
-    <div class="platform">
-        <div class="username">
+    <div class="container platform">
+        <div class="container username">
             @User.Username
         </div>
-        <div class="platforms">
+        @if (User.Platforms.Count > 0)
+        {
+            
+        <div class="container platforms">
             @foreach (string platform in User.Platforms)
             {
                 <div>@platform</div>
             }
         </div>
+        }
     </div>
-    <div class="bio">
+    @if(User.Bio != "" || User.Platforms.Count > 0){
+    <div class="container bio">
         @User.Bio
         @foreach (string game in User.Games)
         {
             <div>@game</div>
         }
-    </div>
+    </div>}
 </div>
 
 @code {
@@ -70,22 +75,18 @@
     [Parameter]
     public string Username { get; set; }
 
+    private User User { get; set; }
+    private Friend Friend { get; set; }
+
     protected override void OnInitialized()
     {
-        User = Username == "" ? Program.User : Program.Friends.Find(user => user.Username == Username);
-        Username ??= "YourProfile";
+        User = Program.Friends.Find(user => user.Username == Username) ?? Program.User;
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        await Task.Run(() =>
-        {
-            User = Username == "" ? Program.User : Program.Friends.Find(user => user.Username == Username);
-            Username ??= "YourProfile";
-        });
+        await Task.Run(() => { User = Program.Friends.Find(user => user.Username == Username) ?? Program.User; });
         StateHasChanged();
     }
 
-
-    private User User { get; set; }
 }

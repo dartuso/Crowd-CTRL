@@ -23,7 +23,7 @@ namespace Crowd_CTRL
             await builder.Build().RunAsync();
         }
 
-        public static User User = new User("TestUser");
+        public static User User = new("TestUser");
         public static List<Friend> Friends = new()
         {
             new Friend("Friend1"),
