@@ -5,7 +5,7 @@ namespace Crowd_CTRL.Pages
 {
     public class Friend : User
     {
-        private string Status { get; set; }
+        public string Status { get; set; }
 
         public Friend(string username)
         {
@@ -42,6 +42,7 @@ namespace Crowd_CTRL.Pages
         {
             List<string> randomGames = new List<string>();
 
+            /*TODO: elim duplicates*/
             Random gen = new Random();
             for (int i = 0; i < gen.Next(5,20); i++)
             {
@@ -53,10 +54,17 @@ namespace Crowd_CTRL.Pages
 
         private List<string> RandomPlatforms()
         {
+            Random gen = new Random();
             List<string> randomPlatforms = new List<string>();
 
-            Random gen = new Random();
-            for (int i = 0; i < gen.Next(5,20); i++)
+            /*TODO: elim duplicates*/
+            
+            HashSet<int> numbers = new HashSet<int>();
+            while (numbers.Count < 6) {
+                numbers.Add(gen.Next(1, 49));
+            }
+            
+            for (int i = 0; i < gen.Next(0,4); i++)
             {
                 randomPlatforms.Add(RandomStr(FriendData.Platforms)() + ": " + Username);
             }
@@ -120,7 +128,7 @@ namespace Crowd_CTRL.Pages
             "Mario Kart Wii",
             "PlayerUnknown's Battlegrounds",
             "Wii Sports Resort",
-            "Pokemon Red / Green / Blue Version",
+            "Pokemon Red",
             "New Super Mario Bros.",
             "Tetris",
             "New Super Mario Bros. Wii",
