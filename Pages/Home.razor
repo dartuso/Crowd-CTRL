@@ -103,7 +103,7 @@
 
     private void HandleValidSubmit()
     {
-        _formPost.Username = Program.Username;
+        _formPost.Username = Program.User.Username;
         _formPost.PostedDate = DateTime.Now;
         _formPost.ProfileUrl = "Icons\\account.svg";
         Program.Posts.Insert(0, _formPost);
