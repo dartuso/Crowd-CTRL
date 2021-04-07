@@ -41,37 +41,42 @@ namespace Crowd_CTRL.Pages
         private List<string> RandomGames()
         {
             List<string> randomGames = new List<string>();
+            var numbers = SeedHash(FriendData.Games.Count);
 
-            /*TODO: elim duplicates*/
-            Random gen = new Random();
-            for (int i = 0; i < gen.Next(5,20); i++)
+            foreach (var num in numbers)
             {
-                randomGames.Add(RandomStr(FriendData.Games)());
+                randomGames.Add(FriendData.Games[num]);
             }
-
+            
             return randomGames;
         }
 
         private List<string> RandomPlatforms()
         {
-            Random gen = new Random();
             List<string> randomPlatforms = new List<string>();
 
-            /*TODO: elim duplicates*/
-            
-            HashSet<int> numbers = new HashSet<int>();
-            while (numbers.Count < 6) {
-                numbers.Add(gen.Next(1, 49));
-            }
-            
-            for (int i = 0; i < gen.Next(0,4); i++)
+            var numbers = SeedHash(FriendData.Platforms.Count);
+
+            foreach (var num in numbers)
             {
-                randomPlatforms.Add(RandomStr(FriendData.Platforms)() + ": " + Username);
+                randomPlatforms.Add(FriendData.Platforms[num]+ ": " + Username);
             }
 
             return randomPlatforms;
         }
 
+        HashSet<int> SeedHash(int maxLength)
+        {
+            Random gen = new Random();
+            HashSet<int> numbers = new HashSet<int>();
+            while (numbers.Count < maxLength/3) {
+                numbers.Add(gen.Next(maxLength));
+            }
+
+            return numbers;
+        }
+        
+        
         private string RandomPicture()
         {
             return RandomStr(FriendData.Pictures)();
