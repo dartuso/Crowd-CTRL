@@ -62,9 +62,9 @@
     @if (User.Bio != "" || User.Games.Count != 0)
     {
         <div class="container bio">
-            <h4>Bio:</h4>
-            @User.Bio
-            <h4>Games:</h4>
+            <h5>Bio:</h5>@User.Bio
+            <br>
+            <h5>Games:</h5>
             @foreach (string game in User.Games)
             {
                 <div>@game</div>

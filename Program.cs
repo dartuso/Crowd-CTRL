@@ -35,7 +35,7 @@ namespace Crowd_CTRL
 
         public static readonly List<Post> Posts = new()
         {
-            new("Icons\\account.svg", "Daniel", "Hey! Hope everyone is doing well!"),
+            new("Daniel", "Hey! Check out the new game: Raid Shadow Legends!"),
             new("Icons\\account.svg", "Overwatch Gamer", "https://www.youtube-nocookie.com/embed/O161-WNZBP4", "Check out my overwatch game play."),
             new ("", "Your Clan “League Warriors” just joined the  “LCS Fall 2020” tournament!"),
             new ("", "Vector91831 is playing Overwatch! - Playing “Competitive” - 20m")
