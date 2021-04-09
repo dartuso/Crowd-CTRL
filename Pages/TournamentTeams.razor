@@ -50,11 +50,13 @@
     <h3 class="uheader">(type team name or click invite)</h3>
 
     <EditForm Model="@TournamentCreate._tournament" class="col1">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
     @foreach (ATeam team in TournamentCreate._tournament.TeamNames)
     {
         <div>
         <label for="tname">Team #@team.teamNo</label>
-        <a href="#" class="badge badge-secondary">
+        <a href="" class="badge badge-secondary">
             <h4>Invite</h4>
         </a>
         <br>

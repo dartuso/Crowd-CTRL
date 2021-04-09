@@ -53,26 +53,28 @@
 <div class="page-layout">
     <h1>Start hosting a new tournament!</h1>
     <form>
-        <label for="tname">Tournament name</label><br>
+        <label for="tname">Tournament name (or title of tournament)</label><br>
         <input @bind-value="_tournament.TournamentName" class="form-control" type="text" id="tname" name="tname"><br>
 
-        <label for="game">Game</label>
+        <label for="game">Game (select game to be played)</label>
         <select @bind="_tournament.GameName" class="form-control" id="game">         
             <option disabled selected> -- select a game -- </option>
             <option>League of Legends</option>
             <option>Rocket League</option>
             <option>Overwatch</option>
-            <option>Option 4</option>
-            <option>Option 5</option>
+            <option>Counter Strike: Global Offensive</option>
+            <option>Valorant</option>
         </select><br>
 
-        <label for="noOfTeams">Number of teams</label>
+        <label for="noOfTeams">Number of teams (select maximum number of teams)</label>
         <select @bind="_tournament.NumberOfTeams" class="form-control" id="noOfTeams">       
             <option>2</option>
             <option>3</option>
             <option>4</option>
             <option>5</option>
+            <optgroup label="working best">
             <option>6</option>
+            </optgroup>
             <option>7</option>
             <option>8</option>
             <option>9</option>
@@ -81,7 +83,7 @@
             <option>12</option>
         </select><br>
 
-        <label for="rules">Rules</label><br>
+        <label for="rules">Rules (enter any rules to be displayed and used for this tournament)</label><br>
         <textarea @bind="_tournament.Rules" class="form-control" id="rules" rows="5" name="rules"></textarea> <br>
     
     </form><br>

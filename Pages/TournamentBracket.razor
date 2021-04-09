@@ -10,41 +10,51 @@
     text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto auto auto auto auto;
   gap: 0px 0px;
   grid-template-areas:
     ". T5 . ."
-    "T1 O1 O3 ."
-    "T2 O1 O3 FIN"
-    "T3 O2 O4 FIN"
-    "T4 O2 O4 ."
-    ". T6 . BUTTONS";
+    "T1 vers2 . ."
+    "vers0 O1 O3 ."
+    "T2 . versus FIN"
+    "T3 . versus FIN"
+    "vers1 O2 O4 ."
+    "T4 vers3 . B1"
+    ". T6 . B2";
 }
-.T5 { grid-area: T5;     margin: 50px;  align-self: center; }
-.T6 { grid-area: T6;     margin: 50px;  align-self: center; }
-.T1 { grid-area: T1;     margin: 50px;  align-self: center; }
-.T2 { grid-area: T2;     margin: 50px;  align-self: center; }
-.T3 { grid-area: T3;     margin: 50px;  align-self: center; }
-.T4 { grid-area: T4;     margin: 50px;  align-self: center; }
-.O1 { grid-area: O1;     margin: 50px;  align-self: center; }
-.O2 { grid-area: O2;     margin: 50px;  align-self: center; }
-.O3 { grid-area: O3;     margin: 50px;  align-self: center; }
-.O4 { grid-area: O4;     margin: 50px;  align-self: center; }
+
+.versus { grid-area: versus; align-self: center; }
+
+.vers0 { grid-area: vers0; align-self: center; }
+.vers1 { grid-area: vers1; align-self: center; }
+.vers2 { grid-area: vers2; align-self: center; }
+.vers3 { grid-area: vers3; align-self: center; }
+
+.T5 { grid-area: T5;     margin: 20px;  align-self: center; }
+
+.T6 { grid-area: T6;     margin: 20px;  align-self: center; }
+
+.T1 { grid-area: T1;     margin: 20px;  align-self: center; }
+
+.T2 { grid-area: T2;     margin: 20px;  align-self: center; }
+
+.T3 { grid-area: T3;     margin: 20px;  align-self: center; }
+
+.T4 { grid-area: T4;     margin: 20px;  align-self: center; }
+
+.O1 { grid-area: O1;     margin: 20px;  align-self: center; }
+
+.O2 { grid-area: O2;     margin: 20px;  align-self: center; }
+
+.O3 { grid-area: O3;     margin: 20px;  align-self: center; }
+
+.O4 { grid-area: O4;     margin: 20px;  align-self: center; }
+
 .FIN { grid-area: FIN;     margin: 50px;  align-self: center; }
-.BUTTONS {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 10px 0px;
-  grid-template-areas:
-    "B1"
-    "B2"
-    "B3";
-  grid-area: BUTTONS;
-}
+
+
 .B1 { grid-area: B1; }
 .B2 { grid-area: B2; }
-.B3 { grid-area: B3; }
 
 .st:link {
     border-width: 2px;
@@ -73,22 +83,52 @@
 <div class="grid-container">
     @foreach (ATeam team in TournamentCreate._tournament.TeamNames)
         {
-            <a class="T@(team.teamNo) st" id="t@(team.teamNo)" href="" @onclick:preventDefault @onclick="() => selectWinner(team)">@(team.teamName)</a>
+            int index = TournamentCreate._tournament.TeamNames.FindIndex(a => a.teamName.Equals(team.teamName));
+            <div class="T@(team.teamNo)">
+                <a style="display: block; " class="nam@(index) st" id="t@(team.teamNo)" href="" @onclick:preventDefault @onclick="() => selectWinner(team)">@(team.teamName)</a>
+            </div>
+            
         }
 
-  <a class="O1 st" href="" @onclick:preventDefault @onclick="() => selectWinner(O1)">@(O1.teamName)</a>
-  <a class="O2 st" href="" @onclick:preventDefault @onclick="() => selectWinner(O2)">@(O2.teamName)</a>
-  <a class="O3 st" href="" @onclick:preventDefault @onclick="() => selectWinner(O3)">@(O3.teamName)</a>
-  <a class="O4 st" href="" @onclick:preventDefault @onclick="() => selectWinner(O4)">@(O4.teamName)</a>
+    <div class="vers0">
+        <h1>↑ VERSUS ↓</h1>
+    </div>
+    <div class="vers1">
+        <h1>↑ VERSUS ↓</h1>
+    </div>
+    <div class="vers2">
+        <h1>↑ VERSUS ↓</h1>
+    </div>
+    <div class="vers3">
+        <h1>↑ VERSUS ↓</h1>
+    </div>
+    <div class="versus">
+        <h1>↑ VERSUS ↓</h1>
+    </div>
+
+    <div class="O1" >
+        <a class="st nam6" style="display: block; " href="" @onclick:preventDefault @onclick="() => selectWinner(O1)">@(O1.teamName)</a>
+    </div>
+    
+    <div class="O2">
+        <a class="st nam7" style="display: block; " href="" @onclick:preventDefault @onclick="() => selectWinner(O2)">@(O2.teamName)</a>
+    </div>
+  
+    <div class="O3">
+        <a class="st nam8" style="display: block; " href="" @onclick:preventDefault @onclick="() => selectWinner(O3)">@(O3.teamName)</a>
+    </div>
+  
+    <div class="O4">
+        <a class="st nam9" style="display: block; " href="" @onclick:preventDefault @onclick="() => selectWinner(O4)">@(O4.teamName)</a>
+    </div>
+  
   <a class="FIN winner" @onclick:preventDefault href="">@(FIN.teamName)</a>
-  <div class="BUTTONS">
     <div class="B1">
         <button class="btn btn-primary" @onclick="TournamentCreateNavigate">Edit tournament</button>
     </div>
     <div class="B2">
         <button class="btn btn-danger" @onclick="TournamentWinNavigate">End tournament</button>
     </div>
-  </div>
 </div>
 
 @code {

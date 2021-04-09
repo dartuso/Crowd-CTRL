@@ -1,6 +1,7 @@
 ﻿@page "/tournament"
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
+@inject PageHistoryState PageHistoryState
 
 <style>
     .content{
@@ -127,6 +128,7 @@
     
     private void TournamentCreateNavigate() 
     {
+        PageHistoryState.AddPageToHistory("tournament");
         NavigationManager.NavigateTo("tournament-create");
     }
 

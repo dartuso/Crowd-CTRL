@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crowd_CTRL.Pages
 {
@@ -19,6 +20,8 @@ namespace Crowd_CTRL.Pages
         }
 
         public int teamNo {get; set; }
+        
+        [Required]
         public string teamName {get; set; }
     }
 }
