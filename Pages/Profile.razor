@@ -1,4 +1,5 @@
-﻿@page "/profile"
+﻿@page "/profile/{username?}"
+@using Crowd_CTRL.Pages
 @layout Shared.SocialLayout
 <style>
     .picContainer{
@@ -11,7 +12,7 @@
         display: block;
         align-content: end;
         margin-left: auto;
-        margin-right: auto;
+        margin-right: 0;
         margin-top: 10px;
     }
     
@@ -40,46 +41,55 @@
     }
 </style>
 
-<div class="flex" >
+<div class="container flex">
     <div class="picContainer">
-        <img src="@ProfilePicture" class="pic" alt="Profile Picture"/>
+        <img src="@User.ProfilePicture" class="pic" alt="Profile Picture"/>
     </div>
-    <div class="platform">
-        <div class="username">
-            @Username
+    <div class="container platform">
+        <div class="container username">
+            @User.Username
         </div>
-        <div class="platforms">
-            @foreach (var platform in _listPlatforms){
-                <div>@platform</div>
+        @if (User.Platforms.Count > 0)
+        {
+            <div class="container platforms">
+                @foreach (string platform in User.Platforms)
+                {
+                    <div>@platform</div>
+                }
+            </div>
+        }
+    </div>
+    @if (User.Bio != "" || User.Games.Count != 0)
+    {
+        <div class="container bio">
+            <h5>Bio:</h5>@User.Bio
+            <br>
+            <h5>Games:</h5>
+            @foreach (string game in User.Games)
+            {
+                <div>@game</div>
             }
         </div>
-    </div>
-    <div class="bio">
-        @Bio
-    </div>
+    }
 </div>
 
 @code {
-    private string Username { get; set; } = "GhostCluster1990";
-    private string ProfilePicture { get; set; } = "Icons\\account.svg";
 
-    private readonly List<string> _listPlatforms = new List<string>()
+    [Parameter]
+    public string Username { get; set; }
+
+    private User User { get; set; }
+    private Friend Friend { get; set; }
+
+    protected override void OnInitialized()
     {
-        "Steam: Ghost_cluster19",
-        "Battle.net: Ghosty#1870",
-        "GOG: Ghost_cluster19",
-        "PSN: Ghost_cluster19"
-    };
+        User = Program.Friends.Find(user => user.Username == Username) ?? Program.User;
+    }
 
-    private string Bio { get; set; } =
-        "Most played Games \n" +
-        "Minecraft: 17 days, 18 hours Largest world size: 5.2gb \n" +
-        "Overwatch: 12 Days, 1 hour Highest ranked: 4400sr \n" +
-        "League of Legends: 11 days 16 hours \n" +
-        "Game Library \n" +
-        "Battle.net \n" +
-        "- Overwatch \n" +
-        "- Diablo III \n" +
-        "PSN \n" +
-        "- FIFA 21 \n";
+    protected override async Task OnParametersSetAsync()
+    {
+        await Task.Run(() => { User = Program.Friends.Find(user => user.Username == Username) ?? Program.User; });
+        StateHasChanged();
+    }
+
 }
