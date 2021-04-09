@@ -10,63 +10,97 @@
     text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto auto auto auto auto;
   gap: 0px 0px;
   grid-template-areas:
     ". T5 . ."
-    "T1 O1 O3 ."
-    "T2 O1 O3 FIN"
-    "T3 O2 O4 FIN"
-    "T4 O2 O4 ."
-    ". T6 . BUTTONS";
+    "T1 vers2 . ."
+    "vers0 O1 O3 ."
+    "T2 . vers4 FIN"
+    "T3 . vers4 FIN"
+    "vers1 O2 O4 ."
+    "T4 vers3 . B1"
+    ". T6 . B2";
 }
-.T5 { grid-area: T5;     margin: 50px;  align-self: center; }
-.T6 { grid-area: T6;     margin: 50px;  align-self: center; }
-.T1 { grid-area: T1;     margin: 50px;  align-self: center; }
-.T2 { grid-area: T2;     margin: 50px;  align-self: center; }
-.T3 { grid-area: T3;     margin: 50px;  align-self: center; }
-.T4 { grid-area: T4;     margin: 50px;  align-self: center; }
-.O1 { grid-area: O1;     margin: 50px;  align-self: center; }
-.O2 { grid-area: O2;     margin: 50px;  align-self: center; }
-.O3 { grid-area: O3;     margin: 50px;  align-self: center; }
-.O4 { grid-area: O4;     margin: 50px;  align-self: center; }
-.FIN { grid-area: FIN;     margin: 50px;  align-self: center; }
-.BUTTONS {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 10px 0px;
-  grid-template-areas:
-    "B1"
-    "B2"
-    "B3";
-  grid-area: BUTTONS;
-}
+
+.vers4 { grid-area: vers4; align-self: center; }
+.vers0 { grid-area: vers0; align-self: center; }
+.vers1 { grid-area: vers1; align-self: center; }
+.vers2 { grid-area: vers2; align-self: center; }
+.vers3 { grid-area: vers3; align-self: center; }
+
+.T5 { grid-area: T5;   margin-left: 10px; margin-right: 10px;  padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T6 { grid-area: T6;   margin-left: 10px; margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T1 { grid-area: T1;   margin-right: 10px;  padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T2 { grid-area: T2;   margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; margin-bottom: 50px; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T3 { grid-area: T3;   margin-right: 10px;  padding: 20px 20px 0px 20px;  align-self: center; margin-top: 50px; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T4 { grid-area: T4;   margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.O1 { grid-area: O1;   margin-left: 10px; margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.O2 { grid-area: O2;   margin-left: 10px; margin-right: 10px; padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.O3 { grid-area: O3;   margin-left: 10px;  padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.O4 { grid-area: O4;   margin-left: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.FIN { grid-area: FIN;     margin: 20px;  align-self: center; }
+
 .B1 { grid-area: B1; }
 .B2 { grid-area: B2; }
-.B3 { grid-area: B3; }
+
+.before {
+    display:block;
+    width: 100%;
+    color: black;
+    background-color: white;
+    min-height: 35px;
+}
+
+.winner {
+    min-height: 35px;
+    color: black;
+    background-color: yellow;
+}
 </style>
 
 
 <h1 style="text-align:center; margin: 30px;">@(TournamentCreate._tournament.TournamentName)</h1>
 <div class="grid-container">
-    @foreach (ATeam team in TournamentCreate._tournament.TeamNames)
-        {
-            <button class="T@(team.teamNo) btn btn-secondary" id="t@(team.teamNo)"  >@(team.teamName)</button>
-        }
+  @foreach (ATeam team in TournamentCreate._tournament.TeamNames)
+      {
+          int index = TournamentCreate._tournament.TeamNames.FindIndex(a => a.teamName.Equals(team.teamName));
+          <div class="T@(team.teamNo) thl bhl vl">
+              <button class="btn before )"  href="" @onclick:preventDefault>@(team.teamName)</button>
+          </div>
+      }
 
-  <button class="O1 btn btn-secondary"  >@(TournamentBracket.O1.teamName)</button>
-  <button class="O2 btn btn-secondary"  >@(TournamentBracket.O2.teamName)</button>
-  <button class="O3 btn btn-secondary"  >@(TournamentBracket.O3.teamName)</button>
-  <button class="O4 btn btn-secondary"  >@(TournamentBracket.O4.teamName)</button>
-  <button class="FIN btn btn-warning"  >@(TournamentBracket.FIN.teamName)</button>
-  <div class="BUTTONS">
-    <div class="B1">
-        <button class="btn btn-primary" @onclick="TournamentWinNavigate">Go back</button>
+  @foreach (int ver in Enumerable.Range(0, 4)) {
+    <div class="vers@(ver) vl ">
+        <h1>↑ VERSUS ↓</h1>
     </div>
-    <div class="B2">
-        <button class="btn btn-danger" >Share bracket</button>
+  }
+
+  <div class="vers4 thl bhl vl">
+    <div class="O3 ">
+        <button class="btn before " style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O3.teamName)</button>
+    </div><br>
+    <h1>↑ VERSUS ↓</h1><br>
+    <div class="O4 ">
+        <button class="btn before" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O4.teamName)</button>
     </div>
+  </div>
+
+  <div class="O1" >
+      <button class="btn before " style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O1.teamName)</button>
+  </div>
+  
+  <div class="O2">
+      <button class="btn before" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O2.teamName)</button>
+  </div>
+  
+  <button class="btn FIN winner" @onclick:preventDefault href="">@(TournamentBracket.FIN.teamName)</button>
+
+  <div class="B1">
+      <button class="btn btn-primary" @onclick="TournamentWinNavigate">Go back</button>
+  </div>
+  <div class="B2">
+      <button class="btn btn-danger" >Share bracket</button>
   </div>
 </div>
 
