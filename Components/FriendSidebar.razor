@@ -14,15 +14,21 @@
     </div>
     @foreach (var friend in Program.Friends)
     {
-        <div>
-            <button class="btn btn-dark" @onclick="() => UserNavigate(friend.Username)">
-                <img src="@friend.ProfilePicture" alt="@friend.Username profile picture" height="24px" width="24px">
-                @friend.Username
-            </button>
-            <div>
-                @friend.Status
+        <button class="btn btn-dark" @onclick="() => UserNavigate(friend.Username)" style="width: 90%; background-color: rgba(255,255,255,0.05);color: white">
+            <div class="row">
+                <div class="col-2" style="padding-left: 3px">
+                    <img src="@friend.ProfilePicture" alt="@friend.Username profile picture" height="48px" width="48px">
+                </div>
+                <div class="col">
+                    <div style="text-align: left"> 
+                        @friend.Username
+                    </div>
+                    <div style="font-size: 0.75em; text-align: left">
+                        @friend.Status
+                    </div>
+                </div>
             </div>
-        </div>
+        </button>
     }
     <hr style="border-top: 1px solid white">
 </div>
