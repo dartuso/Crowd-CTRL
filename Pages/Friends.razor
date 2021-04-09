@@ -3,6 +3,7 @@
 @inject NavigationManager NavigationManager
 @* @using Components *@
 <Crowd_CTRL.Shared.ConfirmModal @ref="ConfirmModal"></Crowd_CTRL.Shared.ConfirmModal>
+<Crowd_CTRL.Shared.ChatBox @ref="ChatBox"></Crowd_CTRL.Shared.ChatBox>
 @using System.Collections.Generic;
 
 <style>
@@ -88,15 +89,24 @@
     </div>
     
     <div class="search-results-container">
+        @* Not searching for friends *@
         @if (@friend.Name == ""){
             <div class="res-list">
                 <div class="friend-item">
-                    <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
-                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 1" />
-                    @* If there is the option to turn on notifications, then the user has been muted *@
-                    @if (@friendMutedStatus["Friend 1"].Equals("notifications_off")){
-                        <RadzenIcon Style="font-size:25px; color: red;" Icon="notifications_off" />
-                    }
+                    <div style="display: inline-flex;">
+                        <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
+                        <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Friend 1" />
+                        
+                        @* If there is the option to turn on notifications, then the user has been muted *@
+                        @if (@friendMutedStatus["Friend 1"].Equals("notifications_off")){
+                            <RadzenIcon Style="font-size:25px; color: #993B27; padding-top:3%;" Icon="notifications_off" />
+                        }
+
+                        <button class="friend-action-button" title="Chat: In progress!" style="padding-top: 2.5%; padding-left:4%;" @onclick='() => ChatBox.StartChat("Friend 1")'>
+                            <RadzenIcon Style="font-size:24px; color: white; justify-self: flex-end;"  Icon="chat" />
+                        </button>
+                    </div>
+                    
                     
                     <div class="friend-actions">
                         <button class="friend-action-button" title="Remove friend" @onclick='() => ConfirmModal.Open("Friend 1")'>
@@ -114,9 +124,7 @@
                             
                         </button>
 
-                        <button class="friend-action-button" title="Chat: In progress!">
-                            <RadzenIcon Style="font-size:27px; color: white; justify-self: flex-end;"  Icon="chat" />
-                        </button>
+                        
                     </div>
                     
                 </div>
@@ -342,7 +350,7 @@
                 <br>
                 <div class="friend-item" style="width: 90%; align-self: center;">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
-                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 1" />
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 1 (Plays Overwatch)" />
                     
                     <div class="friend-actions">
                         <button class="btn btn-primary">
@@ -355,7 +363,7 @@
                 <hr>
                 <div class="friend-item" style="width: 90%; align-self: center;">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
-                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 2" />
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 2 (Plays Call Of Duty: Warzone)" />
                     
                     <div class="friend-actions">
                         <button class="btn btn-primary">
@@ -368,7 +376,7 @@
                 <hr>
                 <div class="friend-item" style="width: 90%; align-self: center;">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
-                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 3" />
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="Other User 3 (Friends with Raptek12)" />
                     
                     <div class="friend-actions">
                         <button class="btn btn-primary">
@@ -391,6 +399,8 @@
     private Crowd_CTRL.Shared.ConfirmModal ConfirmModal { get; set; }
 
     private Crowd_CTRL.Friend friend = new Crowd_CTRL.Friend("");
+
+    private Crowd_CTRL.Shared.ChatBox ChatBox {get; set; }
 
 
     string resTitle = "My Friends";
