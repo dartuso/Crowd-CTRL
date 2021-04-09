@@ -26,11 +26,11 @@ namespace Crowd_CTRL
         public static User User = new("TestUser");
         public static List<Friend> Friends = new()
         {
-            new Friend("Friend1"),
-            new Friend("Friend2"),
-            new Friend("Friend3"),
-            new Friend("Friend4"),
-            new Friend("Friend5"),
+            new Friend("Gamer2123"),
+            new Friend("Dinja"),
+            new Friend("MickMercs"),
+            new Friend("Pokemane"),
+            new Friend("Keanu"),
         };
 
         public static readonly List<Post> Posts = new()
