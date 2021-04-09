@@ -52,6 +52,17 @@
     min-height: 35px;
 }
 
+.clicked1 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked2 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked3 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked4 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked5 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked6 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked7 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked8 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked9 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked10 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+
 .winner {
     min-height: 35px;
     color: black;
@@ -66,7 +77,7 @@
       {
           int index = TournamentCreate._tournament.TeamNames.FindIndex(a => a.teamName.Equals(team.teamName));
           <div class="T@(team.teamNo) thl bhl vl">
-              <button class="btn before )"  href="" @onclick:preventDefault>@(team.teamName)</button>
+              <button class="btn before clicked@(TournamentBracket.click[team.teamNo-1])"  href="" @onclick:preventDefault>@(team.teamName)</button>
           </div>
       }
 
@@ -78,20 +89,20 @@
 
   <div class="vers4 thl bhl vl">
     <div class="O3 ">
-        <button class="btn before " style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O3.teamName)</button>
+        <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O3.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O3.teamName)</button>
     </div><br>
     <h1>↑ VERSUS ↓</h1><br>
     <div class="O4 ">
-        <button class="btn before" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O4.teamName)</button>
+        <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O4.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O4.teamName)</button>
     </div>
   </div>
 
   <div class="O1" >
-      <button class="btn before " style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O1.teamName)</button>
+      <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O1.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O1.teamName)</button>
   </div>
   
   <div class="O2">
-      <button class="btn before" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O2.teamName)</button>
+      <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O2.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O2.teamName)</button>
   </div>
   
   <button class="btn FIN winner" @onclick:preventDefault href="">@(TournamentBracket.FIN.teamName)</button>
