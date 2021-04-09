@@ -16,15 +16,14 @@
     ". T5 . ."
     "T1 vers2 . ."
     "vers0 O1 O3 ."
-    "T2 . versus FIN"
-    "T3 . versus FIN"
+    "T2 . vers4 FIN"
+    "T3 . vers4 FIN"
     "vers1 O2 O4 ."
     "T4 vers3 . B1"
     ". T6 . B2";
 }
 
-.versus { grid-area: versus; align-self: center; }
-
+.vers4 { grid-area: vers4; align-self: center; }
 .vers0 { grid-area: vers0; align-self: center; }
 .vers1 { grid-area: vers1; align-self: center; }
 .vers2 { grid-area: vers2; align-self: center; }
@@ -69,6 +68,22 @@
     background-color: green;
 }
 
+.before {
+    display:block;
+    width: 100%;
+    color: black;
+    background-color: white;
+}
+
+.clicked1 { display:block;    width: 100%;    color: black;    background-color: green; }
+.clicked2 { display:block;    width: 100%;    color: black;    background-color: green; }
+.clicked3 { display:block;    width: 100%;    color: black;    background-color: green; }
+.clicked4 { display:block;    width: 100%;    color: black;    background-color: green; }
+.clicked5 { display:block;    width: 100%;    color: black;    background-color: green; }
+.clicked6 { display:block;    width: 100%;    color: black;    background-color: green; }
+.clicked7 { display:block;    width: 100%;    color: black;    background-color: green; }
+.clicked8 { display:block;    width: 100%;    color: black;    background-color: green; }
+
 .winner {
     border-width: 2px;
     border-style: solid;
@@ -85,26 +100,17 @@
         {
             int index = TournamentCreate._tournament.TeamNames.FindIndex(a => a.teamName.Equals(team.teamName));
             <div class="T@(team.teamNo)">
-                <a style="display: block; " class="nam@(index) st" id="t@(team.teamNo)" href="" @onclick:preventDefault @onclick="() => selectWinner(team)">@(team.teamName)</a>
+                <button class="btn before clicked@(team.teamClick)"  href="" @onclick:preventDefault @onclick="() => selectWinner(team)">@(team.teamName)</button>
             </div>
             
         }
 
-    <div class="vers0">
-        <h1>↑ VERSUS ↓</h1>
-    </div>
-    <div class="vers1">
-        <h1>↑ VERSUS ↓</h1>
-    </div>
-    <div class="vers2">
-        <h1>↑ VERSUS ↓</h1>
-    </div>
-    <div class="vers3">
-        <h1>↑ VERSUS ↓</h1>
-    </div>
-    <div class="versus">
-        <h1>↑ VERSUS ↓</h1>
-    </div>
+
+    @foreach (int ver in Enumerable.Range(0, 5)) {
+        <div class="vers@(ver)">
+            <h1>↑ VERSUS ↓</h1>
+        </div>
+    }
 
     <div class="O1" >
         <a class="st nam6" style="display: block; " href="" @onclick:preventDefault @onclick="() => selectWinner(O1)">@(O1.teamName)</a>
@@ -132,6 +138,15 @@
 </div>
 
 @code {
+    public static string click1 = "";
+    public static string click2 = "";
+    public static string click3 = "";
+    public static string click4 = "";
+    public static string click5 = "";
+    public static string click6 = "";
+    public static string click7 = "";
+    public static string click8 = "";
+    public static string click9 = "";
     public static ATeam O1 = new ATeam(7, "");
     public static ATeam O2 = new ATeam(8, "");
     public static ATeam O3 = new ATeam(9, "");
@@ -153,22 +168,41 @@
     public void selectWinner(ATeam team) {
         switch(team.teamNo) {
             case 1:
+                O1.teamName = team.teamName;
+                click1 = "1";
+                break;
             case 2:
                 O1.teamName = team.teamName;
+                click2 = "2";
                 break;
             case 3:
+                O2.teamName = team.teamName;
+                click3 = "3";
+                break;
             case 4:
                 O2.teamName = team.teamName;
+                click4 = "4";
                 break;
             case 5:
+                O3.teamName = team.teamName;
+                click5 = "5";
+                break;
             case 7:
                 O3.teamName = team.teamName;
+                click7 = "7";
                 break;
             case 6:
+                O4.teamName = team.teamName;
+                click6 = "6";
+                break;
             case 8:
                 O4.teamName = team.teamName;
+                click8 = "8";
                 break;
             case 9:
+                FIN.teamName = team.teamName;
+                click9 = "9";
+                break;
             case 10:
                 FIN.teamName = team.teamName;
                 break;
