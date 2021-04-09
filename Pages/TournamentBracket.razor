@@ -29,14 +29,14 @@
 .vers2 { grid-area: vers2; align-self: center; }
 .vers3 { grid-area: vers3; align-self: center; }
 
-.T5 { grid-area: T5;   margin-left: 10px; margin-right: 10px;  padding: 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
-.T6 { grid-area: T6;   margin-left: 10px; margin-right: 10px;  padding: 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
-.T1 { grid-area: T1;   margin-right: 10px;  padding: 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
-.T2 { grid-area: T2;   margin-right: 10px;  padding: 20px;  align-self: center; margin-bottom: 50px; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
-.T3 { grid-area: T3;   margin-right: 10px;  padding: 20px;  align-self: center; margin-top: 50px; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
-.T4 { grid-area: T4;   margin-right: 10px;  padding: 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
-.O1 { grid-area: O1;   margin-left: 10px; margin-right: 10px;  padding: 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
-.O2 { grid-area: O2;   margin-left: 10px; margin-right: 10px; padding: 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T5 { grid-area: T5;   margin-left: 10px; margin-right: 10px;  padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T6 { grid-area: T6;   margin-left: 10px; margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T1 { grid-area: T1;   margin-right: 10px;  padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T2 { grid-area: T2;   margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; margin-bottom: 50px; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T3 { grid-area: T3;   margin-right: 10px;  padding: 20px 20px 0px 20px;  align-self: center; margin-top: 50px; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T4 { grid-area: T4;   margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.O1 { grid-area: O1;   margin-left: 10px; margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.O2 { grid-area: O2;   margin-left: 10px; margin-right: 10px; padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
 .O3 { grid-area: O3;   margin-left: 10px;  padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
 .O4 { grid-area: O4;   margin-left: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
 .FIN { grid-area: FIN;     margin: 20px;  align-self: center; }
@@ -120,11 +120,11 @@
 
 @code {
     public static List<string> click = new List<string> {"", "", "", "", "", "", "", "", "", "", ""};
-    public static ATeam O1 = new ATeam(7, "");
-    public static ATeam O2 = new ATeam(8, "");
-    public static ATeam O3 = new ATeam(9, "");
-    public static ATeam O4 = new ATeam(10, "");
-    public static ATeam FIN = new ATeam(11, "");
+    public static ATeam O1 = new ATeam(7, "...");
+    public static ATeam O2 = new ATeam(8, "...");
+    public static ATeam O3 = new ATeam(9, "...");
+    public static ATeam O4 = new ATeam(10, "...");
+    public static ATeam FIN = new ATeam(11, "...");
 
     private void TournamentCreateNavigate()
     {
