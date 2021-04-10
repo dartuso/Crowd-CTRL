@@ -48,6 +48,8 @@
                 <InputText @bind-Value="@_updateUser.Bio" placeholder="Update bio" rows="3" class="form-control inputStyling"/>
                 <button type="submit" class="btn btn-primary">Update Bio</button>
             </EditForm>
+        </div>
+        <div class="col-2">
             <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdatePassword">
                 <h4>Update password</h4>
                 <div>
