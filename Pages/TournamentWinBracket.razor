@@ -1,4 +1,5 @@
 @page "/tournament-win-bracket"
+@using Crowd_CTRL.Pages
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
 @inject PageHistoryState PageHistoryState
@@ -114,13 +115,24 @@
       <button class="btn btn-primary" @onclick="TournamentWinNavigate">Go back</button>
   </div>
   <div class="B2">
-      <button class="btn btn-danger" >Share bracket</button>
+      <button class="btn btn-danger" @onclick="() => shareBracket()" >@(shared)</button>
   </div>
 </div>
 
 @code {
+    public static string shared = "Share result";
     private void TournamentWinNavigate()
     {
         NavigationManager.NavigateTo(PageHistoryState.GetGoBackPage());
+    }
+
+    public Post _aPost = new Post();
+    private void shareBracket() {
+        _aPost.Username = Program.User.Username;
+        _aPost.PostedDate = DateTime.Now;
+        _aPost.ProfileUrl = Program.User.ProfilePicture;
+        _aPost.Text = "Congratulations to " + TournamentBracket.FIN.teamName + " for winning the " + TournamentCreate._tournament.TournamentName + " tournament!\nGame: " + TournamentCreate._tournament.GameName;
+        Program.Posts.Insert(0, _aPost);
+        shared = "Shared!";
     }
 }

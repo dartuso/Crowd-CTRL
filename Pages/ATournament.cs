@@ -13,16 +13,18 @@ namespace Crowd_CTRL.Pages
             TeamNames = new List<ATeam>();
             Share = false;
             TDate = DateTime.Now.ToString();
+            navLink = "";
         }
 
         // missing share information, checkbox value needed
-        public ATournament(string TName, string GName, int noOfTeams, string GRules, List<ATeam> Teams, String aDate){
+        public ATournament(string TName, string GName, int noOfTeams, string GRules, List<ATeam> Teams, string aDate, string nav){
             TournamentName = TName;
             GameName = GName;
             NumberOfTeams = noOfTeams;
             Rules = GRules;
             TeamNames = Teams;
             TDate = aDate;
+            navLink = nav;
         }
 
         public string TournamentName {get; set; }
@@ -31,7 +33,7 @@ namespace Crowd_CTRL.Pages
         public string Rules {get; set; }
         public List<ATeam> TeamNames {get; set; }
         public bool Share {get; set; }
-
-        public String TDate {get; set; }
+        public string navLink { get; set; }
+        public string TDate {get; set; }
     }
 }

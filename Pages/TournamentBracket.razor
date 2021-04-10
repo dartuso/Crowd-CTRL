@@ -2,7 +2,7 @@
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
 @inject PageHistoryState PageHistoryState
-@using System
+@using Crowd_CTRL.Pages
 
 @* https://grid.layoutit.com/?id=gWtsyNv  *@
 <style>
@@ -115,7 +115,12 @@
         <button class="btn btn-primary" @onclick="TournamentCreateNavigate">Edit tournament</button>
     </div>
     <div class="B2">
-        <button class="btn btn-danger" @onclick="TournamentWinNavigate">End tournament</button>
+        <button class="btn btn-warning" style="margin: 5px; " @onclick="() => changeDis()">Click to end tournament</button>
+        @if (dis.Equals("disabled")) {
+            <button class="btn btn-danger" disabled @onclick="TournamentWinNavigate">Confirm tournament end</button>
+        } else {
+            <button class="btn btn-danger" @onclick="TournamentWinNavigate">Confirm tournament end</button>
+        }
     </div>
 </div>
 
@@ -127,6 +132,15 @@
     public static ATeam O4 = new ATeam(10, "...");
     public static ATeam FIN = new ATeam(11, "...");
 
+    public static string dis = "disabled";
+
+    public void changeDis() {
+        if (dis.Equals("disabled")) {
+            dis = "false";
+        } else {
+            dis = "disabled";
+        }
+    }
     private void TournamentCreateNavigate()
     {
         NavigationManager.NavigateTo("tournament-create");
@@ -135,7 +149,10 @@
 
     private void TournamentWinNavigate()
     {
-        TournamentCreate._tournament.TDate = DateTime.Now.ToString();
+        string date = DateTime.Now.ToString();
+        date = date.Remove(date.Length - 6);
+        TournamentCreate._tournament.TDate = date;
+        Tournament._oldTournaments.Insert(0, TournamentCreate._tournament);
         NavigationManager.NavigateTo("tournament-win");
         PageHistoryState.AddPageToHistory("tournament-bracket");
     }
@@ -184,4 +201,6 @@
                 break;
         }
     }
+
+    
 }

@@ -2,6 +2,7 @@
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
 @inject PageHistoryState PageHistoryState
+@using Crowd_CTRL.Pages
 
 <style>
     .content{
@@ -106,7 +107,7 @@
 
 </style>
 
-<h1 style="text-align: center;">TOURNAMENTS</h1>
+<h1 style="text-align: center; padding: 20px;">TOURNAMENTS</h1>
 <div class="TournamentContainer">
     <button id="join" class="TournamentButton btn btn-primary" >JOIN</button>
     <button id="create" class="TournamentButton btn btn-primary" @onclick="TournamentCreateNavigate">CREATE</button>
@@ -144,16 +145,19 @@
         PageHistoryState.AddPageToHistory("tournament");
         switch(tour.TournamentName) {
             case "League Fridays #31":
-                NavigationManager.NavigateTo("tournament-old-1");       
+                NavigationManager.NavigateTo(_oldTournaments[0].navLink);       
                 break;
             case "Overwatch Daily":
-                NavigationManager.NavigateTo("tournament-old-2");
+                NavigationManager.NavigateTo(_oldTournaments[1].navLink);
                 break;
             case "Tournament Testing":
-                NavigationManager.NavigateTo("tournament-old-3");
+                NavigationManager.NavigateTo(_oldTournaments[2].navLink);
                 break;
             case "League Fridays #30":
-                NavigationManager.NavigateTo("tournament-old-4");
+                NavigationManager.NavigateTo(_oldTournaments[3].navLink);
+                break;
+            default:
+                NavigationManager.NavigateTo("tournament-win-bracket");
                 break;
         }
         
@@ -172,10 +176,10 @@
     static ATeam a5 = new ATeam(5, "Get&Set win");
     static ATeam a6 = new ATeam(6, "Cloud9");
 
-    public static ATournament t1 = new ATournament("League Fridays #31", "League of Legends", 6, "", new List<ATeam>(){a1,a2,a3,a4,a5,a6}, date_string_1);
-    public static ATournament t2 = new ATournament("Overwatch Daily", "Overwatch", 12, "", new List<ATeam>(){a1,a2,a3,a4,a5,a6}, date_string_2);
-    public static ATournament t3 = new ATournament("Tournament Testing", "Rocket League", 6, "", new List<ATeam>(){a1,a2,a3,a6,a4,a5}, date_string_3);
-    public static ATournament t4 = new ATournament("League Fridays #30", "League of Legends", 6, "", new List<ATeam>(){a1,a6,a3,a5,a4,a2}, date_string_4);
+    public static ATournament t1 = new ATournament("League Fridays #31", "League of Legends", 6, "", new List<ATeam>(){a1,a2,a3,a4,a5,a6}, date_string_1, "tournament-old-1");
+    public static ATournament t2 = new ATournament("Overwatch Daily", "Overwatch", 12, "", new List<ATeam>(){a1,a2,a3,a4,a5,a6}, date_string_2, "tournament-old-2");
+    public static ATournament t3 = new ATournament("Tournament Testing", "Rocket League", 6, "", new List<ATeam>(){a1,a2,a3,a6,a4,a5}, date_string_3, "tournament-old-3");
+    public static ATournament t4 = new ATournament("League Fridays #30", "League of Legends", 6, "", new List<ATeam>(){a1,a6,a3,a5,a4,a2}, date_string_4, "tournament-old-4");
 
     public static List<ATournament> _oldTournaments = new List<ATournament>() {t1, t2, t3, t4};
     
