@@ -1,4 +1,4 @@
-@page "/tournament-win-bracket"
+@page "/tournament-old-2"
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
 @inject PageHistoryState PageHistoryState
@@ -53,15 +53,15 @@
 }
 
 .clicked1 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
-.clicked2 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
-.clicked3 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked2 { display:block;    width: 100%;    color: black;     }
+.clicked3 { display:block;    width: 100%;    color: black;     }
 .clicked4 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
-.clicked5 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked5 { display:block;    width: 100%;    color: black;     }
 .clicked6 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
 .clicked7 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
-.clicked8 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked8 { display:block;    width: 100%;    color: black;     }
 .clicked9 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
-.clicked10 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked10 { display:block;    width: 100%;    color: black;    }
 
 .winner {
     min-height: 35px;
@@ -71,56 +71,13 @@
 </style>
 
 
-<div style="text-align:center; margin: 30px; ">
-  <h1>@(TournamentCreate._tournament.TournamentName)</h1>
-  <h4>Ended @(TournamentCreate._tournament.TDate)</h4>
+<div style="text-align:center; margin: 30px;">
+    <h1>@(Tournament.t2.TournamentName)</h1>
+    <h4>Ended @(Tournament.t2.TDate)</h4>
+    <h2> UNDER CONSTRUCTION </h2>
 </div>
-<div class="grid-container">
-  @foreach (ATeam team in TournamentCreate._tournament.TeamNames)
-      {
-          int index = TournamentCreate._tournament.TeamNames.FindIndex(a => a.teamName.Equals(team.teamName));
-          <div class="T@(team.teamNo) thl bhl vl">
-              <button class="btn before clicked@(TournamentBracket.click[team.teamNo-1])"  href="" @onclick:preventDefault>@(team.teamName)</button>
-          </div>
-      }
 
-  @foreach (int ver in Enumerable.Range(0, 4)) {
-    <div class="vers@(ver) vl ">
-        <h1>↑ VERSUS ↓</h1>
-    </div>
-  }
-
-  <div class="vers4 thl bhl vl">
-    <div class="O3 ">
-        <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O3.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O3.teamName)</button>
-    </div><br>
-    <h1>↑ VERSUS ↓</h1><br>
-    <div class="O4 ">
-        <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O4.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O4.teamName)</button>
-    </div>
-  </div>
-
-  <div class="O1" >
-      <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O1.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O1.teamName)</button>
-  </div>
-  
-  <div class="O2">
-      <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O2.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O2.teamName)</button>
-  </div>
-  
-  <button class="btn FIN winner" @onclick:preventDefault href="">@(TournamentBracket.FIN.teamName)</button>
-
-  <div class="B1">
-      <button class="btn btn-primary" @onclick="TournamentWinNavigate">Go back</button>
-  </div>
-  <div class="B2">
-      <button class="btn btn-danger" >Share bracket</button>
-  </div>
-</div>
 
 @code {
-    private void TournamentWinNavigate()
-    {
-        NavigationManager.NavigateTo(PageHistoryState.GetGoBackPage());
-    }
+
 }

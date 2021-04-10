@@ -2,6 +2,7 @@
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
 @inject PageHistoryState PageHistoryState
+@using System
 
 @* https://grid.layoutit.com/?id=gWtsyNv  *@
 <style>
@@ -134,6 +135,7 @@
 
     private void TournamentWinNavigate()
     {
+        TournamentCreate._tournament.TDate = DateTime.Now.ToString();
         NavigationManager.NavigateTo("tournament-win");
         PageHistoryState.AddPageToHistory("tournament-bracket");
     }
