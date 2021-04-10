@@ -1,4 +1,7 @@
+@using Crowd_CTRL.Pages
 @namespace Components
+@inject NavigationManager NavigationManager
+
 <style>
     .SidebarHeader{
         font-size: 2em;
@@ -9,9 +12,25 @@
     <div class="SidebarHeader">
         Friends
     </div>
-    <RadzenIcon Icon="account_circle"/> Friend 1 <br>
-    <RadzenIcon Icon="account_circle"/> Friend 1 <br>
-    <RadzenIcon Icon="account_circle"/> Friend 1 <br>
-    <RadzenIcon Icon="account_circle"/> Friend 1 <br>
+    @foreach (var friend in Program.Friends)
+    {
+        <div>
+            <button class="btn btn-dark" @onclick="() => UserNavigate(friend.Username)">
+                <img src="@friend.ProfilePicture" alt="@friend.Username profile picture" height="24px" width="24px">
+                @friend.Username
+            </button>
+            <div>
+                @friend.Status
+            </div>
+        </div>
+    }
     <hr style="border-top: 1px solid white">
-</div> 
+</div>
+
+@code
+{
+    private void UserNavigate(string username)
+    {
+        NavigationManager.NavigateTo("/profile/" + username);
+    }
+}

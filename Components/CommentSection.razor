@@ -35,7 +35,7 @@
     private void HandleCommentAdd()
     {
         if (_newComment.Text.Length <= 0) return;
-        _newComment.Username = Program.Username;
+        _newComment.Username = Program.User.Username;
         _newComment.PostedDate = DateTime.Now;
         Comments.Add(_newComment);
         _newComment = new Comment();
