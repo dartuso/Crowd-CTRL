@@ -12,12 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Components\Comment.cs">
-      <DependentUpon>CommentSection.razor</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\Avatars" />
   </ItemGroup>
 
