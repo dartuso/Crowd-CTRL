@@ -10,13 +10,16 @@
     }
     .flex-header{
         flex: 0 1 100%;
+        background-color: rgba(255,255,255,0.05);
     }
     .main-content{
         flex: 80 1 70%;
+        padding-top: 15px;
     }
     .main-sidebar{
         /*flex: 0 0 7%;*/
-        flex: 0 0 15%
+        flex: 0 0 15%;
+        
     }
     .break {
       flex-basis: 100%;
@@ -31,7 +34,9 @@
         @Body
     </div>
     <div class="main-sidebar">
-        <FriendSidebar/>
-        <ClanSidebar/>
+        <div class="card" style="background-color: rgba(255,255,255,0.05); margin-top: 10%;">
+            <FriendSidebar/>
+            <ClanSidebar/>
+        </div>
     </div>
 </div>
