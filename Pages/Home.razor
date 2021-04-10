@@ -4,7 +4,7 @@
 @layout Shared.SocialLayout
 
 <div class="main-content">
-    <div class="container" style="width: 90%; margin-left: auto; margin-right: auto; background-color: rgba(255,255,255,0.05);padding: 1%;margin-bottom: 3%">
+    <div class="container card" style="width: 90%; margin-left: auto; margin-right: auto; background-color: rgba(255,255,255,0.05);padding: 1%;margin-bottom: 3%">
         <div class="row" style="text-align: center">
             <div class="col">
                 <a href="/profile" class="link-primary">
@@ -105,7 +105,7 @@
     {
         _formPost.Username = Program.User.Username;
         _formPost.PostedDate = DateTime.Now;
-        _formPost.ProfileUrl = "Icons\\account.svg";
+        _formPost.ProfileUrl = Program.User.ProfilePicture;
         Program.Posts.Insert(0, _formPost);
 
         _formPost = new Post();
