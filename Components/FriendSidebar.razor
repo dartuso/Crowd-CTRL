@@ -8,7 +8,14 @@
         text-align: center;
     }
     
-    
+    .friend{
+        padding-left: 1.5rem;
+        color: white;
+        overflow-x: hidden;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+     
     .friend:hover{
         background-color: rgba(255,255,255,0.05);
         cursor: pointer;
@@ -18,14 +25,16 @@
     .friendAvatar{
         border-radius: 50%;
     }
+    
+
 </style>
 <div>
     <div class="SidebarHeader">
-        Friends
+        <h2>Friends</h2>
     </div>
     @foreach (var friend in Program.Friends)
     {
-        <div class="friend" @onclick="() => UserNavigate(friend.Username)" style="width: 90%; color: white">
+        <div class="friend" @onclick="() => UserNavigate(friend.Username)">
             <div class="row">
                 <div class="col-2" style="padding-left: 3px">
                     <img src="@friend.ProfilePicture" alt="@friend.Username profile picture" height="48px" width="48px" class="friendAvatar">
