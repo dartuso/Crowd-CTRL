@@ -18,6 +18,8 @@
     <Compile Update="Pages\ATournament.cs">
       <DependentUpon>TournamentCreate.razor</DependentUpon>
     </Compile>
+    <Folder Include="wwwroot\Avatars" />
+    <Folder Include="wwwroot\GameIcon" />
   </ItemGroup>
 
 </Project>
