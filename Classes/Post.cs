@@ -23,7 +23,7 @@ namespace Crowd_CTRL.Pages
 
         public Post(string username, string text, DateTime time)
         {
-            ProfileUrl = "Icons\\account.svg";
+            ProfileUrl = new Friend().ProfilePicture;
             Username = username;
             Embed = "";
             Text = text;
@@ -59,7 +59,7 @@ namespace Crowd_CTRL.Pages
         {
             Username = username;
             Text = text;
-            ProfileUrl = "Icons\\account.svg";
+            ProfileUrl = new Friend().ProfilePicture;
             Embed = "";
             Reaction = 0;
             PostedDate = RandomDayFunc()();
