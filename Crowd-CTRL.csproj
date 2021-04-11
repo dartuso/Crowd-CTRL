@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Avatars" />
+    <Folder Include="wwwroot\GameIcon" />
   </ItemGroup>
 
 </Project>

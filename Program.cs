@@ -35,10 +35,10 @@ namespace Crowd_CTRL
 
         public static readonly List<Post> Posts = new()
         {
-            new("Daniel", "Hey! Check out the new game: Raid Shadow Legends!"),
-            new("Icons\\account.svg", "Overwatch Gamer", "https://www.youtube-nocookie.com/embed/O161-WNZBP4", "Check out my overwatch game play."),
-            new ("", "Your Clan “League Warriors” just joined the  “LCS Fall 2020” tournament!"),
-            new ("", "Vector91831 is playing Overwatch! - Playing “Competitive” - 20m")
+            new("Avatars\\250px_cp2077_2.png","Daniel", "","Hey! Check out the new game: Raid Shadow Legends!"),
+            new("Avatars\\250px_cp2077_1.png","cQx", "https://www.youtube-nocookie.com/embed/O161-WNZBP4", "Check out my overwatch game play!"),
+            new ("GameIcon\\league.png","", "", "Your Clan “League Warriors” just joined the  “LCS Fall 2020” tournament!"),
+            new ("GameIcon\\overwatch.png","", "", "Vector91831 is playing Overwatch! - Playing “Competitive” - 20m")
         };
     }
 }
