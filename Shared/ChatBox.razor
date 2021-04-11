@@ -17,12 +17,10 @@
     color: white;
     padding: 16px 20px;
     border: none;
-    cursor: pointer;
-    opacity: 0.8;
     position: fixed;
     bottom: 0;
     right: 28px;
-    width: 280px;
+    width: 220px;
     }
 
     /* The popup chat - hidden by default */
@@ -31,7 +29,6 @@
     position: fixed;
     bottom: 0;
     right: 15px;
-    @* border: 3px solid #f1f1f1; *@
     z-index: 9;
     }
 
@@ -80,19 +77,75 @@
     .form-container .btn:hover, .open-button:hover {
     opacity: 1;
     }
+
+    .cancel-chat-btn {
+        display: inline-block;
+        height: 30px;
+        padding: 0;
+        margin: 0;
+        vertical-align: top;
+        width: 30px;
+        border-width: 0px;
+        background-color:#ffffff00;
+        align-items: center;
+        padding-top: 10%;
+    }
+    .name-display-btn{
+        background-color:#ffffff00;
+        color: white;
+        border-width: 0px;
+        cursor: pointer;
+        opacity: 0.8;
+    }
+    .name-display-btn:hover{
+        background-color: #4D4D4D;
+    }
+    .min-chat-btn{
+        padding: 0;
+        margin: 0;
+        height: 30px;
+        width:30px;
+        border-width: 0px;
+        background-color:#ffffff00;
+    }
 </style>
 
-<button class="open-button" @onclick="() => Open()" style="display:@chatButtonDisplay;">@friendName</button>
+<div class="open-button" style="display:@chatButtonDisplay;">
+    <button @onclick="() => Open()" class="name-display-btn">
+        <div style="width: 100%; display: inline-flex; font-size:18px;">
+            @friendName
+        </div>
+    </button>
+    <div style="margin-left: auto;">
+        <button class="cancel-chat-btn" @onclick="() => CancelChat()">
+            <RadzenIcon Style="font-size:25px; color: red;" Icon="clear" />
+        </button>
+    </div>
+</div>
+
+
 
 <div class="chat-popup" id="myForm" style="display: @chatDisplay">
     <form action="/action_page.php" class="form-container">
-        <h1>@friendName</h1>
+        <div style="display: inline-flex; width:100%;">
+            <h3>@friendName</h3>
 
-        <label for="msg"><b>Message</b></label>
-        <textarea placeholder="Type message.." name="msg" required></textarea>
+            <div style="margin-left: auto; display:inline-flex;">
+                <button type="button" class="min-chat-btn" @onclick="() => Close()">
+                    <RadzenIcon Style="font-size:24px; color: white;" Icon="keyboard_arrow_down" />
+                </button>
+                <button type="button" class="min-chat-btn" @onclick="() => CancelChat()">
+                    <RadzenIcon Style="font-size:24px; color: white;" Icon="clear" />
+                </button>
+            </div>
+            
+        </div>
+        
+
+        <textarea class="messageBox" placeholder="Type message.." name="msg" required></textarea>
 
         <button type="submit" class="btn">Send</button>
-        <button type="button" class="btn cancel" @onclick="() => Close()">Close</button>
+        
     </form>
 </div>
 
@@ -115,9 +168,17 @@
     }
 
     public void StartChat(String fName){
-        chatButtonDisplay = "block";
+        chatButtonDisplay = "inline-flex";
         friendName = fName;
         Open();
+        StateHasChanged();
+    }
+
+    public void CancelChat(){
+        chatButtonDisplay = "none";
+        chatDisplay = "none";
+        friendName = "";
+        Close();
         StateHasChanged();
     }
 }
