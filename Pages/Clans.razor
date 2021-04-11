@@ -1,6 +1,6 @@
 ﻿@page "/clans"
 @layout Shared.SocialLayout
-
+@inject NavigationManager NavigationManager
 
 <style>
 
@@ -9,10 +9,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr 0.3fr;
         grid-template-rows: auto auto 4fr;
-        grid-template-areas: 
-            "search search button1"
-            ". . new"
-            "content content .";
+        grid-template-areas: "search search button1" ". . new" "content content .";
     }
 
     .search {
@@ -39,15 +36,13 @@
     }
 
     .clan-card {
-        background-color: rgba(255,255,255,0.05); 
+        background-color: rgba(255,255,255,0.05);
         margin: 5px;
         border: 1px solid black;
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
         grid-template-rows: 1fr 3fr;
-        grid-template-areas:
-            "pict name ."
-            "pict desc req";
+        grid-template-areas: "pict name ." "pict desc req";
     }
 
     .name {
@@ -61,7 +56,7 @@
         grid-area: pict;
         justify-self: center;
         align-self: center;
-        background-color: rgba(255,255,255,0.05);  
+        background-color: rgba(255,255,255,0.05);
     }
 
     .req {
@@ -75,10 +70,10 @@
         margin: 10px;
         grid-area: desc;
         font-size: 0.9em;
-        background-color: rgba(255,255,255,0.05); 
+        background-color: rgba(255,255,255,0.05);
     }
 
-    
+
     input {
         margin: 5px;
         display: block;
@@ -91,53 +86,140 @@
 <h1 style="text-align: center;">TEAMS/CLANS</h1>
 <div class="clans-container">
     <div class="search">
-        <input class="form-control" style="background-color: rgba(255,255,255,0.05); color: white" type="text" placeholder="Enter a Clan Name or Clan Game">
+        <input class="form-control" style="background-color: rgba(255,255,255,0.05); color: white" type="text" placeholder="Enter a name or game of a Clan you are not in ...">
     </div>
-    <button class="new btn btn-primary">New Clan</button>
+    <button class="new btn btn-primary" @onclick="CreateNewClan">New Clan</button>
     <div style="text-align: center">
-        <button class="search-button btn btn-primary">Search</button>
+        <button class="search-button btn btn-primary" @onclick="SearchApex">Search</button>
     </div>
     <div class="clan-entries">
+
+        @if (!onlyShowApex)
+        {
+            <div class="clan-card">
+                <div class="name">
+                    <span style="float: left; width: 60%; text-align: left;">FridaysLeagueGamers (15/45)</span>
+                    <span style="float: left; width: 40%; text-align: right;">League of Legends</span>
+                </div>
+                <div class="pict"><RadzenImage Path="Icons\team.png" Style="width:120px; height:120px; margin-left: auto; margin-right: auto; " /></div>
+
+                @if (clanRequested0)
+                {
+                    <button class="req btn btn-success" @onclick="() => changeRequestStatus0()">
+                        Request Sent!
+                    </button>
+                }
+                else
+                {
+                    <button class="req btn btn-primary" @onclick="() => changeRequestStatus0()">
+                        Request to join
+                    </button>
+                }
+
+                <div class="desc">
+                    <p>All players are welcomed regardless of experience or noobiness as long as you love League of Legends!</p>
+                </div>
+            </div>
+
         <div class="clan-card">
             <div class="name">
-                <span style="float: left; width: 60%; text-align: left;">Team name: FridaysLeagueGamers</span>
-                <span style="float: left; width: 40%; text-align: right;">League of Legends</span>
-            </div>
-            <div class="pict">pic1</div>
-            <button class="req btn btn-primary">Request to join</button>
-            <div class="desc">
-                <p>This is a quick description about this group/team</p>
-            </div>
-        </div>
-        <div class="clan-card">
-            <div class="name">
-                <span style="float: left; width: 60%; text-align: left;">Team name: ApexGamingTeam</span>
-                <span style="float: left; width: 40%; text-align: right;">Apex Legends</span>
-            </div>
-            <div class="pict">pic2</div>
-            <button class="req btn btn-primary">Request to join</button>
-            <div class="desc">
-                <p>This is a quick description about this group/team</p>
-            </div>
-        </div>
-        <div class="clan-card">
-            <div class="name">
-                <span style="float: left; width: 60%; text-align: left;">Team name: NeverOverOverwatch</span>
+                <span style="float: left; width: 60%; text-align: left;">NeverOverOverwatch (10/60)</span>
                 <span style="float: left; width: 40%; text-align: right;">Overwatch</span>
             </div>
-            <div class="pict">pic3</div>
-            <button class="req btn btn-primary">Request to join</button>
+            <div class="pict"><RadzenImage Path="Icons\team.png" Style="width:120px; height:120px; margin-left: auto; margin-right: auto; " /></div>
+
+            @if (clanRequested1)
+            {
+                <button class="req btn btn-success" @onclick="() => changeRequestStatus1()">
+                    Request Sent!
+                </button>
+            }
+            else
+            {
+                <button class="req btn btn-primary" @onclick="() => changeRequestStatus1()">
+                    Request to join
+                </button>
+            }
+
             <div class="desc">
-                <p>This is a quick description about this group/team</p>
+                <p>Twitch: XXXXX. Please support us!</p>
             </div>
         </div>
+
+        <div class="clan-card">
+            <div class="name">
+                <span style="float: left; width: 60%; text-align: left;">WDCamperPatrol (3/20)</span>
+                <span style="float: left; width: 40%; text-align: right;">Watch Dogs</span>
+            </div>
+            <div class="pict"><RadzenImage Path="Icons\team.png" Style="width:120px; height:120px; margin-left: auto; margin-right: auto; " /></div>
+
+            @if (clanRequested2)
+            {
+                <button class="req btn btn-success" @onclick="() => changeRequestStatus2()">
+                    Request Sent!
+                </button>
+            }
+            else
+            {
+                <button class="req btn btn-primary" @onclick="() => changeRequestStatus2()">
+                    Request to join
+                </button>
+            }
+
+            <div class="desc">
+                <p>No campers allowed! We are the best glitchers in WD!</p>
+            </div>
+        </div>
+    }
+
+        <div class="clan-card">
+            <div class="name">
+                <span style="float: left; width: 60%; text-align: left;">ApexGamingTeam (7/24)</span>
+                <span style="float: left; width: 40%; text-align: right;">Apex Legends</span>
+            </div>
+            <div class="pict"><RadzenImage Path="Icons\team.png" Style="width:120px; height:120px; margin-left: auto; margin-right: auto; " /></div>
+
+            @if (clanRequested3)
+            {
+                <button class="req btn btn-success" @onclick="() => changeRequestStatus3()">
+                    Request Sent!
+                </button>
+            }
+            else
+            {
+                <button class="req btn btn-primary" @onclick="() => changeRequestStatus3()">
+                    Request to join
+                </button>
+            }
+
+            <div class="desc">
+                <p>This is a place where you can study, combine and collaborate to build the best squad! Welcome!</p>
+            </div>
+        </div>
+
     </div>
 </div>
 
 
 
-
-
 @code {
-    
+
+    bool clanRequested0 = false;
+    bool clanRequested1 = false;
+    bool clanRequested2 = false;
+    bool clanRequested3 = false;
+    bool onlyShowApex = false;
+
+    private void CreateNewClan()
+    {
+        NavigationManager.NavigateTo("clancreation");
+    }
+    private void SearchApex()
+    {
+        onlyShowApex = !onlyShowApex;
+    }
+    private void changeRequestStatus0() { clanRequested0 = !clanRequested0; }
+    private void changeRequestStatus1() { clanRequested1 = !clanRequested1; }
+    private void changeRequestStatus2() { clanRequested2 = !clanRequested2; }
+    private void changeRequestStatus3() { clanRequested3 = !clanRequested3; }
 }
