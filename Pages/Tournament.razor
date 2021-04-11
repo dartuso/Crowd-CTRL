@@ -1,10 +1,11 @@
 ﻿@page "/tournament"
+@using Crowd_CTRL.Pages
 @layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
+@inject PageHistoryState PageHistoryState
+@using Crowd_CTRL.Pages
 
 <style>
-
-
-
     .content{
         color: white;
         background-color: rgba(255,255,255,0.05);
@@ -23,7 +24,7 @@
 
     .header{
         background-color: rgba(255,255,255,0);
-        color: white;
+        color: #D3D3D3;
         text-align: center;
         grid-area: content > header;
     }
@@ -74,10 +75,11 @@
         width: 100%;
         display:grid;
         grid-template-columns: 1fr 1fr ;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr auto 1fr 1fr 1fr;
         grid-gap: 10px;
         grid-template-areas: 
             "join create"
+            "title title"
             "cont cont"
             "cont cont"
             "cont cont";
@@ -100,13 +102,19 @@
     .empty-vertical{
         height: 20px;
     }
+    .title{
+        grid-area: title;
+    }
 
 </style>
 
-<h1 style="text-align: center;">TOURNAMENTS</h1>
+<h1 style="text-align: center; padding: 20px;">TOURNAMENTS</h1>
 <div class="TournamentContainer">
     <button id="join" class="TournamentButton btn btn-primary" >JOIN</button>
-    <button id="create" class="TournamentButton btn btn-primary" >CREATE</button>
+    <button id="create" class="TournamentButton btn btn-primary" @onclick="TournamentCreateNavigate">CREATE</button>
+    <div class="title" style="text-align: center; font-size: 2.5em; color: #d3d3d3;">
+        <h2>Previous tournaments</h2>
+    </div>
     <div class="content">
         <div class="header">Tournament Name</div>
         <div class="header">Game</div>
@@ -114,33 +122,66 @@
         <div class="header">Date</div>
         <div class="header">Action</div>
 
-        <div class="name">Tournmament Name</div>
-        <div class="game">Game</div>
-        <div class="teams">Number of Teams</div>
-        <div class="date">Date</div>
-        <button class="action btn btn-primary">ACTION</button>
-
-        <div class="name">Tournmament Name</div>
-        <div class="game">Game</div>
-        <div class="teams">Number of Teams</div>
-        <div class="date">Date</div>
-        <button class="action btn btn-primary">ACTION</button>
-
-        <div class="name">Tournmament Name</div>
-        <div class="game">Game</div>
-        <div class="teams">Number of Teams</div>
-        <div class="date">Date</div>
-        <button class="action btn btn-primary">ACTION</button>
-
-        <div class="name">Tournmament Name</div>
-        <div class="game">Game</div>
-        <div class="teams">Number of Teams</div> 
-        <div class="date">Date</div>
-        <button class="action btn btn-primary">ACTION</button>
+        @foreach(ATournament tour in _oldTournaments) {
+                    int index = _oldTournaments.FindIndex(a => a.TournamentName.Equals(tour.TournamentName));
+                    <div class="name">@tour.TournamentName</div>
+                    <div class="game">@tour.GameName</div>
+                    <div class="teams">@tour.NumberOfTeams</div>
+                    <div class="date">@tour.TDate</div>
+                    <button class="action btn btn-primary" @onclick="() => TournamentOld(tour)">View bracket</button>
+        }
     </div>
-
 </div>
 
 @code {
+    
+    private void TournamentCreateNavigate() 
+    {
+        PageHistoryState.AddPageToHistory("tournament");
+        NavigationManager.NavigateTo("tournament-create");
+    }
+
+    private void TournamentOld(ATournament tour) 
+    {
+        PageHistoryState.AddPageToHistory("tournament");
+        switch(tour.TournamentName) {
+            case "League Fridays #31":
+                NavigationManager.NavigateTo(_oldTournaments[0].navLink);       
+                break;
+            case "Overwatch Daily":
+                NavigationManager.NavigateTo(_oldTournaments[1].navLink);
+                break;
+            case "Tournament Testing":
+                NavigationManager.NavigateTo(_oldTournaments[2].navLink);
+                break;
+            case "League Fridays #30":
+                NavigationManager.NavigateTo(_oldTournaments[3].navLink);
+                break;
+            default:
+                NavigationManager.NavigateTo("tournament-win-bracket");
+                break;
+        }
+        
+    }
+
+    static string date_string_1 = "02/04/2021 19:35";
+    static string date_string_2 = "31/03/2021 21:00";
+    static string date_string_3 = "29/03/2021 17:45";
+    static string date_string_4 = "29/03/2021 20:30";
+
+    
+    static ATeam a1 = new ATeam(1, "Excelsior");
+    static ATeam a2 = new ATeam(2, "The Lazy Guys");
+    static ATeam a3 = new ATeam(3, "League of Sebastians");
+    static ATeam a4 = new ATeam(4, "AverageGaming"); 
+    static ATeam a5 = new ATeam(5, "Get&Set win");
+    static ATeam a6 = new ATeam(6, "Cloud9");
+
+    public static ATournament t1 = new ATournament("League Fridays #31", "League of Legends", 6, "", new List<ATeam>(){a1,a2,a3,a4,a5,a6}, date_string_1, "tournament-old-1");
+    public static ATournament t2 = new ATournament("Overwatch Daily", "Overwatch", 12, "", new List<ATeam>(){a1,a2,a3,a4,a5,a6}, date_string_2, "tournament-old-2");
+    public static ATournament t3 = new ATournament("Tournament Testing", "Rocket League", 6, "", new List<ATeam>(){a1,a2,a3,a6,a4,a5}, date_string_3, "tournament-old-3");
+    public static ATournament t4 = new ATournament("League Fridays #30", "League of Legends", 6, "", new List<ATeam>(){a1,a6,a3,a5,a4,a2}, date_string_4, "tournament-old-4");
+
+    public static List<ATournament> _oldTournaments = new List<ATournament>() {t1, t2, t3, t4};
     
 }

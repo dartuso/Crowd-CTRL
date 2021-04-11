@@ -1,0 +1,138 @@
+@page "/tournament-win-bracket"
+@using Crowd_CTRL.Pages
+@layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
+@inject PageHistoryState PageHistoryState
+
+@* https://grid.layoutit.com/?id=gWtsyNv  *@
+<style>
+.grid-container {
+    margin: 40px;
+    text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto auto auto auto auto;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". T5 . ."
+    "T1 vers2 . ."
+    "vers0 O1 O3 ."
+    "T2 . vers4 FIN"
+    "T3 . vers4 FIN"
+    "vers1 O2 O4 ."
+    "T4 vers3 . B1"
+    ". T6 . B2";
+}
+
+.vers4 { grid-area: vers4; align-self: center; }
+.vers0 { grid-area: vers0; align-self: center; }
+.vers1 { grid-area: vers1; align-self: center; }
+.vers2 { grid-area: vers2; align-self: center; }
+.vers3 { grid-area: vers3; align-self: center; }
+
+.T5 { grid-area: T5;   margin-left: 10px; margin-right: 10px;  padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T6 { grid-area: T6;   margin-left: 10px; margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T1 { grid-area: T1;   margin-right: 10px;  padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T2 { grid-area: T2;   margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; margin-bottom: 50px; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T3 { grid-area: T3;   margin-right: 10px;  padding: 20px 20px 0px 20px;  align-self: center; margin-top: 50px; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.T4 { grid-area: T4;   margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.O1 { grid-area: O1;   margin-left: 10px; margin-right: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.O2 { grid-area: O2;   margin-left: 10px; margin-right: 10px; padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.O3 { grid-area: O3;   margin-left: 10px;  padding: 20px 20px 0px 20px;  align-self: center; border-top: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.O4 { grid-area: O4;   margin-left: 10px;  padding: 0px 20px 20px 20px;  align-self: center; border-bottom: 4px solid #7a7a7a; border-left: 4px solid #7a7a7a; border-right: 4px solid #7a7a7a;}
+.FIN { grid-area: FIN;     margin: 20px;  align-self: center; }
+
+.B1 { grid-area: B1; }
+.B2 { grid-area: B2; }
+
+.before {
+    display:block;
+    width: 100%;
+    color: black;
+    background-color: white;
+    min-height: 35px;
+}
+
+.clicked1 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked2 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked3 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked4 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked5 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked6 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked7 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked8 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked9 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+.clicked10 { display:block;    width: 100%;    color: black;    background-color: GoldenRod; }
+
+.winner {
+    min-height: 35px;
+    color: black;
+    background-color: yellow;
+}
+</style>
+
+
+<div style="text-align:center; margin: 30px; ">
+  <h1>@(TournamentCreate._tournament.TournamentName)</h1>
+  <h4>Ended @(TournamentCreate._tournament.TDate)</h4>
+</div>
+<div class="grid-container">
+  @foreach (ATeam team in TournamentCreate._tournament.TeamNames)
+      {
+          int index = TournamentCreate._tournament.TeamNames.FindIndex(a => a.teamName.Equals(team.teamName));
+          <div class="T@(team.teamNo) thl bhl vl">
+              <button class="btn before clicked@(TournamentBracket.click[team.teamNo-1])"  href="" @onclick:preventDefault>@(team.teamName)</button>
+          </div>
+      }
+
+  @foreach (int ver in Enumerable.Range(0, 4)) {
+    <div class="vers@(ver) vl ">
+        <h1>↑ VERSUS ↓</h1>
+    </div>
+  }
+
+  <div class="vers4 thl bhl vl">
+    <div class="O3 ">
+        <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O3.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O3.teamName)</button>
+    </div><br>
+    <h1>↑ VERSUS ↓</h1><br>
+    <div class="O4 ">
+        <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O4.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O4.teamName)</button>
+    </div>
+  </div>
+
+  <div class="O1" >
+      <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O1.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O1.teamName)</button>
+  </div>
+  
+  <div class="O2">
+      <button class="btn before clicked@(TournamentBracket.click[TournamentBracket.O2.teamNo-1])" style="display: block; " href="" @onclick:preventDefault >@(TournamentBracket.O2.teamName)</button>
+  </div>
+  
+  <button class="btn FIN winner" @onclick:preventDefault href="">@(TournamentBracket.FIN.teamName)</button>
+
+  <div class="B1">
+      <button class="btn btn-primary" @onclick="TournamentWinNavigate">Go back</button>
+  </div>
+  <div class="B2">
+      <button class="btn btn-danger" @onclick="() => shareBracket()" >@(shared)</button>
+  </div>
+</div>
+
+@code {
+    public static string shared = "Share result";
+    private void TournamentWinNavigate()
+    {
+        NavigationManager.NavigateTo(PageHistoryState.GetGoBackPage());
+    }
+
+    public Post _aPost = new Post();
+    private void shareBracket() {
+        _aPost.Username = Program.User.Username;
+        _aPost.PostedDate = DateTime.Now;
+        _aPost.ProfileUrl = Program.User.ProfilePicture;
+        _aPost.Text = "Congratulations to " + TournamentBracket.FIN.teamName + " for winning the " + TournamentCreate._tournament.TournamentName + " tournament!\nGame: " + TournamentCreate._tournament.GameName;
+        Program.Posts.Insert(0, _aPost);
+        shared = "Shared!";
+    }
+}

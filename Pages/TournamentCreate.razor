@@ -1,0 +1,128 @@
+@page "/tournament-create"
+@using Crowd_CTRL.Pages
+@layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
+@inject PageHistoryState PageHistoryState
+
+<style>
+    .page-layout {
+        text-align:center;
+        justify-self: center;
+        display: grid;
+        margin: 20px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .bot-button {
+        justify-self: end;
+        align-self: end;
+        width: fit-content;
+        height: fit-content; 
+    }
+
+    .ot-button {
+        justify-self: start;
+        align-self: start;
+        width: fit-content;
+        height: fit-content; 
+    }
+    .form-button {
+        width: 500px;
+        display: flex;
+        overflow: auto;
+        white-space: nowrap;
+        margin: 0 auto;
+        justify-content: space-between;
+        
+    }   
+
+    form{
+        text-align: left;
+    }
+
+    input[type=checkbox] { 
+        vertical-align: middle; 
+        position: relative; 
+        bottom: 1px; 
+    } 
+
+
+</style>
+
+<div class="page-layout">
+    <h1>Start hosting a new tournament!</h1>
+    <form>
+        <label for="tname">Tournament name (or title of tournament)</label><br>
+        <input @bind-value="_tournament.TournamentName" class="form-control" type="text" id="tname" name="tname"><br>
+
+        <label for="game">Game (select game to be played)</label>
+        <select @bind="_tournament.GameName" class="form-control" id="game">         
+            <option disabled selected> -- select a game -- </option>
+            <option>League of Legends</option>
+            <option>Rocket League</option>
+            <option>Overwatch</option>
+            <option>Counter Strike: Global Offensive</option>
+            <option>Valorant</option>
+        </select><br>
+
+        <label for="noOfTeams">Number of teams (select maximum number of teams)</label>
+        <select @bind="_tournament.NumberOfTeams" class="form-control" id="noOfTeams">       
+            <optgroup label="implemented">
+            <option>6</option>
+            </optgroup>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+        </select><br>
+
+        <label for="rules">Rules (enter any rules to be displayed and used for this tournament)</label><br>
+        <textarea @bind="_tournament.Rules" class="form-control" id="rules" rows="5" name="rules"></textarea> <br>
+    
+    </form><br>
+
+
+    <div style="align-self: center; justify-self: stretch;">
+        <input name="aShare" type="checkbox" class="form-check-input" style="width:16px; height:16px; " id="checkbox-1">
+        <label class="form-check-label" for="checkbox-1">Share tournament to feed</label> 
+    </div>
+    <div class="form-button">
+    <button class="ot-button btn btn-primary" @onclick="TournamentNavigate">Go back</button>
+    <button class="bot-button btn btn-primary" @onclick="TournamentTeamsNavigate">Continue</button>
+    </div>
+</div>
+
+@code{
+    private void TournamentTeamsNavigate() 
+    {
+        NavigationManager.NavigateTo("tournament-teams");
+        PageHistoryState.AddPageToHistory("tournament-create");
+
+        if (!_tournament.TeamNames.Any()) {
+            foreach (int val in Enumerable.Range(1, _tournament.NumberOfTeams)) {
+                _tournament.TeamNames.Add(new ATeam(val));
+            }
+        } else {
+            _tournament.TeamNames = new List<ATeam>();
+            foreach (int val in Enumerable.Range(1, _tournament.NumberOfTeams)) {
+                _tournament.TeamNames.Add(new ATeam(val));
+            }
+        }
+    }
+
+    private void TournamentNavigate() 
+    {
+        NavigationManager.NavigateTo(PageHistoryState.GetGoBackPage());
+    }
+
+    public static ATournament _tournament = new ATournament();
+
+}
