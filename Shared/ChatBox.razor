@@ -1,4 +1,5 @@
 @* Chatbox adapted from code from here: https://www.w3schools.com/howto/howto_js_popup_chat.asp *@
+@using Crowd_CTRL.Pages
 <style>
     {box-sizing: border-box;}
 
@@ -112,6 +113,7 @@
         width: 100%;
         background-color: #3d3d3d;
         height: 200px;
+        display: flex;
     }
     .send-message-container{
         display: inline-flex;
@@ -136,6 +138,13 @@
         padding-left: 10px;
         padding-right: 10px;
     }
+    .message-item{
+        padding: 5px 10px;
+        margin: 5px 5px 5px 5px;
+        border-radius: 10px;
+        background-color: #4D4D4D;
+        font-size: 15px;;
+    }
 </style>
 
 <div class="open-button" style="display:@chatButtonDisplay;">
@@ -154,7 +163,7 @@
 
 
 <div class="chat-popup" id="myForm" style="display: @chatDisplay">
-    <form action="/action_page.php" class="form-container">
+    <form action="/action_page.php" class="form-container" @onsubmit="() => SendChat()">
         <div style="display: inline-flex; width:100%;">
             <h3>@friendName</h3>
 
@@ -170,11 +179,26 @@
         </div>
         
         <div class="chat-messages">
-
+            @if (messageSent)
+            {
+                <div style="display:flex; flex-direction:column; width:100%; align-self: flex-end;">
+                    <div class="message-item" style="align-self: flex-end; background-color: #0C9CED;">
+                        @messageInBox
+                    </div>
+                    <div class="message-item" style="align-self: flex-start;">
+                        Hey! What's up?
+                    </div>
+                </div>
+            }
+            else{
+                <div style="width: 100%; color:#878787; font-size: 13px; text-align:center; padding-top: 10%;">
+                    No messages here yet...
+                </div>
+            }
         </div>
         <div class="send-message-container">
             @* <textarea class="messageBox" placeholder="Type message.." name="msg" required></textarea> *@
-            <input placeholder="Message..." type="text" class="message-box">
+            <input id="message-to-send" placeholder="Message..." type="text" class="message-box" @bind-value="chatMessage">
             <button type="submit" class="send-message-btn">
                 <RadzenIcon Style="font-size:22px; color: green; justify-self: flex-end; padding-top: 10px;"  Icon="chat" />
             </button>
@@ -186,11 +210,15 @@
 
 @code{
     public Guid guid = Guid.NewGuid();
+    public Friend fr = new Friend("");
     public string friendName;
     public string chatDisplay = "none";
     public string chatButtonDisplay="none";
 
     public bool messageSent = false;
+
+    public string messageInBox = "";
+    public string chatMessage = "";
 
     public void Open(){
         chatDisplay = "block";
@@ -213,7 +241,17 @@
         chatButtonDisplay = "none";
         chatDisplay = "none";
         friendName = "";
+        messageSent = false;
+        chatMessage = "";
         Close();
         StateHasChanged();
+    }
+    public void SendChat(){
+        if(chatMessage != ""){
+            messageSent = true;
+            messageInBox = chatMessage;
+            chatMessage = "";
+            StateHasChanged();
+        }
     }
 }
