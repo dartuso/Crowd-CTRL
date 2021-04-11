@@ -2,6 +2,14 @@
 @using Crowd_CTRL.Pages
 @using Components
 @layout Shared.SocialLayout
+<style>
+    .pic{
+        border-radius: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
 
 <div class="main-content">
     <div class="container card" style="width: 90%; margin-left: auto; margin-right: auto; background-color: rgba(255,255,255,0.05);padding: 1%;margin-bottom: 3%">
@@ -47,13 +55,13 @@
             <EditForm Model="@_formPost" OnValidSubmit="@HandleValidSubmit">
                 <DataAnnotationsValidator/>
                 <ValidationSummary/>
-                <InputText @bind-Value="_formPost.Text" CssClass="form-control" class="form-control" rows="3" placeholder="Share what's new here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white"/>
+                <InputText @bind-Value="_formPost.Text" CssClass="form-control" class="form-control" rows="3" placeholder="Share what's new here!" style="width: 100%;background-color: rgba(255,255,255,0.05); color: white"/>
                 <div class="row">
                     <div class="col">
                         <InputFile @bind-Value="_formPost.Embed" class="form-control" type="file" id="formFile" style="background-color: rgba(255,255,255,0.05); color: white; width: 60%"/>
                     </div>
                     <div class="col">
-                        <button type="submit" class="btn btn-primary" style="margin-left: 50%">Submit</button>
+                        <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
                     </div>
                 </div>
             </EditForm>
@@ -66,7 +74,7 @@
             <div class="card" style="width: 90%; background-color: rgba(255,255,255,0.05); margin-left: auto; margin-right: auto; margin-bottom: 5%">
                 <div class="row">
                     <div class="col-2">
-                        <img src="@post.ProfileUrl" class="card-img-top" alt="Profile Picture" height="150px" width="150px"/>
+                        <img src="@post.ProfileUrl" class="pic" alt="Profile Picture" height="150px" width="150px"/>
                         <h3 style="text-align: center">@post.Username</h3>
                     </div>
                     <div class="col">
@@ -98,7 +106,7 @@
 </div>
 
 @code{
-    private Post _formPost = new Post();
+    private Post _formPost = new();
 
 
     private void HandleValidSubmit()
@@ -107,7 +115,6 @@
         _formPost.PostedDate = DateTime.Now;
         _formPost.ProfileUrl = Program.User.ProfilePicture;
         Program.Posts.Insert(0, _formPost);
-
         _formPost = new Post();
         StateHasChanged();
     }
