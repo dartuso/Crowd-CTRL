@@ -7,6 +7,15 @@ namespace Crowd_CTRL.Pages
     {
         public string Status { get; set; }
 
+        public Friend(string username, string profilePicture)
+        {
+            Status = RandomStatus() + RandomGame();
+            Username = username;
+            Bio = RandomBio();
+            Games = RandomGames();
+            Platforms = RandomPlatforms();
+            ProfilePicture = RandomPicture();
+        }
         public Friend(string username)
         {
             Status = RandomStatus() + RandomGame();
@@ -147,7 +156,23 @@ namespace Crowd_CTRL.Pages
 
         public static List<string> Pictures = new()
         {
-            "Icons//account.svg"
+            // "Icons//account.svg",
+            "Avatars//250px_cp2077_1.png",
+            "Avatars//250px_cp2077_2.png",
+            "Avatars//250px_cp2077_3.png",
+            "Avatars//250px_cp2077_4.png",
+            "Avatars//250px_cp2077_5.png",
+            "Avatars//250px_cp2077_6.png",
+            "Avatars//250px_cp2077_7.png",
+            "Avatars//250px_cp2077_8.png",
+            "Avatars//250px_cp2077_9.png",
+            "Avatars//250px_cp2077_10.png",
+            "Avatars//250px_cp2077_11.png",
+            "Avatars//250px_cp2077_12.png",
+            "Avatars//250px_cp2077_13.png",
+            "Avatars//250px_cp2077_14.png",
+            "Avatars//250px_cp2077_15.png",
+            "Avatars//250px_cp2077_16.png",
         };
         
         

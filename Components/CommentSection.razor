@@ -11,18 +11,19 @@
             </div>
         }
     </div>
-    <div >
-        <EditForm Model="_newComment" OnValidSubmit="@HandleCommentAdd">
-            <div class="row">
-                <div class="col-10">
-                    <InputText @bind-Value="_newComment.Text" CssClass="form-control" class="form-control" rows="3" placeholder="Add a comment here!" style="width: 90%;background-color: rgba(255,255,255,0.05); color: white"/>
-                </div>
-                <div class="col-2">
-                    <button type="submit" class="btn btn-primary" style="margin-left: 50%">Add comment</button>
-                </div>
+    <EditForm Model="_newComment" OnValidSubmit="@HandleCommentAdd">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        <div class="row">
+            <div class="col">
+                <InputText @bind-Value="_newComment.Text" CssClass="form-control" class="form-control" rows="3" placeholder="Add a comment here!" style="width: 100%;background-color: rgba(255,255,255,0.05); color: white"/>
+
             </div>
-        </EditForm>
-    </div>
+            <div class="col-1">
+                <button type="submit" class="btn btn-primary" style="width: 100%">Submit</button>
+            </div>
+        </div>
+    </EditForm>
 </div>
 
 @code {
@@ -30,7 +31,7 @@
     [Parameter]
     public List<Comment> Comments { get; set; }
 
-    private Comment _newComment = new Comment();
+    private Comment _newComment = new();
 
     private void HandleCommentAdd()
     {
