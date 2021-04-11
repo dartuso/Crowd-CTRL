@@ -1,3 +1,4 @@
+@* Chatbox adapted from code from here: https://www.w3schools.com/howto/howto_js_popup_chat.asp *@
 <style>
     {box-sizing: border-box;}
 
@@ -5,22 +6,21 @@
     display: none;
     position: fixed;
     bottom: 0;
-    right: 15px;
-    border: 3px solid #f1f1f1;
+    right: 15%;
     z-index: 9;
-    @* background-color: #4d4d4d; *@
     }
 
     /* Button used to open the chat form - fixed at the bottom of the page */
     .open-button {
     background-color: #555;
     color: white;
-    padding: 16px 20px;
+    padding: 10px 10px 40px 10px;
     border: none;
     position: fixed;
     bottom: 0;
-    right: 28px;
+    right: 15%;
     width: 220px;
+    height: 0px;
     }
 
     /* The popup chat - hidden by default */
@@ -34,9 +34,9 @@
 
     /* Add styles to the form container */
     .form-container {
-    max-width: 300px;
+    width: 300px;
     padding: 10px;
-    background-color: #4d4d4d;
+    background-color: #2e2e2e;
     }
 
     /* Full-width textarea */
@@ -94,8 +94,8 @@
         background-color:#ffffff00;
         color: white;
         border-width: 0px;
-        cursor: pointer;
         opacity: 0.8;
+        width:150px;
     }
     .name-display-btn:hover{
         background-color: #4D4D4D;
@@ -107,6 +107,34 @@
         width:30px;
         border-width: 0px;
         background-color:#ffffff00;
+    }
+    .chat-messages{
+        width: 100%;
+        background-color: #3d3d3d;
+        height: 200px;
+    }
+    .send-message-container{
+        display: inline-flex;
+        width: 100%;
+        padding-top: 10px;
+    }
+    .send-message-btn{
+        width: 13%;
+        background-color: #3d3d3d;
+        height: 35px;
+        padding-left: 3%;
+        border: none;
+        margin-left: 5%;
+
+    }
+    .message-box{
+        width: 90%;
+        background-color: #3d3d3d;
+        height: 35px;
+        border: none;
+        color: white;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 </style>
 
@@ -141,10 +169,17 @@
             
         </div>
         
+        <div class="chat-messages">
 
-        <textarea class="messageBox" placeholder="Type message.." name="msg" required></textarea>
-
-        <button type="submit" class="btn">Send</button>
+        </div>
+        <div class="send-message-container">
+            @* <textarea class="messageBox" placeholder="Type message.." name="msg" required></textarea> *@
+            <input placeholder="Message..." type="text" class="message-box">
+            <button type="submit" class="send-message-btn">
+                <RadzenIcon Style="font-size:22px; color: green; justify-self: flex-end; padding-top: 10px;"  Icon="chat" />
+            </button>
+        </div>
+        
         
     </form>
 </div>
