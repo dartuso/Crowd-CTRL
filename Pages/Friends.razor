@@ -52,7 +52,6 @@
     }
     .friend-actions{
         margin-left: auto;
-        @* display: inline-block; *@
     }
     .friend-action-button{
         display: inline-block;
@@ -80,7 +79,7 @@
 <div class="main-friend-search-container">
     <div class="search-container">
         <EditForm style="display: flex; justify-content: center;" Model="@friend" OnSubmit=@FormSubmitted>
-            <InputText placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 89%; color: white; background-color: #4d4d4d;" @bind-Value="friend.Username" /> 
+            <InputText placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 89%; color: white; background-color: #4d4d4d; padding-left: 10px;" @bind-Value="friend.Username" /> 
             <div style="text-align: center">
                 <button class="btn btn-primary">Search</button>
             </div>
