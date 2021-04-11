@@ -12,6 +12,11 @@
         margin-top: 10px;
         height: 180px;
         width: 180px;
+        border-radius: 50%;
+    }
+
+    .row{
+        margin-bottom: 1%;
     }
 
     button{
@@ -27,10 +32,12 @@
 
 <div class="container">
     <h1>Your profile settings</h1>
-    <div class="row">
+    <div class="row" style="margin-bottom: 1%;">
         <div class="col">
             <img src="@Program.User.ProfilePicture" class="pic" alt="Profile Picture"/>
-            @*<div><button class="btn btn-primary">Change profile picture</button></div>*@
+            <div style="display: flex;justify-content: center;">
+                <button class="btn btn-primary" @onclick="UpdateProfile">Change profile picture</button>
+            </div>
         </div>
         <div class="col">
             <h1>@Program.User.Username</h1>
@@ -44,21 +51,11 @@
         <div class="col">
             <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdateBio">
                 <h4>Update Bio</h4>
-                @Program.User.Bio
                 <InputText @bind-Value="@_updateUser.Bio" placeholder="Update bio" rows="3" class="form-control inputStyling"/>
                 <button type="submit" class="btn btn-primary">Update Bio</button>
             </EditForm>
-        </div>
-        <div class="col-2">
-            <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdatePassword">
-                <h4>Update password</h4>
-                <div>
-                    <InputText @bind-Value="@CurrentPass" type="password" placeholder="Current password" class="form-control inputStyling" CssClass="form-control"/>
-                    <InputText @bind-Value="@NewPass" type="password" placeholder="New password" class="form-control inputStyling" CssClass="form-control"/>
-                    <InputText @bind-Value="@ConfirmPass" type="password" placeholder="Confirm password" class="form-control inputStyling" CssClass="form-control"/>
-                </div>
-                <button type="submit" class="btn btn-primary">Update password</button>
-            </EditForm>
+            <h3>Current Bio:</h3>
+            @Program.User.Bio
         </div>
         <div class="col">
             <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdatePlatforms">
@@ -87,18 +84,32 @@
                 {
                     <div class="row">
                         <div class="col">
-                            @game
-                        </div>
-                        <div class="col">
-                            <button>
-                                <span class="oi oi-trash" style="color: white" @onclick="() => DeleteGame(game)" ></span>
+                            <button class="btn btn-primary">
+                                <span class="oi oi-trash" style="color: white" @onclick="() => DeleteGame(game)"></span>
                             </button>
+                            @game
                         </div>
                     </div>
                 }
             </div>
         </div>
+
     </div>
+    <div class="row">
+        <div class="col">
+            <EditForm Model="_updateUser" OnValidSubmit="@HandleUpdatePassword">
+                <h4>Update password</h4>
+                <div>
+                    <InputText @bind-Value="@CurrentPass" type="password" placeholder="Current password" class="form-control inputStyling" CssClass="form-control"/>
+                    <InputText @bind-Value="@NewPass" type="password" placeholder="New password" class="form-control inputStyling" CssClass="form-control"/>
+                    <InputText @bind-Value="@ConfirmPass" type="password" placeholder="Confirm password" class="form-control inputStyling" CssClass="form-control"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Update password</button>
+            </EditForm>
+        </div>
+        <div class="col-9"></div>
+    </div>
+
     <a href="/Home" class="btn btn-primary" style="margin-left: 80%;">Go to home page</a>
 </div>
 
@@ -229,6 +240,11 @@
     private void DeleteGame(string game)
     {
         Program.User.Games.Remove(game);
+    }
+
+    private void UpdateProfile()
+    {
+        Program.User.ProfilePicture = new Friend().ProfilePicture;
     }
 
 }
