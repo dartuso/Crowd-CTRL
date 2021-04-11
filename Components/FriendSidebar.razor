@@ -32,7 +32,7 @@
     <div class="SidebarHeader">
         <h2>Friends</h2>
     </div>
-    @foreach (var friend in Program.Friends)
+    @foreach (var friend in Program.Friends.FindAll(user => user.isFriend))
     {
         <div class="friend" @onclick="() => UserNavigate(friend.Username)">
             <div class="row">
