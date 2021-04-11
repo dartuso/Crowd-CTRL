@@ -1,10 +1,12 @@
 ﻿@page "/friends"
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
+@using Crowd_CTRL.Pages
+@using Shared
 @* @using Components *@
 <Crowd_CTRL.Shared.ConfirmModal @ref="ConfirmModal"></Crowd_CTRL.Shared.ConfirmModal>
 <Crowd_CTRL.Shared.ChatBox @ref="ChatBox"></Crowd_CTRL.Shared.ChatBox>
-@using System.Collections.Generic;
+
 
 <style>
     .main-friend-search-container{
@@ -78,7 +80,7 @@
 <div class="main-friend-search-container">
     <div class="search-container">
         <EditForm style="display: flex; justify-content: center;" Model="@friend" OnSubmit=@FormSubmitted>
-            <InputText placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 89%; color: white; background-color: #4d4d4d;" @bind-Value="friend.Name" /> 
+            <InputText placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 89%; color: white; background-color: #4d4d4d;" @bind-Value="friend.Username" /> 
             <div style="text-align: center">
                 <button class="btn btn-primary">Search</button>
             </div>
@@ -90,7 +92,7 @@
     
     <div class="search-results-container">
         @* Not searching for friends *@
-        @if (@friend.Name == ""){
+        @if (@friend.Username == ""){
             <div class="res-list">
                 <div class="friend-item">
                     <div style="display: inline-flex;">
@@ -318,11 +320,11 @@
             </div>
         }
         @* When the user tries to search something *@
-        @if(@friend.Name != ""){
+        @if(@friend.Username != ""){
             <div class="res-list">
                 <div class="friend-item" style="width: 90%; align-self: center;">
                     <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Style="font-size:35px;" Icon="account_circle"/></div>
-                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="@friend.Name" />
+                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="@friend.Username" />
                     
                     <div class="friend-actions">
                         @if (friendRequested)
@@ -394,13 +396,11 @@
 </div>
 
 @code{
-    
+    ConfirmModal ConfirmModal { get; set; }
 
-    private Crowd_CTRL.Shared.ConfirmModal ConfirmModal { get; set; }
+    private Friend friend = new();
 
-    private Crowd_CTRL.Friend friend = new Crowd_CTRL.Friend("");
-
-    private Crowd_CTRL.Shared.ChatBox ChatBox {get; set; }
+    ChatBox ChatBox {get; set; }
 
 
     string resTitle = "My Friends";
