@@ -1,0 +1,101 @@
+@namespace Components
+@inject NavigationManager NavigationManager
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:black">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="() => Close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            @if (inputType == 0)
+            {
+                <div class="modal-body">
+                    <p style="color:black">The clan name is valid!</p>
+                </div>
+            }
+            else if (inputType == 1)
+            {
+                <div class="modal-body">
+                    <p style="color:black">The clan name cannot be empty!</p>
+                </div>
+            }
+            else
+            {
+                <div class="modal-body">
+                    <p style="color:black">The clan name already exists!</p>
+                </div>
+            }
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" @onclick="() => Close()">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade @ModalClass" style="display: @ModalDisplay"></div>
+}
+
+
+@code {
+
+    public string clanName { get; set; } = "";
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+    public int inputType;   // 0: valid 1: empty 2: duplicate
+
+    public async Task Open()
+    {
+        string[] currentClanNames =
+        {
+            "Wutang Squad",
+            "Apex Hunters",
+            "H1Z1_E_lite_",
+            "pubg_alphaSquad",
+            "_LosSantos_Epic_",
+            "Fall_guys",
+            "Wh4ck4Gnome",
+            "CCTechSupport",
+            "FridaysLeagueGamers",
+            "NeverOverOverwatch",
+            "WDCamperPatrol",
+            "ApexGamingTeam"
+        };
+
+
+        if (String.IsNullOrEmpty(clanName))
+        {
+            inputType = 1;
+        }
+        else if (Array.IndexOf(currentClanNames, clanName) > -1)
+        {
+            inputType = 2;
+        }
+        else
+        {
+            inputType = 0;
+        }
+
+        ModalDisplay = "block;";
+        await Task.Delay(100);//Delay allows bootstrap to perform nice fade animation
+        ModalClass = "show";
+        StateHasChanged();
+    }
+
+    public async Task Close()
+    {
+        ModalClass = "";
+        await Task.Delay(250);
+        ModalDisplay = "none;";
+        StateHasChanged();
+    }
+}

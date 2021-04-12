@@ -409,14 +409,6 @@
     {
         // It is not implemented since we do not cover it in the Figma
     }
-    async Task leaveClan()
-    {
-        await JsRuntime.InvokeVoidAsync("leaveClanConfirmation");
-        // In demo, we assume that the user will leave the clan, then the user will be re-directed to the homepage
-        // Since it is a fake feature, the user won't leave the clan actually
-        NavigationManager.NavigateTo("home");
-    }
-
     async Task chatSend()
     {
         await JsRuntime.InvokeVoidAsync("appendMsg", "inputbox", "chat-list");

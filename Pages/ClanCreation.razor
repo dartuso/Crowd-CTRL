@@ -2,6 +2,11 @@
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
+@using Components
+
+<ModalClanCreate @ref="Modal1"></ModalClanCreate>
+<ModalClanNameCheck @ref="Modal2"></ModalClanNameCheck>
+
 
 <div class="main-content">
     <!--!-->
@@ -140,9 +145,8 @@
                 </div>
                 <div class="type-info">
                     <div class="type-name">
-                        <input id="clanNameTextBox" type="text" placeholder="Enter your clan name here ...">
-                        <!-- <button class="btn btn-primary" @onclick="clanNameCheck">Check Clan Name</button> -->
-                        <button class="btn btn-primary" @onclick="() => { }">Check Clan Name</button>
+                        <input id="clanNameTextBox" type="text" placeholder="Enter your clan name here ..." @bind="Modal2.clanName">
+                        <button class="btn btn-primary"  @onclick="()=>Modal2.Open()">Check Clan Name</button>
                     </div>
                     <div class="type-size">
                         <input id="clanSizeTextBox" type="text" placeholder="Enter your size of clan here ...">
@@ -162,7 +166,7 @@
                 <textarea name="" id="" placeholder="Tell the world about the purpose or stories of your clan ..."></textarea>
             </div>
             <div>
-                <button class="btn btn-primary" id="next-button" @onclick="createClan">Create</button>
+                <button class="btn btn-primary" id="next-button" @onclick="() => Modal1.Open()">Create</button>
             </div>
         </div>
     </div>
@@ -171,6 +175,9 @@
 
 
 @code {
+
+    public ModalClanCreate Modal1 { get; set; }
+    public ModalClanNameCheck Modal2 { get; set; }
 
     // The clan name cannot be empty or duplicated
     async Task clanNameCheck()
