@@ -1,11 +1,9 @@
 ﻿@page "/friends"
-@layout Shared.SocialLayout
-@inject NavigationManager NavigationManager
 @using Shared
+@layout SocialLayout
 @using Crowd_CTRL.Pages
 <ConfirmModal @ref="ConfirmModal"></ConfirmModal>
 <ChatBox @ref="ChatBox"></ChatBox>
-
 
 <style>
     .main-friend-search-container{
@@ -91,7 +89,7 @@
         <EditForm style="display: flex; justify-content: center;" Model="@friend">
             <InputText placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 89%; color: white; background-color: #4d4d4d;" @bind-Value="friend.Username"/>
             <div style="text-align: center">
-                <button class="btn btn-primary" @onclick="@changedFriendRequestedStatus">Search</button>
+                <button class="btn btn-primary">Search</button>
             </div>
         </EditForm>
     </div>
@@ -150,17 +148,19 @@
                     <div style="padding-right: 10px; padding-left: 10px;">
                         <img src="@friend.ProfilePicture" alt="@friend.Username's profile picture" class="pic"/>
                     </div>
-                    <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text="@friend.Username"/>
+                    <a style="color: white" href="/profile/@friend.Username">
+                        <h2>@friend.Username</h2>
+                    </a>
                     <div class="friend-actions">
                         @if (friendRequested)
                         {
-                            <button class="btn btn-light" @onclick="changedFriendRequestedStatus">
+                            <button class="btn btn-light" @onclick="DeleteFriend">
                                 Request Sent!
                             </button>
                         }
                         else
                         {
-                            <button class="btn btn-primary" @onclick="changedFriendRequestedStatus">
+                            <button class="btn btn-primary" @onclick="RequestFriend">
                                 Add Friend
                             </button>
                         }
@@ -180,9 +180,11 @@
                         <div style="padding-right: 10px; padding-left: 10px;">
                             <img src="@potentialFriend.ProfilePicture" alt="@potentialFriend.Username's profile picture" class="pic"/>
                         </div>
-                        <RadzenLink style="color: white; font-size:20px;" Path="user_profile" Text=@potentialFriend.Username/>
+                        <a style="color: white" href="/profile/@potentialFriend.Username">
+                            <h2>@potentialFriend.Username</h2>
+                        </a>
                         <div class="friend-actions">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" @onclick="() => AddFriend(potentialFriend)" >
                                 Add Friend
                             </button>
                         </div>
@@ -203,29 +205,28 @@
 
     bool friendRequested = false;
 
-    private void UserNavigate(string username)
+    void AddFriend(Friend newFriend)
     {
-        NavigationManager.NavigateTo("profile/" + username);
+        newFriend.isFriend = true;
+    }
+    
+    private void RequestFriend()
+    {
+        friend.isFriend = true;
+        Program.Friends.Add(friend);
+        friend = new("");
+        friendRequested = true;
+        StateHasChanged();
     }
 
-    private void changedFriendRequestedStatus()
+    private void DeleteFriend()
     {
-        if (friendRequested)
+        var index = Program.Friends.FindIndex(user => user.Username == friend.Username);
+        if (index != -1)
         {
-            friendRequested = false;
-            friend.isFriend = true;
-            Program.Friends.Add(friend);
-            friend = new("");
+            Program.Friends.RemoveAt(index);
         }
-        else
-        {
-            friendRequested = true;
-            var index = Program.Friends.FindIndex(user => user.Username == friend.Username);
-            if (index != -1)
-            {
-                Program.Friends.RemoveAt(index);
-            }
-        }
+        friendRequested = false;
         StateHasChanged();
     }
 
