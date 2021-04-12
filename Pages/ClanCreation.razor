@@ -6,6 +6,9 @@
 
 <ModalClanCreate @ref="Modal1"></ModalClanCreate>
 <ModalClanNameCheck @ref="Modal2"></ModalClanNameCheck>
+<ModalClanGameCheck @ref="Modal3"></ModalClanGameCheck>
+<ModalClanTagCheck @ref="Modal4"></ModalClanTagCheck>
+<ModalClanSizeCheck @ref="Modal5"></ModalClanSizeCheck>
 
 
 <div class="main-content">
@@ -146,19 +149,19 @@
                 <div class="type-info">
                     <div class="type-name">
                         <input id="clanNameTextBox" type="text" placeholder="Enter your clan name here ..." @bind="Modal2.clanName">
-                        <button class="btn btn-primary"  @onclick="()=>Modal2.Open()">Check Clan Name</button>
+                        <button class="btn btn-primary"  @onclick="() => Modal2.Open()">Check Clan Name</button>
                     </div>
                     <div class="type-size">
-                        <input id="clanSizeTextBox" type="text" placeholder="Enter your size of clan here ...">
-                        <button class="btn btn-primary" @onclick="clanSizeCheck">Check Clan Size</button>
+                        <input id="clanSizeTextBox" type="text" placeholder="Enter your size of clan here ..." @bind="Modal5.clanSize">
+                        <button class="btn btn-primary" @onclick="() => Modal5.Open()">Check Clan Size</button>
                     </div>
                     <div class="type-game">
-                        <input id="clanGameTextBox" type="text" placeholder="Enter your clan game here ...">
-                        <button class="btn btn-primary" @onclick="clanGameCheck">Check Clan Game</button>
+                        <input id="clanGameTextBox" type="text" placeholder="Enter your clan game here ..." @bind="Modal3.clanGame">
+                        <button class="btn btn-primary" @onclick="() => Modal3.Open()">Check Clan Game</button>
                     </div>
                     <div class="type-text">
-                        <input id="clanTagTextBox" type="text" placeholder="Enter your clan tag here ...">
-                        <button class="btn btn-primary" @onclick="clanTagCheck">Check Clan Tag</button>
+                        <input id="clanTagTextBox" type="text" placeholder="Enter your clan tag here ..." @bind="Modal4.clanTag">
+                        <button class="btn btn-primary" @onclick="() => Modal4.Open()">Check Clan Tag</button>
                     </div>
                 </div>
             </div>
@@ -175,35 +178,9 @@
 
 
 @code {
-
-    public ModalClanCreate Modal1 { get; set; }
-    public ModalClanNameCheck Modal2 { get; set; }
-
-    // The clan name cannot be empty or duplicated
-    async Task clanNameCheck()
-    {
-        //await JsRuntime.InvokeVoidAsync("clanNameCheck", "clanNameTextBox");
-        await JsRuntime.InvokeVoidAsync("clanNameCheck", "myModal");
-    }
-    // The clan size must be an integer between 1 and 100
-    async Task clanSizeCheck()
-    {
-        await JsRuntime.InvokeVoidAsync("clanSizeCheck", "clanSizeTextBox");
-    }
-    // The clan game cannot be empty
-    async Task clanGameCheck()
-    {
-        await JsRuntime.InvokeVoidAsync("clanGameCheck", "clanGameTextBox");
-    }
-    // The clan tag cannot be empty
-    async Task clanTagCheck()
-    {
-        await JsRuntime.InvokeVoidAsync("clanTagCheck", "clanTagTextBox");
-    }
-
-    // Fake button to create the clan, it will show an alert and redirectly the user to the homepage instead
-    async Task createClan()
-    {
-        await JsRuntime.InvokeAsync<string>("createAlert", "Clan created successfully!");
-        NavigationManager.NavigateTo("home");
-    } }
+    public ModalClanCreate Modal1 { get; set; } = new();
+    public ModalClanNameCheck Modal2 { get; set; } = new();
+    public ModalClanGameCheck Modal3 { get; set; } = new();
+    public ModalClanTagCheck Modal4 { get; set; } = new();
+    public ModalClanSizeCheck Modal5 { get; set; } = new();
+}
