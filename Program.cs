@@ -42,5 +42,7 @@ namespace Crowd_CTRL
             new ("GameIcon\\league.png","", "", "Your Clan “League Warriors” just joined the  “LCS Fall 2020” tournament!"),
             new ("GameIcon\\overwatch.png","", "", "Vector91831 is playing Overwatch! - Playing “Competitive” - 20m")
         };
+        
+        public static List<Post> chatPosts = new();
     }
 }

@@ -2,6 +2,8 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
 @using Components  
+@using Crowd_CTRL.Pages
+@using System.Reflection.Metadata
 
 <ModalClanLeaveConfirm @ref="Modal"></ModalClanLeaveConfirm>
 
@@ -265,7 +267,7 @@
                                             Vector91831
                                         </div>
                                         <div class="chat-info-date" style="color:gray">
-                                            04-01-2021
+                                            04/01/2021
                                         </div>
                                     </div>
                                     <div>Happy April Fool!</div>
@@ -282,7 +284,7 @@
                                             ElfenRampage
                                         </div>
                                         <div class="chat-info-date" style="color:gray">
-                                            04-03-2021
+                                            04/03/2021
                                         </div>
                                     </div>
                                     <div>Anyone tried that resident evil 8 demo? Holy, scared the shit out of me</div>
@@ -299,7 +301,7 @@
                                             Vector91831
                                         </div>
                                         <div class="chat-info-date" style="color:gray">
-                                            04-03-2021
+                                            04/03/2021
                                         </div>
                                     </div>
                                     <div>You mean the newest one? Yeah, I saw it on Twitch. When will it release? The end of the year?</div>
@@ -316,7 +318,7 @@
                                             ElfenRampage
                                         </div>
                                         <div class="chat-info-date" style="color:gray">
-                                            04-03-2021
+                                            04/03/2021
                                         </div>
                                     </div>
                                     <div>I think it will release on May. Problem is that I am still waiting for my PS5, xxx those scalpers during this pendamic, you still have to wait for a long time to get the console.</div>
@@ -333,7 +335,7 @@
                                             Vector91831
                                         </div>
                                         <div class="chat-info-date" style="color:gray">
-                                            04-03-2021
+                                            04/03/2021
                                         </div>
                                     </div>
                                     <div>I feel you. And i also heard that ps5's controller has some serious issues. So maybe it is not too bad to be patient wait for the second or the third batch of the product.</div>
@@ -350,7 +352,7 @@
                                             ElfenRampage
                                         </div>
                                         <div class="chat-info-date" style="color:gray">
-                                            04-03-2021
+                                            04/03/2021
                                         </div>
                                     </div>
                                     <div>It's all about product quality control.
@@ -370,7 +372,7 @@
                                             HotRedRubik
                                         </div>
                                         <div class="chat-info-date" style="color:gray">
-                                            04-07-2021
+                                            04/07/2021
                                         </div>
                                     </div>
                                     <div>
@@ -378,14 +380,33 @@
                                     </div>
                                 </div>
                             </li>
-
-
+                            @foreach (Post chat in Program.chatPosts)
+                            {
+                                <li>
+                                    <div class="avatar">
+                                        <div><img src="@Program.User.ProfilePicture" style="width:80px; border-radius: 50%"/></div>
+                                    </div>
+                                    <div class="chat-info">
+                                        <div>
+                                            <div class="chat-info-name" style="color:rgb(82,128,255)">
+                                                @Program.User.Username
+                                            </div>
+                                            <div class="chat-info-date" style="color:gray">
+                                                @chat.PostedDate.ToShortDateString()
+                                            </div>
+                                        </div>
+                                        <div>
+                                            @chat.Text
+                                        </div>
+                                    </div>
+                                </li>
+                            }
                         </ul>
                     </div>
 
                     <div class="inputbox">
-                        <textarea name="" id="inputbox" cols="30" rows="10" placeholder="Start chatting by typing here ..."></textarea>
-                        <button id="chat-send" @onclick="chatSend">SEND</button>
+                        <textarea name="" id="inputbox" cols="30" rows="10" placeholder="Start chatting by typing here ..." @bind="postText"></textarea>
+                        <button id="chat-send" @onclick="AddPost">SEND</button>
                     </div>
 
                 </div>
@@ -399,6 +420,9 @@
 
 @code
 {
+    string postText = "";
+    
+    
     private ModalClanLeaveConfirm Modal { get; set; }
 
     private void checkClanInfo()
@@ -412,5 +436,15 @@
     async Task chatSend()
     {
         await JsRuntime.InvokeVoidAsync("appendMsg", "inputbox", "chat-list");
+    }
+
+    private void AddPost()
+    {
+        Post newPost = new Post();
+        newPost.Text = postText;
+        newPost.PostedDate = DateTime.Now;
+        
+        Program.chatPosts.Add(newPost);
+        postText = "";
     }
 }
