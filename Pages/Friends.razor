@@ -1,9 +1,12 @@
 ﻿@page "/friends"
-@using Shared
-@layout SocialLayout
+@layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
 @using Crowd_CTRL.Pages
-<ConfirmModal @ref="ConfirmModal"></ConfirmModal>
-<ChatBox @ref="ChatBox"></ChatBox>
+@* @using Shared *@
+@using Components
+<Crowd_CTRL.Shared.ConfirmModal @ref="ConfirmModal"></Crowd_CTRL.Shared.ConfirmModal>
+<Crowd_CTRL.Shared.ChatBox @ref="ChatBox"></Crowd_CTRL.Shared.ChatBox>
+
 
 <style>
     .main-friend-search-container{
@@ -20,11 +23,14 @@
         justify-content: center;
     }
     .search-results-container{
-        height: 90%;
+        min-height: 50%;
         background-color: rgba(255,255,255,0.05);
         display: flex;
         align-items: center;
         justify-content: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+
     }
     form{
         width: 100%;
@@ -37,7 +43,7 @@
         align-items: flex-start;
     }
     hr{
-        color: white;
+        color: #878787;
         background-color: white;
         width: 100%;
     }
@@ -69,24 +75,16 @@
         align-items: flex-end;
         display: flex;
     }
-    
-    .padding{
-        padding-top: 2.5%; 
-        padding-left:4%;
-    }
-    
     .pic{
         border-radius: 50%;
-        width: 48px;
-        height: 48px;
+        width: 35px;
+        height: 35px;
     }
 </style>
 
 <h1 style="text-align: center;">FRIENDS</h1>
 <div class="main-friend-search-container">
     <div class="search-container">
-        <EditForm style="display: flex; justify-content: center;" Model="@friend">
-            <InputText placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 89%; color: white; background-color: #4d4d4d;" @bind-Value="friend.Username"/>
         <EditForm style="display: flex; justify-content: center;" Model="@friend" OnSubmit=@FormSubmitted>
             <InputText placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 89%; color: white; background-color: #4d4d4d; padding-left: 10px;" @bind-Value="friend.Username" /> 
             <div style="text-align: center">
@@ -94,26 +92,26 @@
             </div>
         </EditForm>
     </div>
-
-    @if (@friend.Username == "")
-    {
-        <div class="list-header">
-            <h2>My Friends</h2>
-        </div>
-        <div class="search-results-container">
+    <div class="list-header">
+        <h2>@resTitle</h2>
+    </div>
+    
+    <div class="search-results-container">
+        @* Not searching for friends *@
+        @if (@friend.Username == ""){
             <div class="res-list">
                 @foreach (var listFriend in Program.Friends.FindAll(fr => fr.isFriend))
                 {
                     <div class="friend-item">
-                        <div style="display: inline-flex;">
-                            <button class="friend-action-button padding" title="Chat" @onclick='() => ChatBox.StartChat(listFriend.Username)'>
+                        <div style="display: inline-flex; align-items: center;">
+                            <button class="friend-action-button" style="padding-top: 4px;" title="Chat" @onclick='() => ChatBox.StartChat(listFriend.Username)'>
                                 <RadzenIcon Style="font-size:24px; color: white; justify-self: flex-end;" Icon="chat"/>
                             </button>
                             <div style="padding-right: 10px; padding-left: 10px;">
                                 <img src="@listFriend.ProfilePicture" alt="@listFriend.Username's profile picture" class="pic"/>
                             </div>
-                            <a style="color: white" href="/profile/@listFriend.Username">
-                                <h2>@listFriend.Username</h2>
+                            <a style="color: white; font-size:20px;" href="/profile/@listFriend.Username">
+                                @listFriend.Username
                             </a>
                         </div>
                         <div class="friend-actions">
@@ -134,16 +132,11 @@
                     </div>
                     <hr>
                 }
+
             </div>
-        </div>
-    }
-    @* When the user tries to search something *@
-    @if (@friend.Username != "")
-    {
-        <div class="list-header">
-            <h2>Friend Search</h2>
-        </div>
-        <div class="search-results-container">
+        }
+        @* When the user tries to search something *@
+        @if(@friend.Username != ""){
             <div class="res-list">
                 <div class="friend-item" style="width: 90%; align-self: center;">
                     <div style="padding-right: 10px; padding-left: 10px;">
@@ -173,6 +166,7 @@
                         <h2>Others you may know</h2>
                         <h4>(based on past games played and common friends)</h4>
                     </div>
+                    
                 </div>
                 <br>
                 @foreach (var potentialFriend  in Program.Friends.FindAll(user => !user.isFriend))
@@ -193,8 +187,10 @@
                     <hr>
                 }
             </div>
-        </div>
-    }
+        }
+        
+    </div>
+
 </div>
 
 @code{
@@ -202,9 +198,49 @@
 
     private Friend friend = new("");
 
-    ChatBox ChatBox { get; set; }
+    ChatBox ChatBox {get; set; }
+
+
+    string resTitle = "My Friends";
 
     bool friendRequested = false;
+
+    private Dictionary<string, string> friendMutedStatus = new Dictionary<string, string>();
+
+    @* Things are likely going to change here with this friends array and how it is populated *@
+    @* and functions, so bear that in mine*@
+
+    Task initFriendsDict()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            friendMutedStatus.Add(("Friend " + (i+1)), "notifications_active");
+        }
+        return Task.CompletedTask;
+    }
+    protected override async Task OnInitializedAsync(){
+        await initFriendsDict();
+    }
+
+    
+    private void FormSubmitted()
+    {
+        resTitle = "Friend Search";
+        
+    }
+    private void UserProfileNavigate()
+    {
+        NavigationManager.NavigateTo("user_profile");
+    }
+
+    private void changeMutedStatus(string FName){
+        if(friendMutedStatus[FName].Equals("notifications_active")){
+            friendMutedStatus[FName] = "notifications_off";
+        }
+        else{
+            friendMutedStatus[FName] = "notifications_active";
+        }
+    }
 
     void AddFriend(Friend newFriend)
     {
@@ -216,7 +252,6 @@
         friend.isFriend = true;
         Program.Friends.Add(friend);
         friend = new("");
-        friendRequested = true;
         StateHasChanged();
     }
 
