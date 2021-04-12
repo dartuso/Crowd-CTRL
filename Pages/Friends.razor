@@ -77,8 +77,8 @@
     }
     .pic{
         border-radius: 50%;
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
     }
     .search-box{
         width: 89%;
@@ -144,19 +144,22 @@
                             <a style="color: white; font-size:20px;" href="/profile/@listFriend.Username">
                                 @listFriend.Username
                             </a>
+                            @if (!@listFriend.isNotify){
+                                <RadzenIcon Style="font-size:25px; color: #993B27; padding-top:3%;" Icon="notifications_off" />
+                            }
                         </div>
                         <div class="friend-actions">
                             <button class="friend-action-button" title="Remove friend" @onclick='() => ConfirmModal.Open(listFriend.Username)'>
                                 <RadzenIcon Style="font-size:32px; color: red;" Icon="clear"/>
                             </button>
                             <button class="friend-action-button" title="Mute notifications" @onclick='() => { listFriend.isNotify = !listFriend.isNotify; }'>
-                                @if (!@listFriend.isNotify)
+                                @if (@listFriend.isNotify)
                                 {
-                                    <RadzenIcon Style="font-size:31px; color: red;" Icon="notifications_off"/>
+                                    <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
                                 }
                                 else
                                 {
-                                    <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_active"/>
+                                    <RadzenIcon Style="font-size:31px; color: green;" Icon="notifications_active" />
                                 }
                             </button>
                         </div>
@@ -173,8 +176,8 @@
                     <div style="padding-right: 10px; padding-left: 10px;">
                         <img src="@friend.ProfilePicture" alt="@friend.Username's profile picture" class="pic"/>
                     </div>
-                    <a style="color: white" href="/profile/@friend.Username">
-                        <h2>@friend.Username</h2>
+                    <a style="color: white; font-size:20px;" href="/profile/@friend.Username">
+                        @friend.Username
                     </a>
                     <div class="friend-actions">
                         @if (friendRequested)
@@ -206,8 +209,8 @@
                         <div style="padding-right: 10px; padding-left: 10px;">
                             <img src="@potentialFriend.ProfilePicture" alt="@potentialFriend.Username's profile picture" class="pic"/>
                         </div>
-                        <a style="color: white" href="/profile/@potentialFriend.Username">
-                            <h2>@potentialFriend.Username</h2>
+                        <a style="color: white; font-size:20px;" href="/profile/@potentialFriend.Username">
+                            @potentialFriend.Username
                         </a>
                         <div class="friend-actions">
                             <button class="btn btn-primary" @onclick="() => AddFriend(potentialFriend)" >
@@ -237,24 +240,6 @@
     bool friendRequested = false;
 
     bool onSearchPage = false;
-
-    private Dictionary<string, string> friendMutedStatus = new Dictionary<string, string>();
-
-    @* Things are likely going to change here with this friends array and how it is populated *@
-    @* and functions, so bear that in mine*@
-
-    Task initFriendsDict()
-    {
-        for (int i = 0; i < 7; i++)
-        {
-            friendMutedStatus.Add(("Friend " + (i+1)), "notifications_active");
-        }
-        return Task.CompletedTask;
-    }
-    protected override async Task OnInitializedAsync(){
-        await initFriendsDict();
-    }
-
     
     private void FormSubmitted()
     {
@@ -273,19 +258,6 @@
     private void backToFriends(){
         friend.Username = "";
         FormSubmitted();
-    }
-    private void UserProfileNavigate()
-    {
-        NavigationManager.NavigateTo("user_profile");
-    }
-
-    private void changeMutedStatus(string FName){
-        if(friendMutedStatus[FName].Equals("notifications_active")){
-            friendMutedStatus[FName] = "notifications_off";
-        }
-        else{
-            friendMutedStatus[FName] = "notifications_active";
-        }
     }
 
     void AddFriend(Friend newFriend)
