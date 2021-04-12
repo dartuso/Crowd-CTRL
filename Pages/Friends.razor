@@ -80,18 +80,49 @@
         width: 35px;
         height: 35px;
     }
+    .search-box{
+        width: 89%;
+        color: white;
+        background-color: #4d4d4d;
+        padding-left: 10px;
+        border: 0;
+        border-radius: 10px;
+    }
 </style>
 
 <h1 style="text-align: center;">FRIENDS</h1>
-<div class="main-friend-search-container">
-    <div class="search-container">
-        <EditForm style="display: flex; justify-content: center;" Model="@friend" OnSubmit=@FormSubmitted>
-            <InputText placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 89%; color: white; background-color: #4d4d4d; padding-left: 10px;" @bind-Value="friend.Username" /> 
+@* This is the search box that appears on the search page, has an extra back button *@
+@if(onSearchPage){
+<div style="width: 100%; display: flex; justify-content:center; padding-bottom:3%; padding-top:10px;">
+    <div style="width: 80%; display:inline-flex;">
+        @* Extra button to go back to the original friends view page *@
+        <button @onclick="() => backToFriends()" title="Back to My Friends" class="friend-action-button" style="margin-left:auto; padding-right: 20px; width: 50px;">
+            <RadzenIcon Icon="arrow_back" style="font-size:32px; color: white; padding-top: 10px;"/>
+        </button>
+        <EditForm style="display: flex; justify-content: left;" Model="@friend" OnSubmit=@FormSubmitted>
+            <DataAnnotationsValidator/>
+            <InputText class="search-box" placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 90%;" @bind-Value="friend.Username" /> 
             <div style="text-align: center">
                 <button class="btn btn-primary">Search</button>
             </div>
         </EditForm>
     </div>
+</div>
+}
+
+<div class="main-friend-search-container">
+    @* This is the ssearch box that appears on the regular friends page *@
+    @if(!@onSearchPage){
+    <div class="search-container">
+        <EditForm style="display: flex; justify-content: center;" Model="@friend" OnSubmit=@FormSubmitted>
+            <DataAnnotationsValidator/>
+            <InputText class="search-box" placeholder="Search For Users" id="searchBox" name="searchBox" @bind-Value="friend.Username" /> 
+            <div style="text-align: center">
+                <button class="btn btn-primary">Search</button>
+            </div>
+        </EditForm>
+    </div>
+    }
     <div class="list-header">
         <h2>@resTitle</h2>
     </div>
@@ -205,6 +236,8 @@
 
     bool friendRequested = false;
 
+    bool onSearchPage = false;
+
     private Dictionary<string, string> friendMutedStatus = new Dictionary<string, string>();
 
     @* Things are likely going to change here with this friends array and how it is populated *@
@@ -225,8 +258,21 @@
     
     private void FormSubmitted()
     {
-        resTitle = "Friend Search";
+        if(friend.Username != ""){
+            resTitle = "Friend Search";
+            onSearchPage = true;
+        }
+        else{
+            resTitle = "My Friends";
+            onSearchPage = false;
+        }
+        StateHasChanged();
         
+    }
+
+    private void backToFriends(){
+        friend.Username = "";
+        FormSubmitted();
     }
     private void UserProfileNavigate()
     {
@@ -252,6 +298,7 @@
         friend.isFriend = true;
         Program.Friends.Add(friend);
         friend = new("");
+        onSearchPage = false;
         StateHasChanged();
     }
 
