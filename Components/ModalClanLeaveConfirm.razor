@@ -1,0 +1,63 @@
+@namespace Components
+@inject NavigationManager NavigationManager
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:black">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="() => Cancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="color:black">Are you sure to leave the clan?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Leave()">Leave</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade @ModalClass" style="display: @ModalDisplay"></div>
+}
+
+
+@code {
+
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+
+    public async Task Open()
+    {
+        ModalDisplay = "block;";
+        await Task.Delay(100);//Delay allows bootstrap to perform nice fade animation
+        ModalClass = "show";
+        StateHasChanged();
+    }
+
+    public async Task Cancel()
+    {
+        ModalClass = "";
+        await Task.Delay(250);
+        ModalDisplay = "none;";
+        StateHasChanged();
+    }
+
+    public async Task Leave()
+    {
+        ModalClass = "";
+        await Task.Delay(250);
+        ModalDisplay = "none;";
+        StateHasChanged();
+        // redirect to the homepage
+        NavigationManager.NavigateTo("home");
+    }
+}

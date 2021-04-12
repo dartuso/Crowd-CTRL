@@ -2,7 +2,9 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
 @inherits LayoutComponentBase
-@using Components
+@using Components  
+
+<Crowd-CTRL.Components.ModalClanLeaveConfirm @ref="Modal"></Crowd-CTRL.Components.ModalClanLeaveConfirm>
 
 <style>
     .flex {
@@ -245,7 +247,7 @@
                             <RadzenImage Path="Icons\search_white_48dp.svg" Style="width:30px;" />
                         </RadzenButton>
 
-                        <RadzenButton Click="leaveClan" class="abutton" Style="background-color:#ffffff00; margin-right:10px">
+                        <RadzenButton Click="() => Modal.Open()" class="abutton" Style="background-color:#ffffff00; margin-right:10px">
                             <RadzenImage Path="Icons\exit_to_app_white_48dp.svg" Style="width:30px;" />
                         </RadzenButton>
                     </div>
@@ -398,6 +400,10 @@
 
 @code
 {
+
+   
+    private Components.ModalClanLeaveConfirm Modal { get; set; }
+
     private void checkClanInfo()
     {
         NavigationManager.NavigateTo("claninfocheck");

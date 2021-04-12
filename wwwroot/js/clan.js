@@ -43,28 +43,32 @@ function isNumberValid(str, a, b) {
 
 // Check if the clan name is valid
 function clanNameCheck(id) {
-    let s = document.getElementById(id).value;
-    if (isStringEmpty(s)) {
-        alert("The clan name cannot be empty!");
+    var s = document.getElementById(id);
+    s.modal();
+}
+
+function clanNameCheck2(id) {
+    var s = document.getElementById(id);
+    if (isStringEmpty(s.value)) {
+        s.value = "The clan name cannot be empty!";
     }
-    else if (clanList.includes(s)) {
-        alert("The clan name already exists!");
-    }
-    else {
-        alert("The clan name is valid!");
+    else if (clanList.includes(s.value)) {
+        s.value = "The clan name already exists!";
     }
 }
 
 // Check if size of the clan is valid
 function clanSizeCheck(id) {
-    let s = document.getElementById(id).value;
-    if (isStringEmpty(s)) {
-        alert("The size of the clan cannot be empty!");
+    var s = document.getElementById(id);
+    var c = document.getElementById(id).style.color;
+    if (isStringEmpty(s.value)) {
+        s.value = "The size of the clan cannot be empty!";
+        s.style.color = "red";
     }
-    else if (!isNumber(s)) {
+    else if (!isNumber(s.value)) {
         alert("The size of the clan must be a integer!");
     }
-    else if (!isNumberValid(s, 1, 100)) {
+    else if (!isNumberValid(s.value, 1, 100)) {
         alert("The size of the clan cannot be larger than 100 or smaller than 1!");
     }
     else {
