@@ -1,0 +1,257 @@
+@* Chatbox adapted from code from here: https://www.w3schools.com/howto/howto_js_popup_chat.asp *@
+@using Crowd_CTRL.Pages
+<style>
+    {box-sizing: border-box;}
+
+    .chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15%;
+    z-index: 9;
+    }
+
+    /* Button used to open the chat form - fixed at the bottom of the page */
+    .open-button {
+    background-color: #555;
+    color: white;
+    padding: 10px 10px 40px 10px;
+    border: none;
+    position: fixed;
+    bottom: 0;
+    right: 15%;
+    width: 220px;
+    height: 0px;
+    }
+
+    /* The popup chat - hidden by default */
+    .form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    z-index: 9;
+    }
+
+    /* Add styles to the form container */
+    .form-container {
+    width: 300px;
+    padding: 10px;
+    background-color: #2e2e2e;
+    }
+
+    /* Full-width textarea */
+    .form-container textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    resize: none;
+    min-height: 200px;
+    }
+
+    /* When the textarea gets focus, do something */
+    .form-container textarea:focus {
+    background-color: #ddd;
+    outline: none;
+    }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+    background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+    }
+
+    .cancel-chat-btn {
+        display: inline-block;
+        height: 30px;
+        padding: 0;
+        margin: 0;
+        vertical-align: top;
+        width: 30px;
+        border-width: 0px;
+        background-color:#ffffff00;
+        align-items: center;
+        padding-top: 10%;
+    }
+    .name-display-btn{
+        background-color:#ffffff00;
+        color: white;
+        border-width: 0px;
+        opacity: 0.8;
+        width:150px;
+    }
+    .name-display-btn:hover{
+        background-color: #4D4D4D;
+    }
+    .min-chat-btn{
+        padding: 0;
+        margin: 0;
+        height: 30px;
+        width:30px;
+        border-width: 0px;
+        background-color:#ffffff00;
+    }
+    .chat-messages{
+        width: 100%;
+        background-color: #3d3d3d;
+        height: 200px;
+        display: flex;
+    }
+    .send-message-container{
+        display: inline-flex;
+        width: 100%;
+        padding-top: 10px;
+    }
+    .send-message-btn{
+        width: 13%;
+        background-color: #3d3d3d;
+        height: 35px;
+        padding-left: 3%;
+        border: none;
+        margin-left: 5%;
+
+    }
+    .message-box{
+        width: 90%;
+        background-color: #3d3d3d;
+        height: 35px;
+        border: none;
+        color: white;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .message-item{
+        padding: 5px 10px;
+        margin: 5px 5px 5px 5px;
+        border-radius: 10px;
+        background-color: #4D4D4D;
+        font-size: 15px;;
+    }
+</style>
+
+<div class="open-button" style="display:@chatButtonDisplay;">
+    <button @onclick="() => Open()" class="name-display-btn">
+        <div style="width: 100%; display: inline-flex; font-size:18px;">
+            @friendName
+        </div>
+    </button>
+    <div style="margin-left: auto;">
+        <button class="cancel-chat-btn" @onclick="() => CancelChat()">
+            <RadzenIcon Style="font-size:25px; color: red;" Icon="clear" />
+        </button>
+    </div>
+</div>
+
+
+
+<div class="chat-popup" id="myForm" style="display: @chatDisplay">
+    <form action="/action_page.php" class="form-container" @onsubmit="() => SendChat()">
+        <div style="display: inline-flex; width:100%;">
+            <h3>@friendName</h3>
+
+            <div style="margin-left: auto; display:inline-flex;">
+                <button type="button" class="min-chat-btn" @onclick="() => Close()">
+                    <RadzenIcon Style="font-size:24px; color: white;" Icon="keyboard_arrow_down" />
+                </button>
+                <button type="button" class="min-chat-btn" @onclick="() => CancelChat()">
+                    <RadzenIcon Style="font-size:24px; color: white;" Icon="clear" />
+                </button>
+            </div>
+            
+        </div>
+        
+        <div class="chat-messages">
+            @if (messageSent)
+            {
+                <div style="display:flex; flex-direction:column; width:100%; align-self: flex-end;">
+                    <div class="message-item" style="align-self: flex-end; background-color: #0C9CED;">
+                        @messageInBox
+                    </div>
+                    <div class="message-item" style="align-self: flex-start;">
+                        Hey! What's up?
+                    </div>
+                </div>
+            }
+            else{
+                <div style="width: 100%; color:#878787; font-size: 13px; text-align:center; padding-top: 10%;">
+                    No messages here yet...
+                </div>
+            }
+        </div>
+        <div class="send-message-container">
+            @* <textarea class="messageBox" placeholder="Type message.." name="msg" required></textarea> *@
+            <input id="message-to-send" placeholder="Message..." type="text" class="message-box" @bind-value="chatMessage">
+            <button type="submit" class="send-message-btn">
+                <RadzenIcon Style="font-size:22px; color: green; justify-self: flex-end; padding-top: 10px;"  Icon="chat" />
+            </button>
+        </div>
+        
+        
+    </form>
+</div>
+
+@code{
+    public Guid guid = Guid.NewGuid();
+    public Friend fr = new Friend("");
+    public string friendName;
+    public string chatDisplay = "none";
+    public string chatButtonDisplay="none";
+
+    public bool messageSent = false;
+
+    public string messageInBox = "";
+    public string chatMessage = "";
+
+    public void Open(){
+        chatDisplay = "block";
+        StateHasChanged();
+    }
+
+    public void Close(){
+        chatDisplay = "none";
+        StateHasChanged();
+    }
+
+    public void StartChat(String fName){
+        chatButtonDisplay = "inline-flex";
+        friendName = fName;
+        Open();
+        StateHasChanged();
+    }
+
+    public void CancelChat(){
+        chatButtonDisplay = "none";
+        chatDisplay = "none";
+        friendName = "";
+        messageSent = false;
+        chatMessage = "";
+        Close();
+        StateHasChanged();
+    }
+    public void SendChat(){
+        if(chatMessage != ""){
+            messageSent = true;
+            messageInBox = chatMessage;
+            chatMessage = "";
+            StateHasChanged();
+        }
+    }
+}
