@@ -6,11 +6,22 @@ namespace Crowd_CTRL.Pages
     public class Friend : User
     {
         public string Status { get; set; }
-
+        public bool isFriend { get; set; } = false;
+        public bool isNotify { get; set; } = true;
         public Friend(string username, string profilePicture)
         {
             Status = RandomStatus() + RandomGame();
             Username = username;
+            Bio = RandomBio();
+            Games = RandomGames();
+            Platforms = RandomPlatforms();
+            ProfilePicture = profilePicture;
+        }
+        public Friend(string username, bool friend)
+        {
+            Username = username;
+            isFriend = friend;
+            Status = RandomStatus() + RandomGame();
             Bio = RandomBio();
             Games = RandomGames();
             Platforms = RandomPlatforms();

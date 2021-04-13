@@ -1,7 +1,12 @@
 ﻿@page "/friends"
 @layout Shared.SocialLayout
 @inject NavigationManager NavigationManager
-@* @using Components *@
+@using Crowd_CTRL.Pages
+@* @using Shared *@
+@using Components
+<Crowd_CTRL.Shared.ConfirmModal @ref="ConfirmModal"></Crowd_CTRL.Shared.ConfirmModal>
+<Crowd_CTRL.Shared.ChatBox @ref="ChatBox"></Crowd_CTRL.Shared.ChatBox>
+
 
 <style>
     .main-friend-search-container{
@@ -18,11 +23,14 @@
         justify-content: center;
     }
     .search-results-container{
-        height: 90%;
+        min-height: 50%;
         background-color: rgba(255,255,255,0.05);
         display: flex;
         align-items: center;
         justify-content: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+
     }
     form{
         width: 100%;
@@ -35,134 +43,246 @@
         align-items: flex-start;
     }
     hr{
-        color: white;
+        color: #878787;
         background-color: white;
         width: 100%;
     }
     .friend-item{
         width: 100%;
         display: flex;
+        align-items: center;
 
     }
     .friend-actions{
         margin-left: auto;
     }
     .friend-action-button{
-        width: 30px;
+        display: inline-block;
         height: 30px;
+        padding: 0;
+        margin: 0;
+        vertical-align: top;
+        width: 30px;
+        border-width: 0px;
+        background-color:#ffffff00;
+        align-items: center;
     }
-    
+    .friend-search-other-prompt{
+        width: 95%;
+        align-self: center;
+        height: 35%;
+        justify-content: center;
+        align-items: flex-end;
+        display: flex;
+    }
+    .pic{
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+    .search-box{
+        width: 89%;
+        color: white;
+        background-color: #4d4d4d;
+        padding-left: 10px;
+        border: 0;
+        border-radius: 10px;
+    }
 </style>
 
 <h1 style="text-align: center;">FRIENDS</h1>
-<div class="main-friend-search-container">
-    <div class="search-container">
-        <form style="display: flex; justify-content: center;">
-            <input type="text" placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 89%; color: white; background-color: #4d4d4d;"> 
+@* This is the search box that appears on the search page, has an extra back button *@
+@if(onSearchPage){
+<div style="width: 100%; display: flex; justify-content:center; padding-bottom:3%; padding-top:10px;">
+    <div style="width: 80%; display:inline-flex;">
+        @* Extra button to go back to the original friends view page *@
+        <button @onclick="() => backToFriends()" title="Back to My Friends" class="friend-action-button" style="margin-left:auto; padding-right: 20px; width: 50px;">
+            <RadzenIcon Icon="arrow_back" style="font-size:32px; color: white; padding-top: 10px;"/>
+        </button>
+        <EditForm style="display: flex; justify-content: left;" Model="@friend" OnSubmit=@FormSubmitted>
+            <DataAnnotationsValidator/>
+            <InputText class="search-box" placeholder="Search For Users" id="searchBox" name="searchBox" style="width: 90%;" @bind-Value="friend.Username" /> 
             <div style="text-align: center">
                 <button class="btn btn-primary">Search</button>
             </div>
-        </form>
+        </EditForm>
     </div>
-    <div class="list-header">
-        <h2>My Friends</h2>
-    </div>
-    <div class="search-results-container">
-        <div class="res-list">
-            <div class="friend-item">
-                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 1" />
-                
-                <div class="friend-actions">
-                    @* <RadzenButton style ="friend-action-button">
-                        
-                    </RadzenButton> *@
-                    <RadzenIcon style="background-color = red;" Icon="clear" />
-                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
-                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
-                </div>
-                
-            </div>
-            <hr>
-            <div class="friend-item">
-                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 2" />
-                
-                <div class="friend-actions">
-                    <RadzenIcon style="background-color = red;" Icon="clear" />
-                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
-                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
-                </div>
-                
-            </div>
-            <hr>
-            <div class="friend-item">
-                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 3" />
-                
-                <div class="friend-actions">
-                    <RadzenIcon style="background-color = red;" Icon="clear" />
-                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
-                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
-                </div>
-                
-            </div>
-            <hr>
-            <div class="friend-item">
-                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 4" />
-                
-                <div class="friend-actions">
-                    <RadzenIcon style="background-color = red;" Icon="clear" />
-                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
-                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
-                </div>
-                
-            </div>
-            <hr>
-            <div class="friend-item">
-                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 5" />
-                
-                <div class="friend-actions">
-                    <RadzenIcon style="background-color = red;" Icon="clear" />
-                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
-                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
-                </div>
-                
-            </div>
-            <hr>
-            <div class="friend-item">
-                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 6" />
-                
-                <div class="friend-actions">
-                    <RadzenIcon style="background-color = red;" Icon="clear" />
-                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
-                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
-                </div>
-                
-            </div>
-            <hr>
-            <div class="friend-item">
-                <div style="padding-right: 10px; padding-left: 10px;"><RadzenIcon Icon="account_circle"/></div>
-                <RadzenLink style="color: white;" Path="user_profile" Text="Friend 7" />
-                
-                <div class="friend-actions">
-                    <RadzenIcon style="background-color = red;" Icon="clear" />
-                    <RadzenIcon style="color = blue;" Icon="notifications_off" />
-                    <RadzenIcon style="color = white; justify-self: flex-end;" Icon="chat" />
-                </div>
-                
-            </div>
+</div>
+}
 
-        </div>
+<div class="main-friend-search-container">
+    @* This is the ssearch box that appears on the regular friends page *@
+    @if(!@onSearchPage){
+    <div class="search-container">
+        <EditForm style="display: flex; justify-content: center;" Model="@friend" OnSubmit=@FormSubmitted>
+            <DataAnnotationsValidator/>
+            <InputText class="search-box" placeholder="Search For Users" id="searchBox" name="searchBox" @bind-Value="friend.Username" /> 
+            <div style="text-align: center">
+                <button class="btn btn-primary">Search</button>
+            </div>
+        </EditForm>
     </div>
+    }
+    <div class="list-header">
+        <h1>@resTitle</h1>
+    </div>
+    
+    <div class="search-results-container">
+        @* Not searching for friends *@
+        @if (@friend.Username == ""){
+            <div class="res-list">
+                @foreach (var listFriend in Program.Friends.FindAll(fr => fr.isFriend))
+                {
+                    <div class="friend-item">
+                        <div style="display: inline-flex; align-items: center;">
+                            <button class="friend-action-button" style="padding-top: 4px;" title="Chat" @onclick='() => ChatBox.StartChat(listFriend.Username)'>
+                                <RadzenIcon Style="font-size:24px; color: white; justify-self: flex-end;" Icon="chat"/>
+                            </button>
+                            <div style="padding-right: 10px; padding-left: 10px;">
+                                <img src="@listFriend.ProfilePicture" alt="@listFriend.Username's profile picture" class="pic"/>
+                            </div>
+                            <a style="color: white; font-size:20px;" href="/profile/@listFriend.Username">
+                                @listFriend.Username
+                            </a>
+                            @if (!@listFriend.isNotify){
+                                <RadzenIcon Style="font-size:25px; color: #993B27; padding-top:3%;" Icon="notifications_off" />
+                            }
+                        </div>
+                        <div class="friend-actions">
+                            <button class="friend-action-button" title="Remove friend" @onclick='() => ConfirmModal.Open(listFriend.Username)'>
+                                <RadzenIcon Style="font-size:32px; color: red;" Icon="clear"/>
+                            </button>
+                            <button class="friend-action-button" title="Mute notifications" @onclick='() => { listFriend.isNotify = !listFriend.isNotify; }'>
+                                @if (@listFriend.isNotify)
+                                {
+                                    <RadzenIcon Style="font-size:31px; color: #0C9CED;" Icon="notifications_off" />
+                                }
+                                else
+                                {
+                                    <RadzenIcon Style="font-size:31px; color: green;" Icon="notifications_active" />
+                                }
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                }
+
+            </div>
+        }
+        @* When the user tries to search something *@
+        @if(@friend.Username != ""){
+            <div class="res-list">
+                <div class="friend-item" style="width: 90%; align-self: center;">
+                    <div style="padding-right: 10px; padding-left: 10px;">
+                        <img src="@friend.ProfilePicture" alt="@friend.Username's profile picture" class="pic"/>
+                    </div>
+                    <a style="color: white; font-size:20px;" href="/profile/@friend.Username">
+                        @friend.Username
+                    </a>
+                    <div class="friend-actions">
+                        @if (friendRequested)
+                        {
+                            <button class="btn btn-light" @onclick="DeleteFriend">
+                                Request Sent!
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary" @onclick="RequestFriend">
+                                Add Friend
+                            </button>
+                        }
+                    </div>
+                </div>
+                <hr>
+                <div class="friend-search-other-prompt">
+                    <div style="text-align: center;">
+                        <h2>Others you may know</h2>
+                        <h4>(based on past games played and common friends)</h4>
+                    </div>
+                    
+                </div>
+                <br>
+                @foreach (var potentialFriend  in Program.Friends.FindAll(user => !user.isFriend))
+                {
+                    <div class="friend-item" style="width: 90%; align-self: center;">
+                        <div style="padding-right: 10px; padding-left: 10px;">
+                            <img src="@potentialFriend.ProfilePicture" alt="@potentialFriend.Username's profile picture" class="pic"/>
+                        </div>
+                        <a style="color: white; font-size:20px;" href="/profile/@potentialFriend.Username">
+                            @potentialFriend.Username
+                        </a>
+                        <div class="friend-actions">
+                            <button class="btn btn-primary" @onclick="() => AddFriend(potentialFriend)" >
+                                Add Friend
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                }
+            </div>
+        }
+        
+    </div>
+
 </div>
 
 @code{
-    private void UserProfileNavigate()
+    ConfirmModal ConfirmModal { get; set; }
+
+    private Friend friend = new("");
+
+    ChatBox ChatBox {get; set; }
+
+
+    string resTitle = "My Friends";
+
+    bool friendRequested = false;
+
+    bool onSearchPage = false;
+    
+    private void FormSubmitted()
     {
-        NavigationManager.NavigateTo("user_profile");
+        if(friend.Username != ""){
+            resTitle = "Friend Search";
+            onSearchPage = true;
+        }
+        else{
+            resTitle = "My Friends";
+            onSearchPage = false;
+        }
+        StateHasChanged();
+        
     }
+
+    private void backToFriends(){
+        friend.Username = "";
+        FormSubmitted();
+    }
+
+    void AddFriend(Friend newFriend)
+    {
+        newFriend.isFriend = true;
+    }
+    
+    private void RequestFriend()
+    {
+        friend.isFriend = true;
+        Program.Friends.Add(friend);
+        friend = new("");
+        onSearchPage = false;
+        StateHasChanged();
+    }
+
+    private void DeleteFriend()
+    {
+        var index = Program.Friends.FindIndex(user => user.Username == friend.Username);
+        if (index != -1)
+        {
+            Program.Friends.RemoveAt(index);
+        }
+        friendRequested = false;
+        StateHasChanged();
+    }
+
 }
