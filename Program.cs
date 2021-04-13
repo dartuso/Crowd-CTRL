@@ -2,12 +2,9 @@ using System;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Text;
 using Crowd_CTRL.Pages;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Crowd_CTRL
 {
@@ -25,7 +22,7 @@ namespace Crowd_CTRL
             await builder.Build().RunAsync();
         }
 
-        public static User User = new("TestUser");
+        public static User User = new("Sinistra09");
         public static List<Friend> Friends = new()
         {
             new Friend("Gamer2123"),
