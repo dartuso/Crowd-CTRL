@@ -243,7 +243,7 @@
     
     private void FormSubmitted()
     {
-        if(friend.Username != ""){
+        if(friend.Username.Trim() != ""){
             resTitle = "Friend Search";
             onSearchPage = true;
         }
@@ -257,8 +257,8 @@
 
     private void backToFriends()
     {
+        friend = new Friend("");
         onSearchPage = false;
-        friend.Username = "";
         FormSubmitted();
     }
 
