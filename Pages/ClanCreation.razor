@@ -1,0 +1,186 @@
+@page "/clancreation"
+@layout Shared.SocialLayout
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@using Components
+
+<ModalClanCreate @ref="Modal1"></ModalClanCreate>
+<ModalClanNameCheck @ref="Modal2"></ModalClanNameCheck>
+<ModalClanGameCheck @ref="Modal3"></ModalClanGameCheck>
+<ModalClanTagCheck @ref="Modal4"></ModalClanTagCheck>
+<ModalClanSizeCheck @ref="Modal5"></ModalClanSizeCheck>
+
+
+<div class="main-content">
+    <!--!-->
+    <!--!-->
+    <style>
+        input, textarea, button {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: white;
+        }
+
+        #create-clan {
+            width: 100%;
+            height: 800px;
+            /* background-color: red; */
+        }
+
+        .create-clan {
+            /* padding: 40px; */
+            margin-top: 150px;
+            width: 100%;
+            /* height: 100%; */
+            /* height: 800px; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* justify-content: space-between; */
+        }
+
+        .create-clan > div {
+            width: 100%;
+            /* height: 150px; */
+            /* background-color: blue; */
+            padding: 0 40px;
+        }
+
+        .typein {
+            margin-bottom: 60px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .upload-img {
+            flex: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upload-img > div {
+            width: 140px;
+            height: 140px;
+            background-color: #717171;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 140px;
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .upload-img > div > input[type=file] {
+            /* display: none; */
+            position: absolute;
+            display: block;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .type-info {
+            flex: 8;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0 10px;
+            flex-wrap: nowrap;
+        }
+
+        .type-info > div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .type-info > div > input {
+            width: 70%;
+        }
+
+        .type-info > div > button {
+            width: 25%;
+        }
+
+        .type-info > div > input {
+            display: inline-block;
+            height: 45px;
+            /* margin-bottom: 10px; */
+            background-color: rgba(255,255,255,0.05);
+            color: white;
+            border: 1px solid #42f5bf
+        }
+
+        .type-info > div > input::placeholder {
+            color: gray
+        }
+
+        .intros > textarea {
+            height: 150px;
+            width: 100%;
+        }
+
+        #next-button {
+            margin: 30px 20px;
+            width: 120px;
+            height: 40px;
+            float: right;
+        }
+    </style>
+    <h1 style="text-align: center;">CREATE A TEAM/CLAN</h1>
+
+    <div id="create-clan">
+        <div class="create-clan">
+            <div class="typein">
+                <div class="upload-img">
+                    <div>
+                        AVATAR
+                        <input type="file">
+                    </div>
+                </div>
+                <div class="type-info">
+                    <div class="type-name">
+                        <input id="clanNameTextBox" type="text" placeholder="Enter your clan name here ..." @bind="Modal2.clanName">
+                        <button class="btn btn-primary"  @onclick="() => Modal2.Open()">Check Clan Name</button>
+                    </div>
+                    <div class="type-size">
+                        <input id="clanSizeTextBox" type="text" placeholder="Enter your size of clan here ..." @bind="Modal5.clanSize">
+                        <button class="btn btn-primary" @onclick="() => Modal5.Open()">Check Clan Size</button>
+                    </div>
+                    <div class="type-game">
+                        <input id="clanGameTextBox" type="text" placeholder="Enter your clan game here ..." @bind="Modal3.clanGame">
+                        <button class="btn btn-primary" @onclick="() => Modal3.Open()">Check Clan Game</button>
+                    </div>
+                    <div class="type-text">
+                        <input id="clanTagTextBox" type="text" placeholder="Enter your clan tag here ..." @bind="Modal4.clanTag">
+                        <button class="btn btn-primary" @onclick="() => Modal4.Open()">Check Clan Tag</button>
+                    </div>
+                </div>
+            </div>
+            <div class="intros">
+                <textarea name="" id="" placeholder="Tell the world about the purpose or stories of your clan ..."></textarea>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="next-button" @onclick="() => Modal1.Open()">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    public ModalClanCreate Modal1 { get; set; } = new();
+    public ModalClanNameCheck Modal2 { get; set; } = new();
+    public ModalClanGameCheck Modal3 { get; set; } = new();
+    public ModalClanTagCheck Modal4 { get; set; } = new();
+    public ModalClanSizeCheck Modal5 { get; set; } = new();
+}

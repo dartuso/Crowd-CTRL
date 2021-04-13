@@ -1,0 +1,442 @@
+@page "/clanchatroom"
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+@using Components  
+
+<ModalClanLeaveConfirm @ref="Modal"></ModalClanLeaveConfirm>
+
+<style>
+    .flex {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #121212;
+        color: white;
+    }
+
+    .flex-header {
+        flex: 0 1 100%;
+    }
+
+    .main-content {
+        flex: 80 1 70%;
+    }
+
+    .main-sidebar {
+        /*flex: 0 0 7%;*/
+        flex: 0 0 15%
+    }
+
+    .break {
+        flex-basis: 100%;
+        height: 0;
+    }
+</style>
+
+
+
+<div class="flex">
+    <div class="flex-header">
+        <CrowdHeader />
+    </div>
+    <div class="main-content">
+        <!--!-->
+        <style>
+            body,
+            ul,
+            li {
+                padding: 0;
+                margin: 0;
+            }
+
+            #clanchat-interface {
+                width: 100%;
+                /* height: 700px; */
+            }
+
+            .clanchat-interface {
+                /* width: 100%; */
+                padding: 40px 80px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                /* align-items: center; */
+                /* justify-content: space-between; */
+            }
+
+            .clanchat-interface > div {
+                width: 100%;
+                /* height: 200px; */
+            }
+
+            .topbar {
+                /* flex-grow: 1; */
+                background-color: #4c4c4c;
+                border: 1px solid #371DCB;
+                padding: 8px 0px;
+                margin-bottom: 10px;
+            }
+
+            .topbar:nth-child(3) {
+                margin-right: 100px;
+            }
+
+            .topbar-info-pic {
+                float: left;
+                /* display: block; */
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: #4c4c4c;
+                margin-left: 8px;
+            }
+
+            .topbar-info-name {
+                float: left;
+                color: white;
+                padding-top: 2px;
+                margin-left: 10px;
+            }
+
+            .topbar-info-buts {
+                float: right;
+                padding-top: 5px;
+                padding-right: 10px;
+                height: 100%;
+                /* padding-top: 3px; */
+            }
+
+            .topbar-info-buts > button {
+                width: 20px;
+                height: 20px;
+                /* vertical-align: middle; */
+            }
+
+            .chat-window {
+                min-height: 600px;
+                /* flex-grow: 1; */
+                display: flex;
+                flex-direction: column;
+            }
+
+            .chat-records {
+                background-color: black;
+                border: 1px solid #48E2D2;
+                /* flex-grow: 3; */
+                margin-bottom: 20px;
+                height: 500px;
+                overflow-y: overlay;
+                /* border: 1px solid  #4c4c4c; */
+                /* padding-bottom: 30px; */
+            }
+
+            .chat-records > ul {
+                /* width: 100; */
+                /* height: 100%; */
+                padding: 10px;
+                /* overflow:hidden; */
+                /* vertical-align: middle; */
+                /* line-height: 70px; */
+            }
+
+            .chat-records > ul > li {
+                margin-right: 20px;
+                /* width: 100%; */
+                height: 80px;
+                display: flex;
+                flex-direction: row;
+                list-style: none;
+                /* background-color: violet; */
+                /* border: 1px solid white; */
+                margin-bottom: 20px;
+            }
+
+            .chat-records > ul > li:last-child {
+                margin-bottom: 0px;
+            }
+
+            .avatar {
+                flex: 2;
+                display: flex;
+            }
+
+            .avatar > div {
+                width: 80px;
+                height: 80px;
+                background-color: #E4E4E4;
+                margin: auto;
+            }
+
+            .chat-info {
+                flex: 12;
+                display: flex;
+                margin-left: 12px;
+                flex-direction: column;
+            }
+
+            .chat-info > div:first-child {
+                width: 100%;
+                background-color: black;
+                flex: 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-left: 15px;
+            }
+
+            .chat-info-date {
+                /* flex:1; */
+                width: 60%;
+                /* margin: 0 auto; */
+                /* text-align: center; */
+            }
+
+            .chat-info > div:last-child {
+                width: 100%;
+                padding-left: 10px;
+                background-color: rgb(32,33,36);
+                flex: 2;
+            }
+
+            .inputbox {
+                height: 150px;
+                /* flex-grow: 1; */
+                position: relative;
+            }
+
+            .inputbox > textarea {
+                width: 100%;
+                height: 100%;
+                background-color: rgb(46,46,46);
+                border: 1px solid green;
+                color: white;
+                /* line-height: 0px; */
+            }
+
+            .inputbox > button {
+                width: 100px;
+                height: 35px;
+                /* border-radius: 50%; */
+                background-color: rgb(0,119,204);
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                color: white;
+                text-align: center;
+                line-height: 31px;
+                font-size: 15px;
+            }
+
+            .inputbox > button:focus {
+                outline: 0;
+            }
+        </style>
+        <h1 style="text-align: center;">Wutang Squad</h1>
+        <div id="clanchat-interface">
+            <div class="clanchat-interface">
+                <div class="topbar">
+                    <div class="topbar-info-pic"></div>
+                    <div class="topbar-info-name">INGAME: 6 IDLE: 5 OFFLINE: 6</div>
+                    <div class="topbar-info-buts">
+
+                        <RadzenButton Click="checkClanInfo" class="abutton" Style="background-color:#ffffff00; margin-right:20px">
+                            <RadzenImage Path="Icons\article_white_48dp.svg" Style="width:30px;" />
+                        </RadzenButton>
+
+                        <RadzenButton Click="checkClanHistory" class="abutton" Style="background-color:#ffffff00; margin-right:20px">
+                            <RadzenImage Path="Icons\search_white_48dp.svg" Style="width:30px;" />
+                        </RadzenButton>
+
+                        <RadzenButton Click="() => Modal.Open()" class="abutton" Style="background-color:#ffffff00; margin-right:10px">
+                            <RadzenImage Path="Icons\exit_to_app_white_48dp.svg" Style="width:30px;" />
+                        </RadzenButton>
+                    </div>
+                </div>
+                <div class="chat-window">
+                    <div class="chat-records" id="chat-records">
+                        <div></div>
+                        <ul id="chat-list">
+                            <li>
+                                <div class="avatar">
+                                    <div><RadzenImage Path="Avatars\Happy-Penguin.svg" Style="width:80px;" /></div>
+                                </div>
+                                <div class="chat-info">
+                                    <div>
+                                        <div class="chat-info-name" style="color:rgb(246,160,36)">
+                                            Vector91831
+                                        </div>
+                                        <div class="chat-info-date" style="color:gray">
+                                            4/01/2021
+                                        </div>
+                                    </div>
+                                    <div>Happy April Fool!</div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="avatar">
+                                    <div><RadzenImage Path="Avatars\manager_mimooh.svg" Style="width:70px;" /></div>
+                                </div>
+                                <div class="chat-info">
+                                    <div>
+                                        <div class="chat-info-name" style="color:lightgreen" >
+                                            ElfenRampage
+                                        </div>
+                                        <div class="chat-info-date" style="color:gray">
+                                            4/03/2021
+                                        </div>
+                                    </div>
+                                    <div>Anyone tried that resident evil 8 demo? Holy, scared the shit out of me</div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="avatar">
+                                    <div><RadzenImage Path="Avatars\Happy-Penguin.svg" Style="width:80px;" /></div>
+                                </div>
+                                <div class="chat-info">
+                                    <div>
+                                        <div class="chat-info-name" style="color:rgb(246,160,36)">
+                                            Vector91831
+                                        </div>
+                                        <div class="chat-info-date" style="color:gray">
+                                            4/03/2021
+                                        </div>
+                                    </div>
+                                    <div>You mean the newest one? Yeah, I saw it on Twitch. When will it release? The end of the year?</div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="avatar">
+                                    <div><RadzenImage Path="Avatars\manager_mimooh.svg" Style="width:70px;" /></div>
+                                </div>
+                                <div class="chat-info">
+                                    <div>
+                                        <div class="chat-info-name" style="color:lightgreen">
+                                            ElfenRampage
+                                        </div>
+                                        <div class="chat-info-date" style="color:gray">
+                                            4/03/2021
+                                        </div>
+                                    </div>
+                                    <div>I think it will release on May. Problem is that I am still waiting for my PS5, xxx those scalpers during this pendamic, you still have to wait for a long time to get the console.</div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="avatar">
+                                    <div><RadzenImage Path="Avatars\Happy-Penguin.svg" Style="width:80px;" /></div>
+                                </div>
+                                <div class="chat-info">
+                                    <div>
+                                        <div class="chat-info-name" style="color:rgb(246,160,36)">
+                                            Vector91831
+                                        </div>
+                                        <div class="chat-info-date" style="color:gray">
+                                            4/03/2021
+                                        </div>
+                                    </div>
+                                    <div>I feel you. And i also heard that ps5's controller has some serious issues. So maybe it is not too bad to be patient wait for the second or the third batch of the product.</div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="avatar">
+                                    <div><RadzenImage Path="Avatars\manager_mimooh.svg" Style="width:70px;" /></div>
+                                </div>
+                                <div class="chat-info">
+                                    <div>
+                                        <div class="chat-info-name" style="color:lightgreen">
+                                            ElfenRampage
+                                        </div>
+                                        <div class="chat-info-date" style="color:gray">
+                                            4/03/2021
+                                        </div>
+                                    </div>
+                                    <div>It's all about product quality control.
+                                    Actually the similar thing happened when the first batch of ps4 came out several years ago.
+                                    So I am not selling my ps4 yet, i am actually waiting to trade-in in epicgames.
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="avatar">
+                                    <div><RadzenImage Path="Avatars\money_half_dollar.svg" Style="width:80px;" /></div>
+                                </div>
+                                <div class="chat-info">
+                                    <div>
+                                        <div class="chat-info-name" style="color:orchid">
+                                            HotRedRubik
+                                        </div>
+                                        <div class="chat-info-date" style="color:gray">
+                                            4/07/2021
+                                        </div>
+                                    </div>
+                                    <div>
+                                        Hey, we're playing among us if anyone wants to join :^) The code is: DE4DROP
+                                    </div>
+                                </div>
+                            </li>
+                            @foreach (Post chat in Program.chatPosts)
+                            {
+                                <li>
+                                    <div class="avatar">
+                                        <div><img src="@Program.User.ProfilePicture" style="width:80px; border-radius: 50%"/></div>
+                                    </div>
+                                    <div class="chat-info">
+                                        <div>
+                                            <div class="chat-info-name" style="color:rgb(82,128,255)">
+                                                @Program.User.Username
+                                            </div>
+                                            <div class="chat-info-date" style="color:gray">
+                                                @chat.PostedDate.ToShortDateString()
+                                            </div>
+                                        </div>
+                                        <div>
+                                            @chat.Text
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="inputbox">
+                        <textarea name="" id="inputbox" cols="30" rows="10" placeholder="Start chatting by typing here ..." @bind="postText"></textarea>
+                        <button id="chat-send" @onclick="AddPost">SEND</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-sidebar">
+        <ClanMembersSidebar />
+    </div>
+</div>
+
+@code
+{
+    string postText = "";
+    
+    
+    private ModalClanLeaveConfirm Modal { get; set; }
+
+    private void checkClanInfo()
+    {
+        NavigationManager.NavigateTo("claninfocheck");
+    }
+    private void checkClanHistory()
+    {
+        // It is not implemented since we do not cover it in the Figma
+    }
+    private void AddPost()
+    {
+        Post newPost = new Post();
+        newPost.Text = postText;
+        newPost.PostedDate = DateTime.Now;
+        Program.chatPosts.Add(newPost);
+        postText = "";
+    }
+}

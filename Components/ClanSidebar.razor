@@ -1,10 +1,26 @@
 @namespace Components
+
+@inject NavigationManager NavigationManager
+
 <div>
     <div class="SidebarHeader">
         Clans
     </div>
-    <RadzenIcon Icon="account_circle"/> Clan 1 <br>
-    <RadzenIcon Icon="account_circle"/> Clan 1 <br>
-    <RadzenIcon Icon="account_circle"/> Clan 1 <br>
-    <RadzenIcon Icon="account_circle"/> Clan 1 <br>
-</div> 
+    <RadzenImage Path="Avatars\clan5.png" Style="width:40px;" /> <button class="btn btn-dark" @onclick="enterClanChat">Wutang Squad</button>(11/17)<br>
+    <RadzenImage Path="Avatars\clan6.jpeg" Style="width:40px;" /> <button class="btn btn-dark" @onclick="enterClanChat">Apex Hunters</button>(1/6)<br>
+    <RadzenImage Path="Avatars\clan7.jpeg" Style="width:40px;" /> <button class="btn btn-dark" @onclick="enterClanChat">H1Z1_E_lite_</button>(4/12)<br>
+    <RadzenImage Path="Avatars\clan8.jpeg" Style="width:40px;" /> <button class="btn btn-dark" @onclick="enterClanChat">pubg_alphaSquad</button>(12/20)<br>
+    <RadzenImage Path="Avatars\clan9.jpeg" Style="width:40px;" /> <button class="btn btn-dark" @onclick="enterClanChat">_LosSantos_Epic_</button>(3/5)<br>
+    <RadzenImage Path="Avatars\clan10.jpeg" Style="width:40px;" /> <button class="btn btn-dark" @onclick="enterClanChat">Fall_guys</button>(3/10)<br>
+    <RadzenImage Path="Avatars\clan11.jpeg" Style="width:40px;" /> <button class="btn btn-dark" @onclick="enterClanChat">Wh4ck4Gnome</button>(8/50)<br>
+    <RadzenImage Path="Avatars\clan12.jpeg" Style="width:40px;" /> <button class="btn btn-dark" @onclick="enterClanChat">CCTechSupport</button>(85/500)<br>
+</div>
+
+@code
+{
+    // If you press any key in the clan, you will be redirected to the chatroom of 'Wutang Squad'
+    private void enterClanChat()
+    {
+        NavigationManager.NavigateTo("clanchatroom");
+    }
+}
