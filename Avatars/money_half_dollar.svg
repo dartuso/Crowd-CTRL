@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.1"
+   id="svg4999"
+   viewBox="0 0 113 113"
+   height="113"
+   width="113">
+  <title
+     id="title3366">Half-Dollar</title>
+  <defs
+     id="defs5001">
+    <linearGradient
+       id="linearGradient4183">
+      <stop
+         id="stop4185"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1" />
+      <stop
+         id="stop4187"
+         offset="1"
+         style="stop-color:#cccccc;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient
+       xlink:href="#linearGradient4183"
+       id="radialGradient4413"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.69949759,0.13323726,-0.13213063,0.69368779,294.2937,18.585656)"
+       cx="-257.68942"
+       cy="387.62302"
+       fx="-257.68942"
+       fy="387.62302"
+       r="75.7145" />
+  </defs>
+  <metadata
+     id="metadata5004">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Half-Dollar</dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:date>2016-03-26</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>mazeo</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>openclipart.org</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:language>en</dc:language>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>money</rdf:li>
+            <rdf:li>currency</rdf:li>
+            <rdf:li>change</rdf:li>
+            <rdf:li>coin</rdf:li>
+            <rdf:li>coins</rdf:li>
+            <rdf:li>cash</rdf:li>
+            <rdf:li>coinage</rdf:li>
+            <rdf:li>denomination</rdf:li>
+            <rdf:li>half-dollar</rdf:li>
+            <rdf:li>half-dollars</rdf:li>
+            <rdf:li>half dollar</rdf:li>
+            <rdf:li>half dollars</rdf:li>
+            <rdf:li>fifty cents</rdf:li>
+            <rdf:li>50 cents</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>A half-dollar.</dc:description>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>mazeo</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="half_dollar"
+     transform="translate(0.9994092,-207.99941)">
+    <circle
+       r="53.466507"
+       cy="263.22913"
+       cx="56.770866"
+       id="circle4405"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#radialGradient4413);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.52761459;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+    <circle
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#cccccc;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:9.448843;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       id="circle4407"
+       cx="54.230316"
+       cy="265.76968"
+       r="49.505894" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path4409"
+       d="m 78.292027,273.90002 c -2.642875,-0.28219 -4.635657,-2.5484 -5.286501,-5.01831 c -0.853897,-3.0942 -0.314127,-6.77003 2.140306,-9.01513 c 0.860128,-0.80953 1.858008,-1.51424 3.003555,-1.84686 c 0,0 -1.266355,-4.10632 0,-5.37267 c 1.255141,-1.25515 4.069989,-1.25515 5.325134,0 c 1.266347,1.26635 0,5.37267 0,5.37267 c 1.558397,0.71771 4.152254,1.09525 4.326669,2.80521 c 0.164881,1.61661 -1.874633,3.11877 -3.470849,3.42329 c -0.990973,0.18906 -1.701659,-1.23056 -2.785888,-1.18269 c -1.983237,-0.24413 -3.612582,1.8793 -3.198938,3.75073 c 0.204291,1.73253 2.020898,3.17304 3.762062,2.67389 c 1.143039,0.0236 1.686549,-1.73503 2.730535,-1.59254 c 1.538742,0.21001 3.409096,1.79519 3.248347,3.33985 c -0.167771,1.61219 -2.423318,2.29953 -4.035449,2.71308 c -0.696653,-0.0102 -0.353494,0.73648 -0.433853,1.17518 c 0,0 0.887796,2.87881 0,3.76662 c -1.255145,1.25514 -4.069982,1.25514 -5.32513,0 c -1.1767,-1.1767 0,-4.99232 0,-4.99232 z" />
+    <g
+       transform="matrix(0.34987301,0,0,0.34987301,-7.091109,16.913457)"
+       id="g4625">
+      <path
+         style="color:#000000;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:9.85299683;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         d="m 88.733554,666.76721 c -4.278604,3.00528 -2.739825,8.91102 -3.798861,13.36452 c -0.957616,9.27422 -2.202573,18.56233 -2.992357,27.82546 c 0.731794,6.18021 8.424928,6.69735 13.036394,4.85478 c 6.18083,-4.00545 13.3624,-4.67289 20.4937,-3.07628 c 7.42602,0.43921 13.2488,6.98303 13.19774,14.32968 c 1.18335,7.84243 -2.29467,17.44683 -10.93637,18.96363 c -7.06069,1.22473 -15.3913,1.99634 -21.133824,-3.1109 c -2.33662,-2.90416 -3.181635,-8.32043 -8.231494,-8.35136 c -8.685549,-2.15941 -12.925163,10.29028 -7.441652,15.92032 c 9.963377,13.78484 30.02097,16.19496 44.9907,10.12515 c 18.47947,-6.92035 25.19766,-31.61213 15.5644,-48.15111 c -7.57735,-14.59108 -26.22617,-19.68502 -41.38868,-15.7228 l 1.60765,-11.26168 c 10.30476,-0.0855 20.65811,0.16827 30.93158,-0.12171 c 7.89892,-2.35661 6.23483,-14.84813 -0.68817,-17.58311 c -5.41827,-2.49488 -11.56527,-3.19008 -18.88289,-2.9113 c -7.31761,0.27878 -16.130234,2.03625 -24.327866,4.90671 z"
+         id="path4582" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:17.47536659;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 174.29153,672.6002 c -3.68153,1.49568 -6.33982,5.00741 -8.54353,8.31414 c -2.93358,4.4019 -4.84699,9.56065 -5.8374,14.75696 c -1.62567,8.52918 -1.34876,17.47083 0,26.04813 c 0.98485,6.26309 2.73027,12.57575 5.8374,18.10224 c 2.13514,3.79766 4.58195,8.07831 8.54353,9.89128 c 6.23551,2.85361 14.39527,2.97797 20.57235,0 c 3.79616,-1.83011 5.93205,-6.15123 7.87424,-9.89128 c 2.89826,-5.58113 4.42009,-11.87744 5.31504,-18.10224 c 1.23562,-8.59434 1.49337,-17.4948 0,-26.04813 c -0.89925,-5.15039 -2.57349,-10.30508 -5.31504,-14.75696 c -2.00153,-3.25018 -4.36791,-6.80567 -7.87424,-8.31414 c -6.29922,-2.71005 -14.21918,-2.58106 -20.57235,0 z"
+         id="path4584" />
+    </g>
+  </g>
+</svg>
