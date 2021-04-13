@@ -141,7 +141,7 @@
                             <div style="padding-right: 10px; padding-left: 10px;">
                                 <img src="@listFriend.ProfilePicture" alt="@listFriend.Username's profile picture" class="pic"/>
                             </div>
-                            <a style="color: white; font-size:20px;" href="/profile/@listFriend.Username">
+                            <a style="color: white; font-size:20px;" href="profile/@listFriend.Username">
                                 @listFriend.Username
                             </a>
                             @if (!@listFriend.isNotify){
@@ -209,7 +209,7 @@
                         <div style="padding-right: 10px; padding-left: 10px;">
                             <img src="@potentialFriend.ProfilePicture" alt="@potentialFriend.Username's profile picture" class="pic"/>
                         </div>
-                        <a style="color: white; font-size:20px;" href="/profile/@potentialFriend.Username">
+                        <a style="color: white; font-size:20px;" href="profile/@potentialFriend.Username">
                             @potentialFriend.Username
                         </a>
                         <div class="friend-actions">
@@ -255,7 +255,9 @@
         
     }
 
-    private void backToFriends(){
+    private void backToFriends()
+    {
+        onSearchPage = false;
         friend.Username = "";
         FormSubmitted();
     }
@@ -267,11 +269,14 @@
     
     private void RequestFriend()
     {
-        friend.isFriend = true;
-        Program.Friends.Add(friend);
-        friend = new("");
-        onSearchPage = false;
-        StateHasChanged();
+        if (friend.Username != "")
+        {
+            friend.isFriend = true;
+            Program.Friends.Add(friend);
+            onSearchPage = true;
+            friendRequested = true;
+            StateHasChanged();
+        }
     }
 
     private void DeleteFriend()
