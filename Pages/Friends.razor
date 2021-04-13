@@ -141,7 +141,7 @@
                             <div style="padding-right: 10px; padding-left: 10px;">
                                 <img src="@listFriend.ProfilePicture" alt="@listFriend.Username's profile picture" class="pic"/>
                             </div>
-                            <a style="color: white; font-size:20px;" href="profile/@listFriend.Username">
+                            <a style="color: white; font-size:20px;" href="/profile/@listFriend.Username">
                                 @listFriend.Username
                             </a>
                             @if (!@listFriend.isNotify){
@@ -176,9 +176,9 @@
                     <div style="padding-right: 10px; padding-left: 10px;">
                         <img src="@friend.ProfilePicture" alt="@friend.Username's profile picture" class="pic"/>
                     </div>
-                    <a style="color: white; font-size:20px;" href="profile/@friend.Username">
+                    <div style="color: white; font-size:20px;" >
                         @friend.Username
-                    </a>
+                    </div>
                     <div class="friend-actions">
                         @if (friendRequested)
                         {
@@ -209,7 +209,7 @@
                         <div style="padding-right: 10px; padding-left: 10px;">
                             <img src="@potentialFriend.ProfilePicture" alt="@potentialFriend.Username's profile picture" class="pic"/>
                         </div>
-                        <a style="color: white; font-size:20px;" href="profile/@potentialFriend.Username">
+                        <a style="color: white; font-size:20px;" href="/profile/@potentialFriend.Username">
                             @potentialFriend.Username
                         </a>
                         <div class="friend-actions">
