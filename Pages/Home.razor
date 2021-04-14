@@ -58,7 +58,7 @@
                 <InputText @bind-Value="_formPost.Text" CssClass="form-control" class="form-control" rows="3" placeholder="Share what's new here!" style="width: 100%;background-color: rgba(255,255,255,0.05); color: white"/>
                 <div class="row">
                     <div class="col">
-                        <InputFile @bind-Value="_formPost.Embed" class="form-control" type="file" id="formFile" style="background-color: rgba(255,255,255,0.05); color: white; width: 60%"/>
+                        <InputFile OnChange="UpdateFile" class="form-control" type="file" id="formFile" style="background-color: rgba(255,255,255,0.05); color: white; width: 60%"/>
                     </div>
                     <div class="col">
                         <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
@@ -117,6 +117,12 @@
         Program.Posts.Insert(0, _formPost);
         _formPost = new Post();
         StateHasChanged();
+    }
+
+    private Task UpdateFile(InputFileChangeEventArgs e)
+    {
+        _formPost.Embed = "https://www.youtube.com/embed/aKikF2qdtB8";
+        return Task.CompletedTask;
     }
 
 }
