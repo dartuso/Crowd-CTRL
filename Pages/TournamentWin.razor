@@ -39,7 +39,7 @@
     }   
 
 
-    h2 {
+    .ah2 {
         display: flex; /* flex behavior (displays children inline) */
         justify-content: center; /* horizontal centering */
         align-items: center; /* vertical centering */
@@ -51,7 +51,7 @@
 
 
 <h1 style="margin: 30px; text-align: center; font-size: 3.5em">Tournament @(TournamentCreate._tournament.TournamentName) finished!</h1>
-<h2>Congratulations, @(TournamentBracket.FIN.teamName)! You are the tournament's winners! GG WP!</h2>
+<h2 class="ah2">Congratulations, @(TournamentBracket.FIN.teamName)! You are the tournament's winners! GG WP!</h2>
 <div class="form-button">
     <button class="ot-button btn btn-primary" @onclick="TournamentBracketNavigate">View bracket</button>
     <button class="bot-button btn btn-primary" @onclick="TournamentNavigate">Back to Tournaments</button>
