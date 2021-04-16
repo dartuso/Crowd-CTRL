@@ -65,13 +65,13 @@
     
     private void BackNavigate()
     {
-        Program.User.Username = _username;
-        Program.User.Password = _password;
         NavigationManager.NavigateTo("login");
     }
 
     private void RegisterNavigate()
     {
+        Program.User.Username = _username;
+        Program.User.Password = _password;
         NavigationManager.NavigateTo("account_validation");
     }
 }
